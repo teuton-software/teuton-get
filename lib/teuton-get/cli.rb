@@ -23,12 +23,12 @@ class CLI < Thor
     TeutonGet.search(filter)
   end
 
-  map ['ci', '-ci', '--create-index', 'create-index'] => 'create_index'
-  desc 'create-index SOURCE-DIR [TARGET-FILE]', 'Create index from SOURCE directory to TARGET file'
+  map ['cr', '-cr', '--create-repo', 'create-repo'] => 'create_repo'
+  desc 'create-repo [SOURCE-DIR]', 'Create repo from SOURCE directory'
   long_desc <<-LONGDESC
-  Create index from SOURCE directory to TARGET file
+  Create index from SOURCE directory.
   LONGDESC
-  def create_index(source_dir, target_file)
-    Index.create(source_dir, target_file)
+  def create_repo(source_dir)
+    TeutonGet.create_repo(source_dir)
   end
 end
