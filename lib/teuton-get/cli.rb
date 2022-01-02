@@ -23,6 +23,15 @@ class CLI < Thor
     TeutonGet.create_repo(source_dir)
   end
 
+  map ['i', '-i', '--init'] => 'init'
+  desc 'init', 'Create ini config file'
+  long_desc <<-LONGDESC
+    Create ini config file
+  LONGDESC
+  def init()
+    TeutonGet.init()
+  end
+
   map ['s', '-s', '--search'] => 'search'
   desc 'search FILTER', 'Search Teuton test with FILTER'
   long_desc <<-LONGDESC
