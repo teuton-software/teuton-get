@@ -1,6 +1,9 @@
 
+require_relative 'environment'
+
 module Init
   def self.create()
-    puts ENV.to_s
+    puts Environment.instance.get('HOME')
+    puts Environment.instance.get('USER')
   end
 end
