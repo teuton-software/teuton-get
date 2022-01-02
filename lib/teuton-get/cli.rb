@@ -14,6 +14,15 @@ class CLI < Thor
     puts "#{Application::NAME} (version #{Application::VERSION})"
   end
 
+  map ['cr', '-cr', '--create-repo', 'create-repo'] => 'create_repo'
+  desc 'create-repo [SOURCE-DIR]', 'Create repo from SOURCE directory'
+  long_desc <<-LONGDESC
+  Create index from SOURCE directory.
+  LONGDESC
+  def create_repo(source_dir)
+    TeutonGet.create_repo(source_dir)
+  end
+
   map ['s', '-s', '--search'] => 'search'
   desc 'search FILTER', 'Search Teuton test with FILTER'
   long_desc <<-LONGDESC
@@ -23,12 +32,13 @@ class CLI < Thor
     TeutonGet.search(filter)
   end
 
-  map ['cr', '-cr', '--create-repo', 'create-repo'] => 'create_repo'
-  desc 'create-repo [SOURCE-DIR]', 'Create repo from SOURCE directory'
+  map ['d', '-d', '--download'] => '--download'
+  desc 'download TESTNAME', 'Download Teuton test'
   long_desc <<-LONGDESC
-  Create index from SOURCE directory.
+    Download Teuton test
   LONGDESC
-  def create_repo(source_dir)
-    TeutonGet.create_repo(source_dir)
+  def download(testname)
+    TeutonGet.download(testname)
   end
+
 end
