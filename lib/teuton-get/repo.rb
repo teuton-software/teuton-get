@@ -1,4 +1,7 @@
+
 require 'yaml'
+require 'inifile'
+require_relative 'application'
 
 module Repo
   def self.create(source_dir)
@@ -12,11 +15,11 @@ module Repo
     puts "       Test number = #{data.keys.size}"
   end
 
-  def self.locate_filenames(source_dir)
+  private_class_method def self.locate_filenames(source_dir)
     Dir.glob('**/tt-info.yaml')
   end
 
-  def self.read_files(files)
+  private_class_method def self.read_files(files)
     data = {}
     files.each do |filepath|
       content = YAML.load(File.open(filepath))
@@ -25,12 +28,28 @@ module Repo
     data
   end
 
-  def self.write_repo_index(args)
+  private_class_method def self.write_repo_index(args)
     filepath = args[:filepath]
     data = args[:data]
 
     file = File.open(filepath, 'w')
     file.write data.to_yaml
     file.close
+  end
+
+  def self.show_list()
+  end
+
+  def self.get_repos()
+    configfile = Application::CONFIGFILE
+    require 'pp'
+
+    # read an existing file
+    file = IniFile.load('/tmp/desktop.ini')
+    data = file["Desktop Entry"]
+
+    #output one property
+    puts "here is one property:"
+    puts data["Name"]
   end
 end

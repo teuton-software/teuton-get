@@ -5,8 +5,9 @@ require 'singleton'
 class Application
   include Singleton
 
-  VERSION = '0.0.0' # Application version
-  NAME = 'teuton-get' # Application name
+  VERSION    = '0.0.0'
+  NAME       = 'teuton-get'
+  CONFIGFILE = 'repos.ini'
 
   attr_reader   :default
   attr_accessor :options
