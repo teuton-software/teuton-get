@@ -1,5 +1,5 @@
 require 'date'
-require_relative 'lib/teuton/application'
+require_relative 'lib/teuton-get/application'
 
 Gem::Specification.new do |s|
   s.name        = Application::NAME
@@ -23,11 +23,9 @@ Gem::Specification.new do |s|
   s.license     = 'GPL-3.0'
   s.authors     = ['David Vargas Ruiz']
   s.email       = 'teuton.software@protonmail.com'
-#  s.homepage    = 'https://github.com/teuton-software/teuton'
-  s.homepage    = 'https://github.com/teuton-software/teuton/tree/devel'
+  s.homepage    = 'https://github.com/teuton-software/teuton-get/tree/master'
 
-  s.executables << 'teuton'
-  s.executables << 'check_teuton'
+  s.executables << 'teutonget'
   s.files       = Dir.glob(File.join('lib', '**', '*.*'))
 
   s.required_ruby_version = '>= 2.5.0'

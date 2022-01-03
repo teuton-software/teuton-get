@@ -4,8 +4,8 @@ namespace :build do
   desc 'Build gem'
   task :gem do
     puts '[INFO] Building gem...'
-    system('rm teuton-*.*.*.gem')
-    system('gem build teuton.gemspec')
+    system('rm teuton-get-*.*.*.gem')
+    system('gem build teuton-get.gemspec')
   end
 
   desc 'Generate docs'
