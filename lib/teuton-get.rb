@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 require_relative 'teuton-get/application'
-require_relative 'teuton-get/repo'
+
 require_relative 'teuton-get/reader/inifile_reader'
 require_relative 'teuton-get/reader/yaml_reader'
 require_relative 'teuton-get/writer/file_writer'
 require_relative 'teuton-get/writer/terminal_writer'
+
 require_relative 'teuton-get/init'
+require_relative 'teuton-get/repo'
+require_relative 'teuton-get/searcher'
 
 class TeutonGet
 
@@ -19,6 +22,11 @@ class TeutonGet
                      testinfo_reader: YamlReader.new,
                      repoindex_writer: FileWriter.new,
                      progress_writer: TerminalWriter.new)
+
+    cache_dirpath = "#{home}/.teuton/cache/"
+    @searcher = Searcher.new(cache_dirpath: cache_dirpath,
+                             repo: @repo,
+                             writer: TerminalWriter.new)
   end
 
   def create_repo(dirpath)
@@ -39,8 +47,12 @@ class TeutonGet
     @repo.show_list
   end
 
+  def refresh()
+    @searcher.refresh
+  end
+
   def search(filter)
-    Searcher.get(filter)
+    @searcher.get(filter)
   end
 
   def download(testname)

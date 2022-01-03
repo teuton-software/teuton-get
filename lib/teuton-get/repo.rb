@@ -2,10 +2,11 @@
 require_relative 'application'
 
 class Repo
-
+  attr_reader :data
+  
   def initialize(args)
     @reader = args[:config_reader]
-    @config = @reader.read
+    @data = @reader.read
     @testinfo_reader = args[:testinfo_reader]
     @repoindex_writer = args[:repoindex_writer]
     @dev = args[:progress_writer]
@@ -29,7 +30,7 @@ class Repo
     @dev.write "[INFO] Show repo list from "
     @dev.writeln "#{@reader.source}\n", color: :light_blue
 
-    @config.each_pair do |key, value|
+    @data.each_pair do |key, value|
       if value['enable']
         @dev.write '*', color: :light_green
         @dev.writeln " #{key}"

@@ -32,13 +32,22 @@ class CLI < Thor
     TeutonGet.new.init()
   end
 
-  map ['r', '-r', '--repos', 'repos'] => 'repos'
+  map ['--repos', 'repos'] => 'repos'
   desc 'repos', 'Show repo list'
   long_desc <<-LONGDESC
     Show repo list.
   LONGDESC
   def repos()
     TeutonGet.new.show_repo_list()
+  end
+
+  map ['r', '-r', '--refresh', 'refresh'] => 'refresh'
+  desc 'refresh', 'Synchronize list of tests available.'
+  long_desc <<-LONGDESC
+    Synchronize list of tests available.
+  LONGDESC
+  def refresh()
+    TeutonGet.new.refresh()
   end
 
   map ['s', '-s', '--search'] => 'search'
