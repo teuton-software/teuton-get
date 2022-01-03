@@ -1,7 +1,8 @@
 
 require 'inifile'
+require_relative 'reader'
 
-class IniFileReader
+class IniFileReader < Reader
   def initialize(filepath)
     @filepath = filepath
   end

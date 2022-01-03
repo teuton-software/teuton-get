@@ -1,9 +1,14 @@
 
-class LinuxEnvironmentReader
+require_relative 'reader'
+
+class LinuxEnvironmentReader < Reader
+
+  def initialize(command)
+    @command = command
+  end
 
   def read()
-    command = %x[env]
-    lines = command.split("\n")
+    lines = @command.split("\n")
     data = {}
     lines.sort.each do |line|
       items = line.split('=')

@@ -21,7 +21,7 @@ class Application
   def reset
     @default = {}
     @options = {}
-    @env = Environment.new(LinuxEnvironmentReader.new)
+    @env = Environment.new(LinuxEnvironmentReader.new(%x[env]))
   end
 
   def get(key)
