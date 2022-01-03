@@ -1,11 +1,11 @@
 
 require 'colorize'
-require_relative 'environment'
+require_relative 'application'
 
 module Init
   def self.create()
     puts "\n[INFO] Creating configuration files"
-    home = Environment.instance.get('HOME')
+    home = Application.instance.get('HOME')
     dirpath = "#{home}/.teuton"
     create_dir(dirpath)
     create_ini_file(dirpath)

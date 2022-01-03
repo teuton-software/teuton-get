@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'minitest/autorun'
-require_relative '../lib/teuton/application'
+require_relative '../lib/teuton-get/application'
 
 # MiniTest Application Class
 class ApplicationTest < Minitest::Test

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'singleton'
+require_relative 'application/environment'
+require_relative 'reader/linux_environment_reader'
 
 class Application
   include Singleton
@@ -19,13 +21,13 @@ class Application
   def reset
     @default = {}
     @options = {}
-    @verbose = true
+    @env = Environment.new(LinuxEnvironmentReader.new)
   end
 
-  def quiet?
-    return true if Application.instance.options['quiet']
-    return true unless Application.instance.verbose
+  def get(key)
+    return @options[key] unless @options[key].nil?
+    return @env.get(key) unless @env.get(key).nil?
 
-    false
+    @default[key]
   end
 end

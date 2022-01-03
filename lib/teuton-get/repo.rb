@@ -56,7 +56,7 @@ module Repo
   end
 
   def self.read_inifile()
-    home = Environment.instance.get('HOME')
+    home = Application.instance.get('HOME')
     configfile = Application::CONFIGFILE
     inifile = IniFile.load("#{home}/.teuton/#{configfile}")
     data = {}

@@ -1,0 +1,16 @@
+
+class LinuxEnvironmentReader
+
+  def read()
+    command = %x[env]
+    lines = command.split("\n")
+    data = {}
+    lines.sort.each do |line|
+      items = line.split('=')
+      if items.size == 2
+        data[items[0].strip] = items[1].strip
+      end
+    end
+    data
+  end
+end
