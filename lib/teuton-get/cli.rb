@@ -32,6 +32,15 @@ class CLI < Thor
     TeutonGet.init()
   end
 
+  map ['r', '-r', '--repos', 'repos'] => 'repos'
+  desc 'repos', 'Show repo list'
+  long_desc <<-LONGDESC
+    Show repo list.
+  LONGDESC
+  def repos()
+    TeutonGet.show_repo_list()
+  end
+
   map ['s', '-s', '--search'] => 'search'
   desc 'search FILTER', 'Search Teuton test with FILTER'
   long_desc <<-LONGDESC

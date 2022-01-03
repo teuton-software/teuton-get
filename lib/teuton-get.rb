@@ -13,6 +13,10 @@ module TeutonGet
     Init.create
   end
 
+  def self.show_repo_list()
+    Repo.show_list
+  end
+
   def self.search(filter)
     Searcher.get(filter)
   end

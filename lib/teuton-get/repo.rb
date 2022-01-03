@@ -38,18 +38,31 @@ module Repo
   end
 
   def self.show_list()
+    puts "Show repos from config file"
+    data = read_inifile
+    data.each_pair do |key, value|
+      if value['enable']
+        puts "[ #{key} ]"
+        puts "  desc : #{value['description']}"
+        puts "  URL  : #{value['URL']}"
+        puts
+      else
+        puts "[ #{key} ] (disable)".colorize(:yellow)
+        puts "  desc : #{value['description']}".colorize(:yellow)
+        puts "  URL  : #{value['URL']}".colorize(:yellow)
+        puts
+      end
+    end
   end
 
-  def self.get_repos()
+  def self.read_inifile()
+    home = Environment.instance.get('HOME')
     configfile = Application::CONFIGFILE
-    require 'pp'
-
-    # read an existing file
-    file = IniFile.load('/tmp/desktop.ini')
-    data = file["Desktop Entry"]
-
-    #output one property
-    puts "here is one property:"
-    puts data["Name"]
+    inifile = IniFile.load("#{home}/.teuton/#{configfile}")
+    data = {}
+    inifile.sections.each do |section|
+      data[section] = inifile[section]
+    end
+    data
   end
 end
