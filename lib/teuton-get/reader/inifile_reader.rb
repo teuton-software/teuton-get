@@ -1,12 +1,13 @@
 
 require 'inifile'
-require_relative '../application'
 
 class IniFileReader
+  def initialize(filepath)
+    @filepath = filepath
+  end
+
   def read()
-    home = Application.instance.get('HOME')
-    configfile = Application::CONFIGFILE
-    inifile = IniFile.load("#{home}/.teuton/#{configfile}")
+    inifile = IniFile.load(@filepath)
     data = {}
     inifile.sections.each do |section|
       data[section] = inifile[section]

@@ -9,7 +9,11 @@ require_relative 'teuton-get/init'
 class TeutonGet
 
   def initialize()
-    @repo = Repo.new(config_reader: IniFileReader.new,
+    home = Application.instance.get('HOME')
+    filename = Application::CONFIGFILE
+    filepath = "#{home}/.teuton/#{filename}"
+
+    @repo = Repo.new(config_reader: IniFileReader.new(filepath),
                      testinfo_reader: YamlReader.new)
   end
 
