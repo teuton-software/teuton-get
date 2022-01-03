@@ -1,7 +1,6 @@
 
 require 'yaml'
 require_relative 'application'
-require_relative 'reader/inifile_reader'
 
 class Repo
 

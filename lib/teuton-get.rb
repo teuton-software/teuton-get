@@ -2,6 +2,7 @@
 
 require_relative 'teuton-get/application'
 require_relative 'teuton-get/repo'
+require_relative 'teuton-get/reader/inifile_reader'
 require_relative 'teuton-get/init'
 
 module TeutonGet
