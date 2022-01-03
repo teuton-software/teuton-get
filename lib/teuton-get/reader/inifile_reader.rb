@@ -8,6 +8,8 @@ class IniFileReader < Reader
   end
 
   def read()
+    return {} unless File.exists? @filepath
+    
     inifile = IniFile.load(@filepath)
     data = {}
     inifile.sections.each do |section|

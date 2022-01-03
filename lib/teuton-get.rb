@@ -24,7 +24,13 @@ class TeutonGet
   end
 
   def init()
-    Init.create
+    home     = Application.instance.get('HOME')
+    dirpath  = File.join(home, '.teuton')
+    filepath = File.join(home, '.teuton', Application::CONFIGFILE)
+    init     = Init.new(dirpath: dirpath,
+                        filepath: filepath,
+                        writer: TerminalWriter.new)
+    init.create
   end
 
   def show_repo_list()

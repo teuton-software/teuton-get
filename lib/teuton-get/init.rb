@@ -1,36 +1,43 @@
 
-require 'colorize'
-require_relative 'application'
+require 'fileutils'
 
-module Init
-  def self.create()
-    puts "\n[INFO] Creating configuration files"
-    home = Application.instance.get('HOME')
-    dirpath = "#{home}/.teuton"
-    create_dir(dirpath)
-    create_ini_file(dirpath)
+class Init
+
+  def initialize(args)
+    @dirpath = args[:dirpath]
+    @filepath = args[:filepath]
+    @dev = args[:writer]
   end
 
-  private_class_method def self.create_dir(dirpath)
+  def create()
+    @dev.write "\n[INFO] Creating configuration files"
+    create_dir
+    create_ini_file
+  end
+
+  private
+
+  def create_dir
+    dirpath = @dirpath
     if Dir.exist? dirpath
       puts "* Exists dir!       => #{dirpath.colorize(:yellow)}"
     else
       begin
         FileUtils.mkdir_p(dirpath)
         puts "* Create dir        => #{dirpath.colorize(:green)}"
-      rescue StandardError
+      rescue => e
         puts "* Create dir  ERROR => #{dirpath.colorize(:red)}"
+        puts e
       end
     end
   end
 
-  private_class_method def self.create_ini_file(dirpath)
+  def create_ini_file
     src = File.join(File.dirname(__FILE__), 'files', Application::CONFIGFILE)
-    dst = File.join(dirpath, Application::CONFIGFILE)
-    copyfile(src, dst)
+    copyfile(src, @filepath)
   end
 
-  private_class_method def self.copyfile(target, dest)
+  def copyfile(target, dest)
     if File.exist? dest
       puts "* Exists file!      => #{dest.colorize(:yellow)}"
       return true
