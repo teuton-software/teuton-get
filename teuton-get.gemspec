@@ -5,16 +5,9 @@ Gem::Specification.new do |s|
   s.name        = Application::NAME
   s.version     = Application::VERSION
   s.date        = Date.today.strftime("%Y-%m-%d")
-  s.summary     = "Teuton (Teuton Software)"
+  s.summary     = "TeutonGet (Teuton Software)"
   s.description = <<-EOF
-  Intrastructure test, useful for:
-  (1) Sysadmin teachers to evaluate students remote machines.
-  (2) Sysadmin apprentices to evaluate their learning process as a game.
-  (3) Professional sysadmin to monitor remote machines.
-
-  Allow us:
-  (a) Write test units for real or virtual machines using simple DSL.
-  (b) Check compliance with requirements on remote machines.
+    Find and download Teuton Test.
   EOF
 
   s.extra_rdoc_files = [ 'README.md', 'LICENSE' ] +

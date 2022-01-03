@@ -4,6 +4,7 @@ require_relative 'teuton-get/application'
 require_relative 'teuton-get/repo'
 require_relative 'teuton-get/reader/inifile_reader'
 require_relative 'teuton-get/reader/yaml_reader'
+require_relative 'teuton-get/writer/terminal_writer'
 require_relative 'teuton-get/init'
 
 class TeutonGet
@@ -14,7 +15,8 @@ class TeutonGet
     filepath = "#{home}/.teuton/#{filename}"
 
     @repo = Repo.new(config_reader: IniFileReader.new(filepath),
-                     testinfo_reader: YamlReader.new)
+                     testinfo_reader: YamlReader.new,
+                     writer: TerminalWriter.new)
   end
 
   def create_repo(dirpath)

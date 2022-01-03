@@ -6,31 +6,32 @@ class Repo
   def initialize(args)
     @config = args[:config_reader].read
     @testinfo_reader = args[:testinfo_reader]
+    @writer = args[:writer]
   end
 
   def create(source_dir)
-    puts "[INFO] Create repo for <#{source_dir}> directory"
+    @writer.write "[INFO] Create repo for <#{source_dir}> directory"
     files = locate_filenames(source_dir)
     data = read_files(files)
     repofile = "#{source_dir}/tt-repo.yaml"
 
     write_repo_index(filepath: repofile, data: data)
-    puts "       Creating file <#{repofile}>"
-    puts "       Test number = #{data.keys.size}"
+    @writer.write "       Creating file <#{repofile}>"
+    @writer.write "       Test number = #{data.keys.size}"
   end
 
   def show_list()
-    puts "Show repos from config file"
+    @writer.write "Show repos from config file"
     @config.each_pair do |key, value|
       if value['enable']
-        puts "[ #{key} ]"
-        puts "  desc : #{value['description']}"
-        puts "  URL  : #{value['URL']}"
-        puts
+        @writer.write "[ #{key} ]"
+        @writer.write "  desc : #{value['description']}"
+        @writer.write "  URL  : #{value['URL']}"
+        @writer.write
       else
-        puts "[ #{key} ] (disable)".colorize(:yellow)
-        puts "  desc : #{value['description']}".colorize(:yellow)
-        puts "  URL  : #{value['URL']}".colorize(:yellow)
+        @writer.write "[ #{key} ] (disable)", color: :yellow
+        @writer.write "  desc : #{value['description']}", color: :yellow
+        @writer.write "  URL  : #{value['URL']}", color: :yellow
         puts
       end
     end

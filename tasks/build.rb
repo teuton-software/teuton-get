@@ -18,8 +18,8 @@ namespace :build do
   desc 'Build docker image'
   task :docker do
     puts '[INFO] Building docker image...'
-    system('docker rmi dvarrui/teuton')
-    system('docker build -t dvarrui/teuton install/docker/')
+    system('docker rmi dvarrui/teutonget')
+    system('docker build -t dvarrui/teutonget install/docker/')
   end
 
   desc 'Build all (gem and docs)'
