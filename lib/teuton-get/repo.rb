@@ -3,7 +3,7 @@ require_relative 'application'
 
 class Repo
   attr_reader :data
-  
+
   def initialize(args)
     @reader = args[:config_reader]
     @data = @reader.read
@@ -27,25 +27,22 @@ class Repo
   end
 
   def show_list()
-    @dev.write "[INFO] Show repo list from "
-    @dev.writeln "#{@reader.source}\n", color: :light_blue
+    @dev.writeln "[INFO] Show repo list"
+
+    rows = []
+    rows << ['E', 'NAME', 'DESCRIPTION']
+    rows << :separator
 
     @data.each_pair do |key, value|
-      if value['enable']
-        @dev.write '*', color: :light_green
-        @dev.writeln " #{key}"
-        @dev.write "    ├─ desc : "
-        @dev.writeln "#{value['description']}"
-        @dev.write "    └─ URL  : "
-        @dev.writeln "#{value['URL']}"
-      else
-        @dev.write 'X', color: :light_red
-        @dev.write  " #{key} "
-        @dev.writeln "(disable)", color: :light_red
-        @dev.writeln "    ├─ desc : #{value['description']}"
-        @dev.writeln "    └─ URL  : #{value['URL']}"
-      end
+      enable = ''
+      enable = 'X' unless value['enable']
+      description = value['description'] || '?'
+
+      rows << [ enable, key, description ]
     end
+    @dev.write_table(rows)
+    @dev.write 'Config: '
+    @dev.writeln "#{@reader.source}\n", color: :white
   end
 
   private

@@ -1,5 +1,6 @@
 
 require 'colorize'
+require 'terminal-table'
 require_relative 'writer'
 
 class TerminalWriter < Writer
@@ -12,4 +13,7 @@ class TerminalWriter < Writer
     write("#{text}\n", args)
   end
 
+  def write_table(rows)
+    puts Terminal::Table.new :rows => rows
+  end
 end

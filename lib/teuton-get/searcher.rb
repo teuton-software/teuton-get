@@ -18,7 +18,8 @@ class Searcher
   def refresh_repo(reponame)
     return if @repo.data[reponame]['enable'] == false
 
-    @dev.writeln " => Refresh repo #{reponame}"
+    @dev.write " => Refresh repo "
+    @dev.writeln "#{reponame}", color: :light_blue
     dirpath = File.join(@cache_dirpath, reponame)
     unless Dir.exist? dirpath
       begin

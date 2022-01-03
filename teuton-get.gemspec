@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'inifile', '~> 3.0'
   s.add_runtime_dependency 'colorize', '~> 0.8.1'
+  s.add_runtime_dependency 'terminal-table', '~> 3.0'
   s.add_runtime_dependency 'thor', '~> 1.1'
 
   s.add_development_dependency 'minitest', '~> 5.11'

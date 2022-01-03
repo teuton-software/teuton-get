@@ -4,7 +4,7 @@
 # Group general functions used by Rakefile tasks
 module Utils
   def self.packages
-    p = %w[thor colorize inifile]
+    p = %w[thor colorize inifile terminal-table]
     p += %w[minitest yard rubocop]
     p
   end
