@@ -7,7 +7,6 @@ require_relative 'teuton-get/reader/yaml_reader'
 require_relative 'teuton-get/init'
 
 class TeutonGet
-  attr_reader :repo
 
   def initialize()
     @repo = Repo.new(config_reader: IniFileReader.new,
@@ -15,7 +14,7 @@ class TeutonGet
   end
 
   def create_repo(dirpath)
-    repo.create(dirpath)
+    @repo.create(dirpath)
   end
 
   def init()
@@ -23,7 +22,7 @@ class TeutonGet
   end
 
   def show_repo_list()
-    repo.show_list
+    @repo.show_list
   end
 
   def search(filter)
