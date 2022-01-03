@@ -10,7 +10,7 @@ class Init
   end
 
   def create()
-    @dev.write "\n[INFO] Creating configuration files"
+    @dev.writeln "\n[INFO] Creating configuration files"
     create_dir
     create_ini_file
   end
@@ -20,13 +20,16 @@ class Init
   def create_dir
     dirpath = @dirpath
     if Dir.exist? dirpath
-      puts "* Exists dir!       => #{dirpath.colorize(:yellow)}"
+      @dev.write "* Exists dir!       => "
+      @dev.writeln dirpath, color: :yellow
     else
       begin
         FileUtils.mkdir_p(dirpath)
-        puts "* Create dir        => #{dirpath.colorize(:green)}"
+        @dev.write "* Create dir        => "
+        @dev.writeln dirpath, color: :green
       rescue => e
-        puts "* Create dir  ERROR => #{dirpath.colorize(:red)}"
+        @dev.write "* Create dir  ERROR => "
+        @dev.writeln dirpath, color: :red
         puts e
       end
     end

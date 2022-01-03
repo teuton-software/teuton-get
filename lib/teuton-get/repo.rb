@@ -20,19 +20,20 @@ class Repo
     @dev.write "       Test number = #{data.keys.size}"
   end
 
+require 'pry-byebug'
   def show_list()
-    @dev.write "Show repos from config file"
+    @dev.writeln "Show repos from config file"
     @config.each_pair do |key, value|
       if value['enable']
-        @dev.write "[ #{key} ]"
-        @dev.write "  desc : #{value['description']}"
-        @dev.write "  URL  : #{value['URL']}"
-        @dev.write
+        @dev.writeln "[ #{key} ]"
+        @dev.writeln "  desc : #{value['description']}"
+        @dev.writeln "  URL  : #{value['URL']}"
+        @dev.writeln
       else
-        @dev.write "[ #{key} ] (disable)", color: :yellow
-        @dev.write "  desc : #{value['description']}", color: :yellow
-        @dev.write "  URL  : #{value['URL']}", color: :yellow
-        puts
+        @dev.writeln "[ #{key} ] (disable)", color: :yellow
+        @dev.writeln "  desc : #{value['description']}", color: :yellow
+        @dev.writeln "  URL  : #{value['URL']}", color: :yellow
+        @dev.writeln
       end
     end
   end
