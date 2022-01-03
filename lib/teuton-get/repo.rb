@@ -27,7 +27,7 @@ class Repo
 
     @config.each_pair do |key, value|
       if value['enable']
-        @dev.write '*', color: :green
+        @dev.write '*', color: :light_green
         @dev.writeln " #{key}"
         @dev.write "    ├─ desc : "
         @dev.writeln "#{value['description']}"
