@@ -7,18 +7,22 @@ class Repo
     @reader = args[:config_reader]
     @config = @reader.read
     @testinfo_reader = args[:testinfo_reader]
-    @dev = args[:writer]
+    @repoindex_writer = args[:repoindex_writer]
+    @dev = args[:progress_writer]
   end
 
   def create(source_dir)
-    @dev.write "[INFO] Create repo for <#{source_dir}> directory"
-    files = locate_filenames(source_dir)
+    @dev.writeln "[INFO] Create repo for <#{source_dir}> directory"
+    files = Dir.glob(File.join(source_dir, '**', 'tt-info.yaml'))
     data = read_files(files)
-    repofile = "#{source_dir}/tt-repo.yaml"
+    filepath = "#{source_dir}/tt-repo.yaml"
 
-    write_repo_index(filepath: repofile, data: data)
-    @dev.write "       Creating file <#{repofile}>"
-    @dev.write "       Test number = #{data.keys.size}"
+    @repoindex_writer.open(filepath)
+    @repoindex_writer.write data.to_yaml
+    @repoindex_writer.close
+
+    @dev.writeln "       Creating file <#{filepath}>"
+    @dev.writeln "       Test number = #{data.keys.size}"
   end
 
   def show_list()
@@ -45,10 +49,6 @@ class Repo
 
   private
 
-  def self.locate_filenames(source_dir)
-    Dir.glob('**/tt-info.yaml')
-  end
-
   def read_files(files)
     data = {}
     files.each do |filepath|
@@ -56,14 +56,5 @@ class Repo
       data[filepath] = content
     end
     data
-  end
-
-  def write_repo_index(args)
-    filepath = args[:filepath]
-    data = args[:data]
-
-    file = File.open(filepath, 'w')
-    file.write data.to_yaml
-    file.close
   end
 end
