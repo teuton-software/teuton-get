@@ -3,28 +3,34 @@
 require_relative 'teuton-get/application'
 require_relative 'teuton-get/repo'
 require_relative 'teuton-get/reader/inifile_reader'
+require_relative 'teuton-get/reader/yaml_reader'
 require_relative 'teuton-get/init'
 
-module TeutonGet
-  def self.create_repo(dirpath)
-    repo = Repo.new(IniFileReader.new)
+class TeutonGet
+  attr_reader :repo
+
+  def initialize()
+    @repo = Repo.new(config_reader: IniFileReader.new,
+                     testinfo_reader: YamlReader.new)
+  end
+
+  def create_repo(dirpath)
     repo.create(dirpath)
   end
 
-  def self.init()
+  def init()
     Init.create
   end
 
-  def self.show_repo_list()
-    repo = Repo.new(IniFileReader.new)
+  def show_repo_list()
     repo.show_list
   end
 
-  def self.search(filter)
+  def search(filter)
     Searcher.get(filter)
   end
 
-  def self.download(testname)
+  def download(testname)
     Downloader.get(testname)
   end
 end

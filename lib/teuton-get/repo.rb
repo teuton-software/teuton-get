@@ -1,11 +1,11 @@
 
-require 'yaml'
 require_relative 'application'
 
 class Repo
 
-  def initialize(config_reader)
-    @config = config_reader.read
+  def initialize(args)
+    @config = args[:config_reader].read
+    @testinfo_reader = args[:testinfo_reader]
   end
 
   def create(source_dir)
@@ -45,7 +45,7 @@ class Repo
   def read_files(files)
     data = {}
     files.each do |filepath|
-      content = YAML.load(File.open(filepath))
+      content = @testinfo_reader.read(filepath)
       data[filepath] = content
     end
     data

@@ -20,7 +20,7 @@ class CLI < Thor
   Create index from SOURCE directory.
   LONGDESC
   def create_repo(source_dir)
-    TeutonGet.create_repo(source_dir)
+    TeutonGet.new.create_repo(source_dir)
   end
 
   map ['i', '-i', '--init'] => 'init'
@@ -29,7 +29,7 @@ class CLI < Thor
     Create ini config file
   LONGDESC
   def init()
-    TeutonGet.init()
+    TeutonGet.new.init()
   end
 
   map ['r', '-r', '--repos', 'repos'] => 'repos'
@@ -38,7 +38,7 @@ class CLI < Thor
     Show repo list.
   LONGDESC
   def repos()
-    TeutonGet.show_repo_list()
+    TeutonGet.new.show_repo_list()
   end
 
   map ['s', '-s', '--search'] => 'search'
@@ -47,7 +47,7 @@ class CLI < Thor
   Search Teuton test with FILTER
   LONGDESC
   def search(filter)
-    TeutonGet.search(filter)
+    TeutonGet.new.search(filter)
   end
 
   map ['d', '-d', '--download'] => '--download'
@@ -56,7 +56,7 @@ class CLI < Thor
     Download Teuton test
   LONGDESC
   def download(testname)
-    TeutonGet.download(testname)
+    TeutonGet.new.download(testname)
   end
 
 end
