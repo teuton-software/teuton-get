@@ -28,7 +28,7 @@ class TeutonGet
   def init()
     home     = Application.instance.get('HOME')
     dirpath  = File.join(home, '.teuton')
-    filepath = File.join(home, '.teuton', Application::CONFIGFILE)
+    filepath = File.join(dirpath, Application::CONFIGFILE)
     init     = Init.new(dirpath: dirpath,
                         filepath: filepath,
                         writer: TerminalWriter.new)
