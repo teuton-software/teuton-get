@@ -5,11 +5,16 @@ require_relative 'reader'
 class IniFileReader < Reader
   def initialize(filepath)
     @filepath = filepath
+    self
+  end
+
+  def source
+    @filepath
   end
 
   def read()
     return {} unless File.exists? @filepath
-    
+
     inifile = IniFile.load(@filepath)
     data = {}
     inifile.sections.each do |section|

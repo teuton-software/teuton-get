@@ -4,7 +4,8 @@ require_relative 'application'
 class Repo
 
   def initialize(args)
-    @config = args[:config_reader].read
+    @reader = args[:config_reader]
+    @config = @reader.read
     @testinfo_reader = args[:testinfo_reader]
     @dev = args[:writer]
   end
@@ -20,20 +21,24 @@ class Repo
     @dev.write "       Test number = #{data.keys.size}"
   end
 
-require 'pry-byebug'
   def show_list()
-    @dev.writeln "Show repos from config file"
+    @dev.write "[INFO] Show repo list from "
+    @dev.writeln "#{@reader.source}\n", color: :light_blue
+
     @config.each_pair do |key, value|
       if value['enable']
-        @dev.writeln "[ #{key} ]"
-        @dev.writeln "  desc : #{value['description']}"
-        @dev.writeln "  URL  : #{value['URL']}"
-        @dev.writeln
+        @dev.write '*', color: :green
+        @dev.writeln " #{key}"
+        @dev.write "    ├─ desc : "
+        @dev.writeln "#{value['description']}"
+        @dev.write "    └─ URL  : "
+        @dev.writeln "#{value['URL']}"
       else
-        @dev.writeln "[ #{key} ] (disable)", color: :yellow
-        @dev.writeln "  desc : #{value['description']}", color: :yellow
-        @dev.writeln "  URL  : #{value['URL']}", color: :yellow
-        @dev.writeln
+        @dev.write 'X', color: :light_red
+        @dev.write  " #{key} "
+        @dev.writeln "(disable)", color: :light_red
+        @dev.writeln "    ├─ desc : #{value['description']}"
+        @dev.writeln "    └─ URL  : #{value['URL']}"
       end
     end
   end

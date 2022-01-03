@@ -42,14 +42,18 @@ class Init
 
   def copyfile(target, dest)
     if File.exist? dest
-      puts "* Exists file!      => #{dest.colorize(:yellow)}"
+      @dev.write "* Exists file!      => "
+      @dev.writeln dest, color: :yellow
       return true
     end
     begin
       FileUtils.cp(target, dest)
-      puts "* Create file       => #{dest.colorize(:green)}"
-    rescue StandardError
-      puts "* Create file ERROR => #{dest.colorize(:red)}"
+      @dev.write "* Create file       => "
+      @dev.writeln dest, color: :green
+    rescue => e
+      @dev.write "* Create file ERROR => "
+      @dev.writeln dest, color: :red
+      puts e
     end
   end
 end
