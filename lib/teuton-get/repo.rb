@@ -1,10 +1,15 @@
 
 require 'yaml'
-require 'inifile'
 require_relative 'application'
+require_relative 'reader/inifile_reader'
 
-module Repo
-  def self.create(source_dir)
+class Repo
+
+  def initialize(config_reader)
+    @config = config_reader.read
+  end
+
+  def create(source_dir)
     puts "[INFO] Create repo for <#{source_dir}> directory"
     files = locate_filenames(source_dir)
     data = read_files(files)
@@ -15,32 +20,9 @@ module Repo
     puts "       Test number = #{data.keys.size}"
   end
 
-  private_class_method def self.locate_filenames(source_dir)
-    Dir.glob('**/tt-info.yaml')
-  end
-
-  private_class_method def self.read_files(files)
-    data = {}
-    files.each do |filepath|
-      content = YAML.load(File.open(filepath))
-      data[filepath] = content
-    end
-    data
-  end
-
-  private_class_method def self.write_repo_index(args)
-    filepath = args[:filepath]
-    data = args[:data]
-
-    file = File.open(filepath, 'w')
-    file.write data.to_yaml
-    file.close
-  end
-
-  def self.show_list()
+  def show_list()
     puts "Show repos from config file"
-    data = read_inifile
-    data.each_pair do |key, value|
+    @config.each_pair do |key, value|
       if value['enable']
         puts "[ #{key} ]"
         puts "  desc : #{value['description']}"
@@ -55,14 +37,27 @@ module Repo
     end
   end
 
-  def self.read_inifile()
-    home = Application.instance.get('HOME')
-    configfile = Application::CONFIGFILE
-    inifile = IniFile.load("#{home}/.teuton/#{configfile}")
+  private
+
+  def self.locate_filenames(source_dir)
+    Dir.glob('**/tt-info.yaml')
+  end
+
+  def read_files(files)
     data = {}
-    inifile.sections.each do |section|
-      data[section] = inifile[section]
+    files.each do |filepath|
+      content = YAML.load(File.open(filepath))
+      data[filepath] = content
     end
     data
+  end
+
+  def write_repo_index(args)
+    filepath = args[:filepath]
+    data = args[:data]
+
+    file = File.open(filepath, 'w')
+    file.write data.to_yaml
+    file.close
   end
 end

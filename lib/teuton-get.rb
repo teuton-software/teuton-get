@@ -6,7 +6,8 @@ require_relative 'teuton-get/init'
 
 module TeutonGet
   def self.create_repo(dirpath)
-    Repo.create(dirpath)
+    repo = Repo.new(IniFileReader.new)
+    repo.create(dirpath)
   end
 
   def self.init()
@@ -14,7 +15,8 @@ module TeutonGet
   end
 
   def self.show_repo_list()
-    Repo.show_list
+    repo = Repo.new(IniFileReader.new)
+    repo.show_list
   end
 
   def self.search(filter)
