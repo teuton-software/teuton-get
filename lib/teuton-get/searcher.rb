@@ -7,7 +7,10 @@ class Searcher
   end
 
   def refresh
-    @dev.writeln '[INFO] Refresh test list'
+    dirpath = @cache_dirpath
+    FileUtils.rm_r(dirpath) if Dir.exist? dirpath
+
+    @dev.writeln '[INFO] Refresh repo'
     @repo.data.keys.sort.each do |key|
       refresh_repo key
     end
@@ -20,7 +23,13 @@ class Searcher
 
     @dev.write " => Refresh repo "
     @dev.writeln "#{reponame}", color: :light_blue
+    
     dirpath = File.join(@cache_dirpath, reponame)
+    create_dir(dirpath)
+    get_repo_index(reponame)
+  end
+
+  def create_dir(dirpath)
     unless Dir.exist? dirpath
       begin
         FileUtils.mkdir_p(dirpath)
@@ -30,5 +39,8 @@ class Searcher
         puts e
       end
     end
+  end
+
+  def get_repo_index(reponame)
   end
 end

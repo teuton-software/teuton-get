@@ -27,7 +27,7 @@ class Repo
   end
 
   def show_list()
-    @dev.writeln "[INFO] Show repo list"
+    #@dev.writeln "[INFO] Show repo list"
 
     rows = []
     rows << ['E', 'NAME', 'DESCRIPTION']

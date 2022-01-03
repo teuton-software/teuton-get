@@ -23,7 +23,7 @@ class TeutonGet
                      repoindex_writer: FileWriter.new,
                      progress_writer: TerminalWriter.new)
 
-    cache_dirpath = "#{home}/.teuton/cache/"
+    cache_dirpath = "#{home}/.teuton/cache"
     @searcher = Searcher.new(cache_dirpath: cache_dirpath,
                              repo: @repo,
                              writer: TerminalWriter.new)
