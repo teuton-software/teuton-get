@@ -1,5 +1,6 @@
 
 require_relative 'reader/url_reader'
+require_relative 'reader/yaml_reader'
 
 class Searcher
   def initialize(args)
@@ -19,6 +20,30 @@ class Searcher
     @repo.data.keys.sort.each do |key|
       refresh_repo key
     end
+    save_database
+  end
+
+require 'pry-byebug'
+  def get(filter)
+    result = []
+    filename = database_filename
+    @database = YamlReader.new.read(database_filename)
+    @database.keys.each do |reponame|
+      @database[reponame].each do |testname, data|
+        if testname.include? filter
+          result += [{reponame: reponame, testname: testname}]
+        end
+      end
+    end
+    result
+  end
+
+  def show(result)
+    rows = []
+    rows << ['REPONAME', 'TESTNAME']
+    rows << :separator
+    result.each { |item| rows << [item[:reponame], item[:testname]] }
+    @dev.write_table(rows)
   end
 
   private
@@ -32,7 +57,6 @@ class Searcher
     dirpath = File.join(@cache_dirpath)
     create_dir(dirpath)
     get_database(reponame)
-    save_database
   end
 
   def enabled?(reponame)
@@ -72,8 +96,12 @@ class Searcher
     yaml_content = YAML::load(content_page)
   end
 
-  def save_database()
-    filename = File.join(@cache_dirpath, 'database.yaml')
-    File.write(filename, @database.to_yaml)
+  def database_filename()
+    File.join(@cache_dirpath, 'database.yaml')
   end
+
+  def save_database()
+    File.write(database_filename, @database.to_yaml)
+  end
+
 end

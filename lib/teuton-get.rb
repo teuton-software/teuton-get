@@ -53,7 +53,8 @@ class TeutonGet
   end
 
   def search(filter)
-    @searcher.get(filter)
+    result = @searcher.get(filter)
+    @searcher.show(result)
   end
 
   def download(testname)
