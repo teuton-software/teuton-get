@@ -1,19 +1,22 @@
 
-
-61
-
-You can do the same without OpenURI:
-
 require 'net/http'
 require 'uri'
 
-def open(url)
-  Net::HTTP.get(URI.parse(url))
+require_relative 'reader'
+
+class URLReader < Reader
+  attr_reader :page_content
+
+  def initialize(url)
+    @url = url
+  end
+
+  def source
+    @url
+  end
+
+  def read
+    @page_content = Net::HTTP.get(URI.parse(@url))
+  end
+
 end
-
-page_content = open('http://www.google.com')
-puts page_content
-
-Or, more succinctly:
-
-Net::HTTP.get(URI.parse('http://www.google.com'))

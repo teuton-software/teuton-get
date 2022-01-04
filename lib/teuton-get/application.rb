@@ -7,10 +7,12 @@ require_relative 'reader/linux_environment_reader'
 class Application
   include Singleton
 
-  VERSION    = '0.0.0'
-  NAME       = 'teuton-get'
-  CONFIGFILE = 'repos.ini'
-
+  VERSION       = '0.0.0'
+  NAME          = 'teuton-get'
+  CONFIGFILE    = 'repos.ini'
+  INDEXFILENAME = 'tt-repo.yaml'
+  INFOFILENAME  = 'tt-info.yaml'
+  
   attr_reader   :default
   attr_accessor :options
 

@@ -13,10 +13,15 @@ class Repo
   end
 
   def create(source_dir)
+    infofilename = Application::INFOFILENAME
+    indexfilename = Application::INDEXFILENAME
+
     @dev.writeln "[INFO] Create repo for <#{source_dir}> directory"
-    files = Dir.glob(File.join(source_dir, '**', 'tt-info.yaml'))
+
+    files = Dir.glob(File.join(source_dir, '**', infofilename))
     data = read_files(files)
-    filepath = "#{source_dir}/tt-repo.yaml"
+    filepath = File.join(source_dir, indexfilename)
+    #filepath = "#{source_dir}/#{indexfilename}"
 
     @repoindex_writer.open(filepath)
     @repoindex_writer.write data.to_yaml

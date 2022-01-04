@@ -26,7 +26,8 @@ class TeutonGet
     cache_dirpath = "#{home}/.teuton/cache"
     @searcher = Searcher.new(cache_dirpath: cache_dirpath,
                              repo: @repo,
-                             writer: TerminalWriter.new)
+                             writer: TerminalWriter.new,
+                             reader: YamlReader.new)
   end
 
   def create_repo(dirpath)
