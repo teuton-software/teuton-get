@@ -51,7 +51,7 @@ class CLI < Thor
   end
 
   map ['s', '-s', '--search'] => 'search'
-  desc 'search FILTER', 'Search Teuton test with FILTER'
+  desc 'search [REPONAME:]FILTER', 'Search Teuton test with FILTER'
   long_desc <<-LONGDESC
   Search Teuton test with FILTER
   LONGDESC
@@ -60,9 +60,9 @@ class CLI < Thor
   end
 
   map ['d', '-d', '--download'] => '--download'
-  desc 'download TESTNAME', 'Download Teuton test'
+  desc 'download REPONAME:TESTNAME', 'Download Teuton test'
   long_desc <<-LONGDESC
-    Download Teuton test
+    Download Teuton test. Example: "teutonget main:system.1/debian_conf"
   LONGDESC
   def download(testname)
     TeutonGet.new.download(testname)
