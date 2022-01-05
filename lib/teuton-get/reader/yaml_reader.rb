@@ -7,6 +7,7 @@ class YamlReader < Reader
   end
 
   def read(filepath)
+    return {} unless File.exist? filepath
     YAML.load(File.open(filepath))
   end
 end
