@@ -60,9 +60,9 @@ class CLI < Thor
   end
 
   map ['d', '-d', '--download'] => '--download'
-  desc 'download REPONAME:TESTNAME', 'Download Teuton test'
+  desc 'download REPONAME@TESTNAME', 'Download Teuton test'
   long_desc <<-LONGDESC
-    Download Teuton test. Example: "teutonget main:system.1/debian_conf"
+    Download Teuton test. Example: "teutonget main@system/opensuse"
   LONGDESC
   def download(testname)
     TeutonGet.new.download(testname)

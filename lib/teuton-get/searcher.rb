@@ -40,20 +40,18 @@ class Searcher
   end
 
   def show(result)
-    rows = []
-    rows << ['REPONAME', 'TESTNAME']
-    rows << :separator
-    result.each { |item| rows << [item[:reponame], item[:testname]] }
-    @dev.write_table(rows)
+    result.each do |item|
+      @dev.writeln "(#{item[:score]}) #{item[:reponame]}@#{item[:testname]}"
+    end
   end
 
   private
 
   def refresh_repo(reponame)
-    return if enabled? reponame
+    return unless enabled? reponame
 
     @dev.write " => Refresh repo "
-    @dev.writeln "#{reponame}", color: :light_blue
+    @dev.writeln "#{reponame}", color: :light_cyan
 
     dirpath = File.join(@cache_dirpath)
     create_dir(dirpath)
@@ -61,7 +59,7 @@ class Searcher
   end
 
   def enabled?(reponame)
-    @repo.data[reponame]['enable'] == false
+    @repo.data[reponame]['enable'] == true
   end
 
   def create_dir(dirpath)
@@ -126,10 +124,32 @@ class Searcher
     return results if @database[reponame].nil?
 
     @database[reponame].each do |testname, data|
-      if testname.include? filter
-        results += [{reponame: reponame, testname: testname}]
+      score = evaluate_test(testname: testname,
+                            data: data,
+                            filter: filter)
+      if (score > 0)
+        results += [{score: score, reponame: reponame, testname: testname}]
       end
     end
     results
+  end
+
+  def evaluate_test(args)
+    testname = args[:testname]
+    data = args[:data]
+    filter = args[:filter]
+
+    score = 0
+    data.each_pair do |key, value|
+      if value.class == String
+        score += 1 if (value.downcase.include? filter)
+      elsif value.class == Date
+        score += 1 if (value.to_s.include? filter)
+      elsif value.class == Array
+        score += 1 if (value.include? filter)
+      end
+    end
+    score += 1 if (testname.include? filter)
+    score
   end
 end
