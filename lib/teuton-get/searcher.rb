@@ -23,7 +23,6 @@ class Searcher
     save_database
   end
 
-require 'pry-byebug'
   def get(filter)
     result = []
     filename = database_filename

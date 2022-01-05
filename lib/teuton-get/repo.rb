@@ -55,8 +55,14 @@ class Repo
   def read_files(files)
     data = {}
     files.each do |filepath|
-      content = @testinfo_reader.read(filepath)
-      data[filepath] = content
+      cleanpath = filepath
+      if cleanpath.start_with? './'
+        # delete 2 chars at the begining. Example: "./"
+        cleanpath[0,2] = ''
+      end
+      content = @testinfo_reader.read(cleanpath)
+      dirpath = File.dirname(cleanpath)
+      data[dirpath] = content
     end
     data
   end

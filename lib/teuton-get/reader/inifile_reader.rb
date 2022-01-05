@@ -3,16 +3,16 @@ require 'inifile'
 require_relative 'reader'
 
 class IniFileReader < Reader
-  def initialize(filepath)
+  def initialize(filepath = '')
     @filepath = filepath
-    self
   end
 
   def source
     @filepath
   end
 
-  def read()
+  def read(filepath = :default)
+    @filepath = filepath unless filepath == :default
     return {} unless File.exists? @filepath
 
     inifile = IniFile.load(@filepath)
