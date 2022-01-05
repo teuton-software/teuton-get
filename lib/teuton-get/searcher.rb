@@ -107,13 +107,13 @@ class Searcher
 
   def read_search_input(input)
     reponame_filter = 'all'
-    options = input.split(':')
+    options = input.split('@')
     if options.size == 1
       reponame_filter = 'all'
       filter = options[0]
     elsif options[0] == ''
         reponame_filter = 'all'
-        filter = filter[1]
+        filter = options[1]
     else
       reponame_filter = options[0]
       filter = options[1]
@@ -124,7 +124,7 @@ class Searcher
   def search_into_repo(reponame, filter)
     results = []
     return results if @database[reponame].nil?
-    
+
     @database[reponame].each do |testname, data|
       if testname.include? filter
         results += [{reponame: reponame, testname: testname}]
