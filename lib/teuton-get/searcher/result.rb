@@ -5,9 +5,9 @@ class Result
   attr_reader :testname
 
   def initialize(args)
-    @score = args[:score]
-    @reponame = args[:reponame]
-    @testname = args[:testname]
+    @score = args[:score] || 0
+    @reponame = args[:reponame] || '???'
+    @testname = args[:testname] || '???'
   end
 
   def id
