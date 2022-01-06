@@ -32,7 +32,7 @@ class TeutonGet
   end
 
   def create_repo(dirpath)
-    @repo_config.create(dirpath)
+    @repo_config.create_repo(dirpath)
   end
 
   def init()
@@ -42,7 +42,7 @@ class TeutonGet
     init     = Init.new(dirpath: dirpath,
                         filepath: filepath,
                         writer: TerminalWriter.new)
-    init.create
+    init.create_config
   end
 
   def show_repo_list()

@@ -9,7 +9,7 @@ class Init
     @dev = args[:writer]
   end
 
-  def create()
+  def create_config()
     @dev.writeln "\n[INFO] Creating configuration files"
     create_dir
     create_ini_file

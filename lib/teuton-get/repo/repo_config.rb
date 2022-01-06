@@ -2,8 +2,6 @@
 require_relative '../application'
 
 class RepoConfig
-#  attr_reader :data
-
   def initialize(args)
     @reader = args[:config_reader]
     @data = @reader.read
@@ -12,7 +10,7 @@ class RepoConfig
     @dev = args[:progress_writer]
   end
 
-  def create(source_dir)
+  def create_repo(source_dir)
     infofilename = Application::INFOFILENAME
     indexfilename = Application::INDEXFILENAME
 
