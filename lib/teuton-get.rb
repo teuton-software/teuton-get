@@ -9,6 +9,8 @@ require_relative 'teuton-get/writer/terminal_writer'
 
 require_relative 'teuton-get/init'
 require_relative 'teuton-get/repo'
+require_relative 'teuton-get/repo/repo_config'
+require_relative 'teuton-get/repo/repo_data'
 require_relative 'teuton-get/searcher'
 
 class TeutonGet
@@ -16,10 +18,11 @@ class TeutonGet
   def initialize()
     home = Application.instance.get('HOME')
     filename = Application::CONFIGFILE
-    filepath = "#{home}/.teuton/#{filename}"
-
+    configpath = "#{home}/.teuton/#{filename}"
     cache_dirpath = "#{home}/.teuton/cache"
-    @repo = Repo.new(config_reader: IniFileReader.new(filepath),
+    @inifile_reader = IniFileReader.new(configpath)
+
+    @repo = Repo.new(config_reader: @inifile_reader,
                      testinfo_reader: YamlReader.new,
                      repoindex_writer: FileWriter.new,
                      progress_writer: TerminalWriter.new,
@@ -31,7 +34,11 @@ class TeutonGet
   end
 
   def create_repo(dirpath)
-    @repo.create(dirpath)
+    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
+                                  testinfo_reader: YamlReader.new,
+                                  repoindex_writer: FileWriter.new,
+                                  progress_writer: TerminalWriter.new)
+    @repo_config.create(dirpath)
   end
 
   def init()
@@ -45,11 +52,20 @@ class TeutonGet
   end
 
   def show_repo_list()
-    @repo.show_list
+    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
+                                  testinfo_reader: YamlReader.new,
+                                  repoindex_writer: FileWriter.new,
+                                  progress_writer: TerminalWriter.new)
+    @repo_config.show_list
   end
 
   def refresh()
-    @repo.refresh
+    home = Application.instance.get('HOME')
+    cache_dirpath = "#{home}/.teuton/cache"
+    @repo_data = RepoData.new(config_reader: @inifile_reader,
+                              progress_writer: TerminalWriter.new,
+                              cache_dirpath: cache_dirpath)
+    @repo_data.refresh
   end
 
   def search(filter)
