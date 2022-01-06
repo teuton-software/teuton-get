@@ -15,9 +15,9 @@ class Searcher
     reponame_filter, filter = read_search_input(input)
     results = []
     filename = @repo.database_filename
+    @database = YamlReader.new.read(filename)
 
-    @database = YamlReader.new.read(@repo.database_filename)
-    if reponame_filter == 'all'
+    if reponame_filter == :all
       @database.keys.each do |reponame|
         results += search_into_repo(reponame, filter)
       end
@@ -36,18 +36,21 @@ class Searcher
   private
 
   def read_search_input(input)
-    reponame_filter = 'all'
+    reponame_filter = :all
+    filter = :all
     options = input.split('@')
     if options.size == 1
-      reponame_filter = 'all'
+      reponame_filter = :all
       filter = options[0]
     elsif options[0] == ''
-        reponame_filter = 'all'
+        reponame_filter = :all
         filter = options[1]
-    else
+    elsif options.size == 2
       reponame_filter = options[0]
       filter = options[1]
     end
+    reponame_filter = :all if reponame_filter == 'ALL'
+    filter = :all if filter == 'ALL'
     [reponame_filter, filter]
   end
 
@@ -56,6 +59,11 @@ class Searcher
     return results if @database[reponame].nil?
 
     @database[reponame].each do |testname, data|
+      if (filter == :all)
+        results += [{score: 1, reponame: reponame, testname: testname}]
+        next
+      end
+
       score = evaluate_test(testname: testname,
                             data: data,
                             filter: filter)
