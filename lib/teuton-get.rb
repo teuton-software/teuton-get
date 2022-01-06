@@ -7,7 +7,7 @@ require_relative 'teuton-get/reader/yaml_reader'
 require_relative 'teuton-get/writer/file_writer'
 require_relative 'teuton-get/writer/terminal_writer'
 
-require_relative 'teuton-get/init'
+require_relative 'teuton-get/repo/repo'
 require_relative 'teuton-get/repo/repo_config'
 require_relative 'teuton-get/repo/repo_data'
 require_relative 'teuton-get/searcher'
@@ -20,10 +20,6 @@ class TeutonGet
     configpath = "#{home}/.teuton/#{filename}"
     @inifile_reader = IniFileReader.new(configpath)
 
-    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
-                                  testinfo_reader: YamlReader.new,
-                                  repoindex_writer: FileWriter.new,
-                                  progress_writer: TerminalWriter.new)
 
     cache_dirpath = "#{home}/.teuton/cache"
     @repo_data = RepoData.new(config_reader: @inifile_reader,
@@ -32,20 +28,24 @@ class TeutonGet
   end
 
   def create_repo(dirpath)
-    @repo_config.create_repo(dirpath)
+    @repo = Repo.new(testinfo_reader: YamlReader.new,
+                     repoindex_writer: FileWriter.new,
+                     progress_writer: TerminalWriter.new)
+    @repo.create_repo(dirpath)
   end
 
   def init()
     home     = Application.instance.get('HOME')
     dirpath  = File.join(home, '.teuton')
-    filepath = File.join(dirpath, Application::CONFIGFILE)
-    init     = Init.new(dirpath: dirpath,
-                        filepath: filepath,
-                        writer: TerminalWriter.new)
-    init.create_config
+    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
+                                  progress_writer: TerminalWriter.new,
+                                  dirpath: dirpath)
+    @repo_config.create_config
   end
 
   def show_repo_list()
+    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
+                                  progress_writer: TerminalWriter.new)
     @repo_config.show_list
   end
 

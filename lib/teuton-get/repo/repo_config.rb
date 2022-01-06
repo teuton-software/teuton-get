@@ -1,31 +1,21 @@
 
+require 'fileutils'
 require_relative '../application'
 
 class RepoConfig
   def initialize(args)
     @reader = args[:config_reader]
     @data = @reader.read
-    @testinfo_reader  = args[:testinfo_reader]
-    @repoindex_writer = args[:repoindex_writer]
     @dev = args[:progress_writer]
+
+    @dirpath = args[:dirpath] || ''
+    @filepath = File.join(@dirpath, Application::CONFIGFILE)
   end
 
-  def create_repo(source_dir)
-    infofilename = Application::INFOFILENAME
-    indexfilename = Application::INDEXFILENAME
-
-    @dev.writeln "[INFO] Create repo for <#{source_dir}> directory"
-
-    files = Dir.glob(File.join(source_dir, '**', infofilename))
-    data = read_files(files)
-    filepath = File.join(source_dir, indexfilename)
-
-    @repoindex_writer.open(filepath)
-    @repoindex_writer.write data.to_yaml
-    @repoindex_writer.close
-
-    @dev.writeln "       Creating file <#{filepath}>"
-    @dev.writeln "       Test number = #{data.keys.size}"
+  def create_config()
+    @dev.writeln "\n[INFO] Creating configuration files"
+    create_dir
+    create_ini_file
   end
 
   def show_list()
@@ -48,18 +38,43 @@ class RepoConfig
 
   private
 
-  def read_files(files)
-    data = {}
-    files.each do |filepath|
-      cleanpath = filepath
-      if cleanpath.start_with? './'
-        # delete 2 chars at the begining. Example: "./"
-        cleanpath[0,2] = ''
+  def create_dir
+    dirpath = @dirpath
+    if Dir.exist? dirpath
+      @dev.write "* Exists dir!       => "
+      @dev.writeln dirpath, color: :yellow
+    else
+      begin
+        FileUtils.mkdir_p(dirpath)
+        @dev.write "* Create dir        => "
+        @dev.writeln dirpath, color: :green
+      rescue => e
+        @dev.write "* Create dir  ERROR => "
+        @dev.writeln dirpath, color: :red
+        puts e
       end
-      content = @testinfo_reader.read(cleanpath)
-      dirpath = File.dirname(cleanpath)
-      data[dirpath] = content
     end
-    data
+  end
+
+  def create_ini_file
+    src = File.join(File.dirname(__FILE__), 'files', Application::CONFIGFILE)
+    copyfile(src, @filepath)
+  end
+
+  def copyfile(target, dest)
+    if File.exist? dest
+      @dev.write "* Exists file!      => "
+      @dev.writeln dest, color: :yellow
+      return true
+    end
+    begin
+      FileUtils.cp(target, dest)
+      @dev.write "* Create file       => "
+      @dev.writeln dest, color: :green
+    rescue => e
+      @dev.write "* Create file ERROR => "
+      @dev.writeln dest, color: :red
+      puts e
+    end
   end
 end
