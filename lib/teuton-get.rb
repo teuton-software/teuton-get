@@ -18,12 +18,13 @@ class TeutonGet
     filename = Application::CONFIGFILE
     filepath = "#{home}/.teuton/#{filename}"
 
+    cache_dirpath = "#{home}/.teuton/cache"
     @repo = Repo.new(config_reader: IniFileReader.new(filepath),
                      testinfo_reader: YamlReader.new,
                      repoindex_writer: FileWriter.new,
-                     progress_writer: TerminalWriter.new)
+                     progress_writer: TerminalWriter.new,
+                     cache_dirpath: cache_dirpath)
 
-    cache_dirpath = "#{home}/.teuton/cache"
     @searcher = Searcher.new(cache_dirpath: cache_dirpath,
                              repo: @repo,
                              writer: TerminalWriter.new,
@@ -49,7 +50,7 @@ class TeutonGet
   end
 
   def refresh()
-    @searcher.refresh
+    @repo.refresh
   end
 
   def search(filter)

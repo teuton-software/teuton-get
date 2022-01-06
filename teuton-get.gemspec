@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.license     = 'GPL-3.0'
   s.authors     = ['David Vargas Ruiz']
   s.email       = 'teuton.software@protonmail.com'
-  s.homepage    = 'https://github.com/teuton-software/teuton-get/tree/master'
+  s.homepage    = 'https://github.com/dvarrui/teuton-get/tree/master'
 
   s.executables << 'teutonget'
   s.files       = Dir.glob(File.join('lib', '**', '*.*'))

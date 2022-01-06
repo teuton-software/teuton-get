@@ -1,8 +1,7 @@
 
-require_relative 'reader/url_reader'
 require_relative 'reader/yaml_reader'
 
-class Searcher
+class Filter
   def initialize(args)
     @cache_dirpath = args[:cache_dirpath]
     @repo = args[:repo]
@@ -14,9 +13,9 @@ class Searcher
   def get(input)
     reponame_filter, filter = read_search_input(input)
     results = []
-    filename = @repo.database_filename
+    filename = database_filename
 
-    @database = YamlReader.new.read(@repo.database_filename)
+    @database = YamlReader.new.read(database_filename)
     if reponame_filter == 'all'
       @database.keys.each do |reponame|
         results += search_into_repo(reponame, filter)
@@ -27,13 +26,15 @@ class Searcher
     results
   end
 
-  def show(result)
-    result.each do |item|
-      @dev.writeln "(#{item[:score]}) #{item[:reponame]}@#{item[:testname]}"
-    end
+  private
+
+  def enabled?(reponame)
+    @repo.data[reponame]['enable'] == true
   end
 
-  private
+  def database_filename()
+    File.join(@cache_dirpath, 'database.yaml')
+  end
 
   def read_search_input(input)
     reponame_filter = 'all'
