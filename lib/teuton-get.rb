@@ -25,8 +25,7 @@ class TeutonGet
                      progress_writer: TerminalWriter.new,
                      cache_dirpath: cache_dirpath)
 
-    @searcher = Searcher.new(cache_dirpath: cache_dirpath,
-                             repo: @repo,
+    @searcher = Searcher.new(repo: @repo,
                              writer: TerminalWriter.new,
                              reader: YamlReader.new)
   end

@@ -12,7 +12,8 @@ class Application
   CONFIGFILE    = 'repos.ini'
   INDEXFILENAME = 'tt-repo.yaml'
   INFOFILENAME  = 'tt-info.yaml'
-
+  MAGICNUMBER   = 999
+  
   def initialize
     @env = Environment.new(LinuxEnvironmentReader.new(%x[env]))
   end

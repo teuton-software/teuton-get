@@ -1,5 +1,6 @@
 
 require_relative 'application'
+require_relative 'reader/url_reader'
 
 class Repo
   attr_reader :data

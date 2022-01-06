@@ -1,41 +1,33 @@
 
-require_relative 'reader/url_reader'
-require_relative 'reader/yaml_reader'
+require_relative 'searcher/result'
+require_relative 'application'
 
 class Searcher
   def initialize(args)
-    @cache_dirpath = args[:cache_dirpath]
     @repo = args[:repo]
     @dev = args[:writer]
     @reader = args[:reader]
-    @database = {}
+
+    filename = @repo.database_filename
+    @database = @reader.read(filename)
+
+    @results = {}
   end
 
   def get(input)
-    reponame_filter, filter = read_search_input(input)
-    results = []
-    filename = @repo.database_filename
-    @database = YamlReader.new.read(filename)
-
-    if reponame_filter == :all
-      @database.keys.each do |reponame|
-        results += search_into_repo(reponame, filter)
-      end
-    else
-      results += search_into_repo(reponame_filter, filter)
-    end
-    results
+    reponame_filter, filters = parse_input(input)
+    search_inside(reponame_filter, filters)
   end
 
   def show(result)
-    result.each do |item|
-      @dev.writeln "(#{item[:score]}) #{item[:reponame]}@#{item[:testname]}"
+    @results.each do |i|
+      @dev.writeln "(#{i[:score]}) #{i[:reponame]}@#{i[:testname]}"
     end
   end
 
   private
 
-  def read_search_input(input)
+  def parse_input(input)
     reponame_filter = :all
     filter = :all
     options = input.split('@')
@@ -50,28 +42,48 @@ class Searcher
       filter = options[1]
     end
     reponame_filter = :all if reponame_filter == 'ALL'
-    filter = :all if filter == 'ALL'
-    [reponame_filter, filter]
+    if filter == 'ALL'
+      filters = :all
+    else
+      filters = filter.split(',')
+    end
+    [reponame_filter, filters]
   end
 
-  def search_into_repo(reponame, filter)
-    results = []
-    return results if @database[reponame].nil?
-
-    @database[reponame].each do |testname, data|
-      if (filter == :all)
-        results += [{score: 1, reponame: reponame, testname: testname}]
-        next
-      end
-
-      score = evaluate_test(testname: testname,
-                            data: data,
-                            filter: filter)
-      if (score > 0)
-        results += [{score: score, reponame: reponame, testname: testname}]
+  def search_inside(reponame_filter, filters)
+    @results = {}
+    if reponame_filter == :all
+      @database.keys.each { |reponame| search_inside_repo(reponame, filters) }
+    else
+      @database.keys.each do |reponame|
+        search_inside_repo(reponame, filters) if reponame.include? reponame_filter
       end
     end
-    results
+    sort_results
+  end
+
+  def search_inside_repo(reponame, filters)
+    return if reponame != :all and @database[reponame].nil?
+
+    @database[reponame].each do |testname, data|
+      result = Result.new(score: 0,
+                          reponame: reponame,
+                          testname: testname)
+      if (filters == :all)
+        add_result(result)
+        next
+      end
+      score = 0
+      filters.each do |filter|
+        score += evaluate_test(testname: testname,
+                               data: data,
+                               filter: filter)
+        if (score > 0)
+          result.score = score
+          add_result result
+        end
+      end
+    end
   end
 
   def evaluate_test(args)
@@ -91,5 +103,25 @@ class Searcher
     end
     score += 1 if (testname.include? filter)
     score
+  end
+
+require 'pry-byebug'
+  def add_result(result)
+    key = result.id
+    if @results[key].nil?
+      @results[key] = result
+      return
+    end
+    @results[key].score += result.score
+  end
+
+  def sort_results()
+    results = []
+    @results.each_pair { |key, value| results += [value.to_h] }
+
+    results.sort_by! do |i|
+      [(Application::MAGICNUMBER - i[:score]), i[:id]]
+    end
+    @results = results
   end
 end
