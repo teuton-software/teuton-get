@@ -8,7 +8,6 @@ require_relative 'teuton-get/writer/file_writer'
 require_relative 'teuton-get/writer/terminal_writer'
 
 require_relative 'teuton-get/init'
-require_relative 'teuton-get/repo'
 require_relative 'teuton-get/repo/repo_config'
 require_relative 'teuton-get/repo/repo_data'
 require_relative 'teuton-get/searcher'
@@ -19,25 +18,20 @@ class TeutonGet
     home = Application.instance.get('HOME')
     filename = Application::CONFIGFILE
     configpath = "#{home}/.teuton/#{filename}"
-    cache_dirpath = "#{home}/.teuton/cache"
     @inifile_reader = IniFileReader.new(configpath)
 
-    @repo = Repo.new(config_reader: @inifile_reader,
-                     testinfo_reader: YamlReader.new,
-                     repoindex_writer: FileWriter.new,
-                     progress_writer: TerminalWriter.new,
-                     cache_dirpath: cache_dirpath)
-
-    @searcher = Searcher.new(repo: @repo,
-                             writer: TerminalWriter.new,
-                             reader: YamlReader.new)
-  end
-
-  def create_repo(dirpath)
     @repo_config = RepoConfig.new(config_reader: @inifile_reader,
                                   testinfo_reader: YamlReader.new,
                                   repoindex_writer: FileWriter.new,
                                   progress_writer: TerminalWriter.new)
+
+    cache_dirpath = "#{home}/.teuton/cache"
+    @repo_data = RepoData.new(config_reader: @inifile_reader,
+                              progress_writer: TerminalWriter.new,
+                              cache_dirpath: cache_dirpath)
+  end
+
+  def create_repo(dirpath)
     @repo_config.create(dirpath)
   end
 
@@ -52,23 +46,17 @@ class TeutonGet
   end
 
   def show_repo_list()
-    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
-                                  testinfo_reader: YamlReader.new,
-                                  repoindex_writer: FileWriter.new,
-                                  progress_writer: TerminalWriter.new)
     @repo_config.show_list
   end
 
   def refresh()
-    home = Application.instance.get('HOME')
-    cache_dirpath = "#{home}/.teuton/cache"
-    @repo_data = RepoData.new(config_reader: @inifile_reader,
-                              progress_writer: TerminalWriter.new,
-                              cache_dirpath: cache_dirpath)
     @repo_data.refresh
   end
 
   def search(filter)
+    @searcher = Searcher.new(repo: @repo_data,
+                             writer: TerminalWriter.new,
+                             reader: YamlReader.new)
     result = @searcher.get(filter)
     @searcher.show(result)
   end
