@@ -1,9 +1,13 @@
 # Teuton tests info
 # Date
-name: OpenSUSE configuration
-description: OpenSUSE configuration
+name: OpenSUSE conf
+description: OpenSUSE basic configuration
 author: dvarrui
 date: 2020-09-06
 tags:
 - OpenSUSE
+- basic
+- hostname
+- ip
+- gateway
 - configuration

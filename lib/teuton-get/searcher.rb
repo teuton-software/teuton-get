@@ -4,11 +4,12 @@ require_relative 'application'
 
 class Searcher
   def initialize(args)
-    @repo = args[:repo]
     @dev = args[:writer]
-    @reader = args[:reader]
 
-    filename = @repo.database_filename
+    @repodata = args[:repodata]
+    filename = @repodata.database_filename
+
+    @reader = args[:reader]
     @database = @reader.read(filename)
 
     @results = {}
@@ -105,7 +106,6 @@ class Searcher
     score
   end
 
-require 'pry-byebug'
   def add_result(result)
     key = result.id
     if @results[key].nil?

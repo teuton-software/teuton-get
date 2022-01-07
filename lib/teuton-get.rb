@@ -54,8 +54,8 @@ class TeutonGet
   end
 
   def search(filter)
-    @searcher = Searcher.new(repo: @repo_data,
-                             writer: TerminalWriter.new,
+    @searcher = Searcher.new(writer: TerminalWriter.new,
+                             repodata: @repo_data,
                              reader: YamlReader.new)
     result = @searcher.get(filter)
     @searcher.show(result)

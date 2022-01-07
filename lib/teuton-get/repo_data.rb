@@ -1,4 +1,5 @@
 
+require 'yaml'
 require_relative 'application'
 require_relative 'reader/url_reader'
 
