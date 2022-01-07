@@ -18,7 +18,7 @@ class RepoData
     dirpath = @cache_dirpath
     FileUtils.rm_r(dirpath) if Dir.exist? dirpath
 
-    @dev.writeln '[INFO] Refresh repo'
+    @dev.writeln "\nRefreshing active repos"
     @data.keys.sort.each do |key|
       refresh_repo key
     end

@@ -13,7 +13,8 @@ class Repo
     infofilename = Application::INFOFILENAME
     indexfilename = Application::INDEXFILENAME
 
-    @dev.writeln "[INFO] Create repo for <#{source_dir}> directory"
+    @dev.write "\nCreate repo into folder "
+    @dev.writeln source_dir, color: :light_cyan
 
     files = Dir.glob(File.join(source_dir, '**', infofilename))
     data = read_files(files)
@@ -23,8 +24,9 @@ class Repo
     @repoindex_writer.write data.to_yaml
     @repoindex_writer.close
 
-    @dev.writeln "       Creating file <#{filepath}>"
-    @dev.writeln "       Test number = #{data.keys.size}"
+    @dev.write " => Creating file: "
+    @dev.writeln filepath, color: :light_cyan
+    @dev.writeln "    Tests counter: #{data.keys.size}"
   end
 
   private
