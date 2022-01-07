@@ -1,6 +1,6 @@
 
-require_relative '../application'
-require_relative '../reader/url_reader'
+require_relative 'application'
+require_relative 'reader/url_reader'
 
 class RepoData
   attr_reader :data

@@ -1,6 +1,6 @@
 
 require 'fileutils'
-require_relative '../application'
+require_relative 'application'
 
 class RepoConfig
   def initialize(args)

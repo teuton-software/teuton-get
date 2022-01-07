@@ -7,9 +7,9 @@ require_relative 'teuton-get/reader/yaml_reader'
 require_relative 'teuton-get/writer/file_writer'
 require_relative 'teuton-get/writer/terminal_writer'
 
-require_relative 'teuton-get/repo/repo'
-require_relative 'teuton-get/repo/repo_config'
-require_relative 'teuton-get/repo/repo_data'
+require_relative 'teuton-get/repo'
+require_relative 'teuton-get/repo_config'
+require_relative 'teuton-get/repo_data'
 require_relative 'teuton-get/searcher'
 
 class TeutonGet
