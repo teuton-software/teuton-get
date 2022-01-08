@@ -17,45 +17,47 @@ class TeutonGet
   def initialize()
     config_filepath = Application.instance.get(:config_filepath)
     @inifile_reader = IniFileReader.new(config_filepath)
-
-
-    cache_dirpath = Application.instance.get(:cache_dirpath)
-    @repo_data = RepoData.new(config_reader: @inifile_reader,
-                              progress_writer: TerminalWriter.new,
-                              cache_dirpath: cache_dirpath)
   end
 
   def create_repo(dirpath)
-    @repo = Repo.new(testinfo_reader: YamlReader.new,
-                     repoindex_writer: FileWriter.new,
-                     progress_writer: TerminalWriter.new)
-    @repo.create_repo(dirpath)
+    repo = Repo.new(testinfo_reader: YamlReader.new,
+                    repoindex_writer: FileWriter.new,
+                    progress_writer: TerminalWriter.new)
+    repo.create_repo(dirpath)
   end
 
   def init()
     config_dirpath = Application.instance.get(:config_dirpath)
-    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
-                                  progress_writer: TerminalWriter.new,
-                                  config_dirpath: config_dirpath)
-    @repo_config.create_config
+    repo_config = RepoConfig.new(config_reader: @inifile_reader,
+                                 progress_writer: TerminalWriter.new,
+                                 config_dirpath: config_dirpath)
+    repo_config.create_config
   end
 
   def show_repo_list()
-    @repo_config = RepoConfig.new(config_reader: @inifile_reader,
-                                  progress_writer: TerminalWriter.new)
-    @repo_config.show_list
+    repo_config = RepoConfig.new(config_reader: @inifile_reader,
+                                 progress_writer: TerminalWriter.new)
+    repo_config.show_list
   end
 
   def refresh()
-    @repo_data.refresh
+    cache_dirpath = Application.instance.get(:cache_dirpath)
+    repo_data = RepoData.new(config_reader:   @inifile_reader,
+                             progress_writer: TerminalWriter.new,
+                             cache_dirpath:   cache_dirpath)
+    repo_data.refresh
   end
 
   def search(filter)
-    @searcher = Searcher.new(writer: TerminalWriter.new,
-                             repodata: @repo_data,
-                             reader: YamlReader.new)
-    result = @searcher.get(filter)
-    @searcher.show(result)
+    cache_dirpath = Application.instance.get(:cache_dirpath)
+    repo_data = RepoData.new(config_reader:   @inifile_reader,
+                             progress_writer: TerminalWriter.new,
+                             cache_dirpath:   cache_dirpath)
+    searcher = Searcher.new(writer:   TerminalWriter.new,
+                            repodata: repo_data,
+                            reader:   YamlReader.new)
+    result = searcher.get(filter)
+    searcher.show(result)
   end
 
   def download(testname)
