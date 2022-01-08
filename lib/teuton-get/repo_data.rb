@@ -34,7 +34,7 @@ class RepoData
   def refresh_repo(reponame)
     unless enabled? reponame
       @dev.write "    Skiping repo "
-      @dev.writeln "#{reponame}", color: :yellow
+      @dev.writeln "#{reponame}", color: :light_red
       return false
     end
 
