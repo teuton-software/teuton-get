@@ -15,8 +15,8 @@ require_relative 'teuton-get/searcher'
 class TeutonGet
 
   def initialize()
-    configpath = Application.instance.get(:configpath)
-    @inifile_reader = IniFileReader.new(configpath)
+    config_filepath = Application.instance.get(:config_filepath)
+    @inifile_reader = IniFileReader.new(config_filepath)
 
 
     cache_dirpath = Application.instance.get(:cache_dirpath)
@@ -33,11 +33,10 @@ class TeutonGet
   end
 
   def init()
-    home     = Application.instance.get('HOME')
-    dirpath  = File.join(home, '.teuton')
+    config_dirpath = Application.instance.get(:config_dirpath)
     @repo_config = RepoConfig.new(config_reader: @inifile_reader,
                                   progress_writer: TerminalWriter.new,
-                                  dirpath: dirpath)
+                                  config_dirpath: config_dirpath)
     @repo_config.create_config
   end
 

@@ -8,8 +8,8 @@ class RepoConfig
     @data = @reader.read
     @dev = args[:progress_writer]
 
-    @dirpath = args[:dirpath] || ''
-    @filepath = File.join(@dirpath, Application::CONFIGFILE)
+    @config_dirpath = args[:config_dirpath] || ''
+    @config_filepath = File.join(@config_dirpath, Application::CONFIGFILE)
   end
 
   def create_config()
@@ -39,7 +39,7 @@ class RepoConfig
   private
 
   def create_dir
-    dirpath = @dirpath
+    dirpath = @config_dirpath
     if Dir.exist? dirpath
       @dev.write "  * Exists dir!      : "
       @dev.writeln dirpath, color: :yellow
@@ -58,7 +58,7 @@ class RepoConfig
 
   def create_ini_file
     src = File.join(File.dirname(__FILE__), 'files', Application::CONFIGFILE)
-    copyfile(src, @filepath)
+    copyfile(src, @config_filepath)
   end
 
   def copyfile(target, dest)

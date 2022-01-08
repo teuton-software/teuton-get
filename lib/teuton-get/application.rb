@@ -30,11 +30,14 @@ class Application
 
   def init_params()
     home = get('HOME')
-    filename = Application::CONFIGFILE
-    configpath = "#{home}/.teuton/#{filename}"
-    @params[:configpath] = configpath
+    config_dirpath = File.join(home, '.teuton')
+    @params[:config_dirpath] = config_dirpath
 
-    cache_dirpath = "#{home}/.teuton/cache"
+    filename = Application::CONFIGFILE
+    config_filepath = File.join(config_dirpath, filename)
+    @params[:config_filepath] = config_filepath
+
+    cache_dirpath = File.join(config_dirpath, 'cache')
     @params[:cache_dirpath] = cache_dirpath
   end
 end
