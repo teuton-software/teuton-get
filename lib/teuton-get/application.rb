@@ -17,11 +17,24 @@ class Application
   def initialize
     @env = Environment.new(LinuxEnvironmentReader.new(%x[env]))
     @params = {}
+    init_params
   end
 
   def get(key)
     return @env.get(key) if key.class == String
 
-    @params[key]
+    @params[key] || 'NODATA'
+  end
+
+  private
+
+  def init_params()
+    home = get('HOME')
+    filename = Application::CONFIGFILE
+    configpath = "#{home}/.teuton/#{filename}"
+    @params[:configpath] = configpath
+
+    cache_dirpath = "#{home}/.teuton/cache"
+    @params[:cache_dirpath] = cache_dirpath
   end
 end

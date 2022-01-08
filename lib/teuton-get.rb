@@ -15,13 +15,11 @@ require_relative 'teuton-get/searcher'
 class TeutonGet
 
   def initialize()
-    home = Application.instance.get('HOME')
-    filename = Application::CONFIGFILE
-    configpath = "#{home}/.teuton/#{filename}"
+    configpath = Application.instance.get(:configpath)
     @inifile_reader = IniFileReader.new(configpath)
 
 
-    cache_dirpath = "#{home}/.teuton/cache"
+    cache_dirpath = Application.instance.get(:cache_dirpath)
     @repo_data = RepoData.new(config_reader: @inifile_reader,
                               progress_writer: TerminalWriter.new,
                               cache_dirpath: cache_dirpath)
