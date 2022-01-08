@@ -32,7 +32,11 @@ class RepoData
   private
 
   def refresh_repo(reponame)
-    return unless enabled? reponame
+    unless enabled? reponame
+      @dev.write "    Skiping repo "
+      @dev.writeln "#{reponame}", color: :yellow
+      return false
+    end
 
     @dev.write " => Refresh repo "
     @dev.writeln "#{reponame}", color: :light_cyan
