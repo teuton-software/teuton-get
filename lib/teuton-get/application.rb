@@ -13,12 +13,15 @@ class Application
   INDEXFILENAME = 'tt-repo.yaml'
   INFOFILENAME  = 'tt-info.yaml'
   MAGICNUMBER   = 999
-  
+
   def initialize
     @env = Environment.new(LinuxEnvironmentReader.new(%x[env]))
+    @params = {}
   end
 
   def get(key)
-    @env.get(key)
+    return @env.get(key) if key.class == String
+
+    @params[key]
   end
 end

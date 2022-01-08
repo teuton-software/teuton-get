@@ -1,8 +1,8 @@
-# Teuton tests info (version 1)
+# tt-info (version 1)
 name: NODATA
-desc: NODATA
 author: NODATA
 date: 2022-01-01
+desc: NODATA
 require:
 - NODATA
 tags:
