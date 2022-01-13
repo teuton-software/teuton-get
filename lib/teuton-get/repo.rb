@@ -1,7 +1,7 @@
 
 require_relative 'application'
 
-# Create repo index
+# Create repo dir data and info file data
 class Repo
   def initialize(args)
     @testinfo_reader  = args[:testinfo_reader]
@@ -29,6 +29,21 @@ class Repo
     @dev.writeln "    Tests counter: #{data.keys.size}"
   end
 
+  def create_info(testpath)
+    startfile = File.join(testpath, 'start.rb')
+    unless File.exist?(startfile)
+      @dev.writeln "[ERROR] File start.rb not found!", color: :light_red
+      return
+    end
+
+    @dev.write "\nCreate info for "
+    @dev.writeln testpath, color: :light_cyan
+    infofilename = Application::INFOFILENAME
+    target = File.join(testpath, infofilename)
+    source = File.join(File.dirname(__FILE__), 'files', infofilename)
+    copyfile(source, target)
+  end
+
   private
 
   def read_files(files)
@@ -44,5 +59,22 @@ class Repo
       data[dirpath] = content
     end
     data
+  end
+
+  def copyfile(target, dest)
+    if File.exist? dest
+      @dev.write "  * Exists file! : "
+      @dev.writeln dest, color: :light_yellow
+      return true
+    end
+    begin
+      FileUtils.cp(target, dest)
+      @dev.write " => Create file : "
+      @dev.writeln dest, color: :light_green
+    rescue => e
+      @dev.write " => Create file ERROR: "
+      @dev.writeln dest, color: :light_red
+      puts e
+    end
   end
 end

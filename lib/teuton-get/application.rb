@@ -30,7 +30,7 @@ class Application
 
   def init_params()
     home = get('HOME')
-    config_dirpath = File.join(home, '.teuton')
+    config_dirpath = File.join(home, '.config', 'teuton')
     @params[:config_dirpath] = config_dirpath
 
     filename = Application::CONFIGFILE

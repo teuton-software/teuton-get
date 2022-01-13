@@ -19,6 +19,11 @@ class TeutonGet
     @inifile_reader = IniFileReader.new(config_filepath)
   end
 
+  def create_info(testpath)
+    repo = Repo.new(progress_writer: TerminalWriter.new)
+    repo.create_info(testpath)
+  end
+
   def create_repo(dirpath)
     repo = Repo.new(testinfo_reader: YamlReader.new,
                     repoindex_writer: FileWriter.new,

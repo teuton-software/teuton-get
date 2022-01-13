@@ -14,6 +14,15 @@ class CLI < Thor
     puts "#{Application::NAME} (version #{Application::VERSION})"
   end
 
+  map ['ci', '-ci', '--create-info', 'create-info'] => 'create_info'
+  desc 'create-info [TEST-PATH]', 'Create info data for Teuton test'
+  long_desc <<-LONGDESC
+  Create info data for Teuton test.
+  LONGDESC
+  def create_info(testpath)
+    TeutonGet.new.create_info(testpath)
+  end
+
   map ['cr', '-cr', '--create-repo', 'create-repo'] => 'create_repo'
   desc 'create-repo [SOURCE-DIR]', 'Create repo from SOURCE directory'
   long_desc <<-LONGDESC
