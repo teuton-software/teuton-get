@@ -24,7 +24,7 @@ class CLI < Thor
   end
 
   map ['cr', '-cr', '--create-repo', 'create-repo'] => 'create_repo'
-  desc 'create-repo [SOURCE-DIR]', 'Create repo from SOURCE directory'
+  desc 'create-repo [SOURCE-DIR]', 'Create repo into SOURCE directory'
   long_desc <<-LONGDESC
   Create index from SOURCE directory.
   LONGDESC

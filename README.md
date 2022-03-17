@@ -14,6 +14,9 @@ Find and download Teuton Test.
 
 # Use
 
+* `teutonget init`, create config file.
+* `teutonget refresh`, update repo info.
+
 | Command        | Description |
 | -------------- | ------------------------- |
 | teutonget init | Create teutonget.ini file |
