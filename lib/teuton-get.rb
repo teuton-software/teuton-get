@@ -37,12 +37,7 @@ class TeutonGet
                                  progress_writer: TerminalWriter.new,
                                  config_dirpath: config_dirpath)
     repo_config.create_config
-  end
-
-  def show_repo_list()
-    repo_config = RepoConfig.new(config_reader: @inifile_reader,
-                                 progress_writer: TerminalWriter.new)
-    repo_config.show_list
+    refresh # Refresh repo info cache just after config file creation
   end
 
   def refresh()
@@ -51,6 +46,12 @@ class TeutonGet
                              progress_writer: TerminalWriter.new,
                              cache_dirpath:   cache_dirpath)
     repo_data.refresh
+  end
+
+  def show_repo_list()
+    repo_config = RepoConfig.new(config_reader: @inifile_reader,
+                                 progress_writer: TerminalWriter.new)
+    repo_config.show_list
   end
 
   def search(filter)
