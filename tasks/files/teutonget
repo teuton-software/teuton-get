@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+HOME=/home/david
+RUBY=$HOME/.rbenv/versions/2.7.5/bin/ruby
+FOLDER=proy/repos/teuton.d/teuton-get
+APP=$HOME/$FOLDER/bin/teutonget $1 $2 $3
+
+$RUBY $APP
+
