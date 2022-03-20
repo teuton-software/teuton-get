@@ -2,6 +2,7 @@
 
 require 'thor'
 require_relative 'application'
+require_relative 'version'
 require_relative '../teuton-get'
 
 class CLI < Thor
@@ -11,7 +12,7 @@ class CLI < Thor
   desc 'version', 'Show the program version'
 
   def version
-    puts "#{Application::NAME} (version #{Application::VERSION})"
+    puts "#{Version::NAME} (version #{Version::VERSION})"
   end
 
   map ['ci', '-ci', '--create-info', 'create-info'] => 'create_info'
