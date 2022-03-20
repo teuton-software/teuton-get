@@ -25,10 +25,10 @@ class TeutonGet
   end
 
   def create_repo(dirpath)
-    repo = Repo.new(testinfo_reader: YamlReader.new,
-                    repoindex_writer: FileWriter.new,
-                    progress_writer: TerminalWriter.new)
-    repo.create_repo(dirpath)
+    localrepo = LocalRepo.new(testinfo_reader: YamlReader.new,
+                              repoindex_writer: FileWriter.new,
+                              progress_writer: TerminalWriter.new)
+    localrepo.create_repo(dirpath)
   end
 
   def init()
