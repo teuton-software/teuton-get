@@ -1,7 +1,7 @@
 
 require_relative 'writer'
 
-class NulllWriter < Writer
+class NullWriter < Writer
   def write(text = '', args = {})
   end
 

@@ -20,8 +20,8 @@ class TeutonGet
   end
 
   def create_info(testpath)
-    repo = Repo.new(progress_writer: TerminalWriter.new)
-    repo.create_info(testpath)
+    localrepo = LocalRepo.new(progress_writer: TerminalWriter.new)
+    localrepo.create_info(testpath)
   end
 
   def create_repo(dirpath)

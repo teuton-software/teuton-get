@@ -4,6 +4,8 @@ require_relative '../application'
 # Create repo dir data and info file data
 class LocalRepo
 
+  # args
+  # * progress_writer: TerminalWriter.new
   def initialize(args)
     @testinfo_reader  = args[:testinfo_reader]
     @repoindex_writer = args[:repoindex_writer]
@@ -21,7 +23,7 @@ class LocalRepo
     @dev.writeln testpath, color: :light_cyan
     infofilename = Application::INFOFILENAME
     target = File.join(testpath, infofilename)
-    source = File.join(File.dirname(__FILE__), 'files', infofilename)
+    source = File.join(File.dirname(__FILE__), '..', 'files', infofilename)
     copyfile(source, target)
   end
 
