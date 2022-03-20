@@ -1,9 +1,17 @@
+#encoding: utf-8
+
+$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+
 require 'date'
+
+name = "teuton-get"
+require "#{name}/version"
 require_relative 'lib/teuton-get/application'
 
+
 Gem::Specification.new do |s|
-  s.name        = Application::NAME
-  s.version     = Application::VERSION
+  s.name        = name
+  s.version     = Version::VERSION
   s.date        = Date.today.strftime("%Y-%m-%d")
   s.summary     = "TeutonGet (Teuton Software)"
   s.description = <<-EOF
@@ -16,7 +24,7 @@ Gem::Specification.new do |s|
   s.license     = 'GPL-3.0'
   s.authors     = ['David Vargas Ruiz']
   s.email       = 'teuton.software@protonmail.com'
-  s.homepage    = 'https://github.com/dvarrui/teuton-get/tree/master'
+  s.homepage    = Version::HOMEPAGE
 
   s.executables << 'teutonget'
   s.files       = Dir.glob(File.join('lib', '**', '*.*'))
@@ -29,5 +37,4 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'thor', '~> 1.1'
 
   s.add_development_dependency 'minitest', '~> 5.11'
-  s.add_development_dependency 'rubocop', '~> 0.74'
 end
