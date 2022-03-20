@@ -13,7 +13,8 @@ class Application
   MAGICNUMBER   = 999
 
   def initialize
-    @env = Environment.new(LinuxEnvironmentReader.new(%x[env]))
+    # @env = Environment.new(LinuxEnvironmentReader.new(%x[env]))
+    @env = Environment.new
     @params = {}
     init_params
   end

@@ -1,8 +1,9 @@
 
 class Environment
 
-  def initialize(reader)
-    @env = reader.read
+  def initialize(reader=nil)
+    #@env = reader.read
+    @env = ENV
   end
 
   def get(key)

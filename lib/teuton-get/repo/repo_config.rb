@@ -1,8 +1,9 @@
 
 require 'fileutils'
-require_relative 'application'
+require_relative '../application'
 
 class RepoConfig
+  
   def initialize(args)
     @reader = args[:config_reader]
     @data = @reader.read
