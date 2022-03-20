@@ -2,12 +2,9 @@
 
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
 
-require 'date'
-
 name = "teuton-get"
 require "#{name}/version"
-require_relative 'lib/teuton-get/application'
-
+require 'date'
 
 Gem::Specification.new do |s|
   s.name        = name
