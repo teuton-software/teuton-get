@@ -39,24 +39,23 @@ class LocalRepoTest < Minitest::Test
     FileUtils.rm(filepath)
   end
 
-  def notest_create_repo
-    filepaths = []
+  def test_create_repo
+    tempfiles = []
 
     dirpath = @dirpaths[1]
-    filepaths << File.join(dirpath, Application::INFOFILENAME)
     @localrepo.create_info(dirpath)
+    tempfiles << File.join(dirpath, Application::INFOFILENAME)
 
     dirpath = @dirpaths[2]
-    filepaths << File.join(dirpath, Application::INFOFILENAME)
     @localrepo.create_info(dirpath)
 
-    filepath = File.join('tests/files', Application::INDEXFILENAME)
-    assert_equal false, File.exist?(filepath)
+    indexfilepath = File.join('tests/files', Application::INDEXFILENAME)
+    assert_equal false, File.exist?(indexfilepath)
 
-    localrepo.create_repo(dirpath)
+    assert_equal true, @localrepo.create_repo('tests/files')
+    assert_equal true, File.exist?(indexfilepath)
+    tempfiles << indexfilepath
 
-    assert_equal true, @localrepo.create_repo(dirpath)
-    assert_equal true, File.exist?(filepath)
-    #FileUtils.rm(filepath)
+    tempfiles.each { |filepath| FileUtils.rm(filepath) }
   end
 end

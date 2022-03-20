@@ -45,6 +45,7 @@ class LocalRepo
     @dev.write " => Creating file: "
     @dev.writeln filepath, color: :light_cyan
     @dev.writeln "    Tests counter: #{data.keys.size}"
+    true
   end
 
   private
