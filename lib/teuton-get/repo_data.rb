@@ -42,8 +42,9 @@ class RepoData
     @dev.writeln "#{reponame}", color: :light_cyan
 
     dirpath = File.join(@cache_dirpath)
-    create_dir(dirpath)
-    get_database(reponame)
+    ok1 = create_dir(dirpath)
+    ok2 = get_database(reponame)
+    true && ok1 && ok2
   end
 
   def enabled?(reponame)
@@ -54,12 +55,15 @@ class RepoData
     unless Dir.exist? dirpath
       begin
         FileUtils.mkdir_p(dirpath)
+        return true
       rescue => e
         @dev.write "* Create dir  ERROR => "
         @dev.writeln dirpath, color: :red
         puts e
+        return false
       end
     end
+    false
   end
 
   def get_database(reponame)
@@ -70,6 +74,7 @@ class RepoData
     else
       @database[reponame] = get_local_database(data["URL"])
     end
+    true
   end
 
   def get_local_database(dirpath)

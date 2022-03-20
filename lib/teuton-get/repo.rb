@@ -9,6 +9,21 @@ class Repo
     @dev = args[:progress_writer]
   end
 
+  def create_info(testpath)
+    startfile = File.join(testpath, 'start.rb')
+    unless File.exist?(startfile)
+      @dev.writeln "[ERROR] File start.rb not found!", color: :light_red
+      return false
+    end
+
+    @dev.write "\nCreate info for "
+    @dev.writeln testpath, color: :light_cyan
+    infofilename = Application::INFOFILENAME
+    target = File.join(testpath, infofilename)
+    source = File.join(File.dirname(__FILE__), 'files', infofilename)
+    copyfile(source, target)
+  end
+
   def create_repo(source_dir)
     infofilename = Application::INFOFILENAME
     indexfilename = Application::INDEXFILENAME
@@ -27,21 +42,6 @@ class Repo
     @dev.write " => Creating file: "
     @dev.writeln filepath, color: :light_cyan
     @dev.writeln "    Tests counter: #{data.keys.size}"
-  end
-
-  def create_info(testpath)
-    startfile = File.join(testpath, 'start.rb')
-    unless File.exist?(startfile)
-      @dev.writeln "[ERROR] File start.rb not found!", color: :light_red
-      return
-    end
-
-    @dev.write "\nCreate info for "
-    @dev.writeln testpath, color: :light_cyan
-    infofilename = Application::INFOFILENAME
-    target = File.join(testpath, infofilename)
-    source = File.join(File.dirname(__FILE__), 'files', infofilename)
-    copyfile(source, target)
   end
 
   private
@@ -71,10 +71,12 @@ class Repo
       FileUtils.cp(target, dest)
       @dev.write " => Create file : "
       @dev.writeln dest, color: :light_green
+      return true
     rescue => e
       @dev.write " => Create file ERROR: "
       @dev.writeln dest, color: :light_red
       puts e
+      return false
     end
   end
 end
