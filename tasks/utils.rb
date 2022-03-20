@@ -9,14 +9,13 @@ module Utils
     p
   end
 
-  def self.create_symbolic_link
+  def self.create_launcher
     if File.exist? '/usr/local/bin/teutonget'
       puts '[WARN] Exist file /usr/local/bin/teutonget!'
       return
     end
-    puts '[INFO] Creating symbolic link into /usr/local/bin'
-    basedir = File.join(File.dirname(__FILE__), '..')
-    system("ln -s #{basedir}/teutonget '/usr/local/bin/teutonget'")
+    puts '[INFO] Creating launcher into /usr/local/bin'
+    system("cp files/teutonget '/usr/local/bin/teutonget'")
   end
 
   def self.install_gems(list, options = '')

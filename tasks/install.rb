@@ -15,8 +15,8 @@ namespace :install do
     Utils.install_gems(Utils.packages)
   end
 
-  desc 'Symbolic link'
-  task :link do
-    Utils.create_symbolic_link
+  desc 'Create launcher'
+  task :launcher do
+    Utils.create_launcher
   end
 end
