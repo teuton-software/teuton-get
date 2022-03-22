@@ -1,4 +1,12 @@
-# tt-info (version 1)
+#############################
+# DONT CHANGE THIS ATTRIBUTES
+# TeutonGet tt-info file
+version: 1
+type: teutontest
+
+###################################################
+# UPDATE VALUES
+# Keep this attribute names and update their values.
 name: NODATA
 author: NODATA
 date: 2022-01-01
@@ -7,3 +15,6 @@ require:
 - NODATA
 tags:
 - NODATA
+
+############################################
+# Add your custom attributes after this line
