@@ -1,11 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'minitest/autorun'
+require 'test/unit'
 require_relative '../../lib/teuton-get/searcher/result'
 
-class ResultTest < Minitest::Test
-  def setup
-  end
+class ResultTest < Test::Unit::TestCase
 
   def test_result_hash
     result = Result.new({})

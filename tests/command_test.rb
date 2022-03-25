@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'minitest/autorun'
+require 'test/unit'
 
-# MiniTest Rubocop
-class CommandTest < Minitest::Test
+class CommandTest < Test::Unit::TestCase
 
   def test_teuton_get_help
     output = `teutonget help`

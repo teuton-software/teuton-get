@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 
-require 'minitest/autorun'
+require 'test/unit'
+
 require_relative '../lib/teuton-get/repo/local_repo'
 require_relative '../lib/teuton-get/reader/yaml_reader'
 require_relative '../lib/teuton-get/writer/file_writer'
 require_relative '../lib/teuton-get/writer/null_writer'
 
-class LocalRepoTest < Minitest::Test
+class LocalRepoTest < Test::Unit::TestCase
 
   def setup
     @tmpdir = 'var'

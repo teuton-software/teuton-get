@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'minitest/autorun'
+require 'test/unit'
 require_relative '../lib/teuton-get/application'
 
-class ApplicationTest < Minitest::Test
+class ApplicationTest < Test::Unit::TestCase
+
   def setup
     @app = Application.instance
     @config_path = File.join('/', 'home', 'david', '.config', 'teuton')
