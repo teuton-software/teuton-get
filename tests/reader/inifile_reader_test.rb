@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'minitest/autorun'
+require 'test/unit'
 require_relative '../../lib/teuton-get/reader/inifile_reader'
 
-require 'pry-byebug'
-class IniFileReaderTest < Minitest::Test
+class IniFileReaderTest < Test::Unit::TestCase
+
   def setup
     filepath1 = File.join(File.dirname(__FILE__), 'unkown', 'repos.ini')
     @inifile1 = IniFileReader.new(filepath1)

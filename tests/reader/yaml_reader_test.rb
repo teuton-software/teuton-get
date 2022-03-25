@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'minitest/autorun'
+require 'test/unit'
 require_relative '../../lib/teuton-get/reader/yaml_reader'
 
-class YamlReaderTest < Minitest::Test
+class YamlReaderTest < Test::Unit::TestCase
+
   def setup
     @filepath1 = File.join('unkown', 'tt-info.yaml')
     @filepath2 = File.join(File.dirname(__FILE__), '..', 'files', 'learn-02-config', 'tt-info.yaml')
