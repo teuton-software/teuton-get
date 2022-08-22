@@ -18,7 +18,6 @@ Tool that find and download _Teuton Tests_ from remote repositories.
 # Contact
 
 * **Email**: `teuton.software@protonmail.com`
-* **Twitter**: `@SoftwareTeuton`
 
 # Documentation
 
@@ -32,3 +31,5 @@ Tool that find and download _Teuton Tests_ from remote repositories.
 | teutonget init | Create teutonget.ini file |
 | teutonget search FILTER [repo=REPONAME]| Find Teuton Test on REPO with FILTER |
 | teutonget download TESTNAME | Download Teuton Test |
+
+
