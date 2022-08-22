@@ -28,22 +28,23 @@ class IniFileReaderTest < Test::Unit::TestCase
 
   def test_inifile2_reponame_main
     data = @inifile2.read
-    assert_equal 'Main Teuton repo', data['main']['description']
-    assert_equal 'https://raw.githubusercontent.com/teuton-software/teuton-tests/master', data['main']['URL']
-    assert_equal true, data['main']['enable']
+    assert_equal "Main Teuton repo", data["main"]["description"]
+    assert_equal "https://raw.githubusercontent.com/teuton-software/teuton-tests/master", data["main"]["URL"]
+    assert_equal true, data["main"]["enable"]
   end
 
   def test_inifile2_reponame_local
     data = @inifile2.read
-    assert_equal 'Local repo from my PC', data['local']['description']
-    assert_equal '/home/david/teuton-tests', data['local']['URL']
-    assert_equal true, data['local']['enable']
+    assert_equal "Local repo from my PC", data["local"]["description"]
+    username = `whoami`.chomp
+    assert_equal "/home/#{username}/teuton-tests", data["local"]["URL"]
+    assert_equal true, data["local"]["enable"]
   end
 
   def test_inifile2_reponame_foo
     data = @inifile2.read
-    assert_equal 'Foo repo', data['foo']['description']
-    assert_equal 'https://foo.org', data['foo']['URL']
-    assert_equal false, data['foo']['enable']
+    assert_equal "Foo repo", data["foo"]["description"]
+    assert_equal "https://foo.org", data["foo"]["URL"]
+    assert_equal false, data["foo"]["enable"]
   end
 end
