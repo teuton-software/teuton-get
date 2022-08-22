@@ -1,15 +1,24 @@
 # frozen_string_literal: true
 
-require_relative 'tasks/build'
-require_relative 'tasks/install'
-require_relative 'tasks/push'
+require "bundler/gem_tasks"
+require "rake/testtask"
 
-desc 'Default: check'
-task :default do
-  Rake::Task['install:check'].invoke
+Rake::TestTask.new(:test) do |t|
+  t.libs << "test"
+  t.libs << "lib"
+  t.test_files = FileList["test/**/*_test.rb"]
 end
 
-desc 'Rake help'
-task :help do
-  system('rake -T')
-end
+require "standard/rake"
+
+task default: %i[test standard]
+
+
+# require_relative 'tasks/build'
+# require_relative 'tasks/install'
+# require_relative 'tasks/push'
+
+# desc 'Default: check'
+# task :default do
+#   Rake::Task['install:check'].invoke
+# end
