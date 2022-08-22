@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-namespace :dev do
+namespace :devel do
   desc 'Create launcher'
   task :launcher do
     if File.exist? '/usr/local/bin/teutonget'
