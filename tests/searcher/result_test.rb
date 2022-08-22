@@ -16,8 +16,8 @@ class ResultTest < Test::Unit::TestCase
 
   def test_result
     result = Result.new(score: 16,
-                        reponame: 'main',
-                        testname: 'sysadmin/debian')
+                        reponame: "main",
+                        testname: "sysadmin/debian")
 
     assert_equal 16, result.score
     assert_equal 'main', result.reponame
