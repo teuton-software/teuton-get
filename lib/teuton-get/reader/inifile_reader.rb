@@ -13,7 +13,7 @@ class IniFileReader < Reader
 
   def read(filepath = :default)
     @filepath = filepath unless filepath == :default
-    return {} unless File.exists? @filepath
+    return {} unless File.exist? @filepath
 
     inifile = IniFile.load(@filepath)
     data = {}

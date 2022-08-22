@@ -14,9 +14,9 @@ class LocalRepoTest < Test::Unit::TestCase
     @localrepo = LocalRepo.new(testinfo_reader: YamlReader.new,
                                repoindex_writer: FileWriter.new,
                                progress_writer: NullWriter.new)
-    @dirpaths = ['tests/files/learn-00-empty',
-                 'tests/files/learn-01-target',
-                 'tests/files/learn-02-config']
+    @dirpaths = ['test/files/learn-00-empty',
+                 'test/files/learn-01-target',
+                 'test/files/learn-02-config']
   end
 
   def test_create_info_wrong
@@ -50,10 +50,10 @@ class LocalRepoTest < Test::Unit::TestCase
     dirpath = @dirpaths[2]
     @localrepo.create_info(dirpath)
 
-    indexfilepath = File.join('tests/files', Application::INDEXFILENAME)
+    indexfilepath = File.join('test' , 'files', Application::INDEXFILENAME)
     assert_equal false, File.exist?(indexfilepath)
 
-    assert_equal true, @localrepo.create_repo('tests/files')
+    assert_equal true, @localrepo.create_repo(File.join('test', 'files'))
     assert_equal true, File.exist?(indexfilepath)
     tempfiles << indexfilepath
 

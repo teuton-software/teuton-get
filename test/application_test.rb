@@ -7,11 +7,12 @@ class ApplicationTest < Test::Unit::TestCase
 
   def setup
     @app = Application.instance
-    @config_path = File.join('/', 'home', 'david', '.config', 'teuton')
+    username = `whoami`.chomp
+    @config_path = File.join('/', 'home', username, '.config', 'teuton')
   end
 
   def test_application_env
-    dirpath = File.join('/', 'home', 'david')
+    dirpath = File.join('/', 'home', username)
     assert_equal dirpath, @app.get('HOME')
   end
 
