@@ -30,7 +30,7 @@ class TeutonGet
     localrepo.create_repo(dirpath)
   end
 
-  def init()
+  def init
     config_dirpath = Application.instance.get(:config_dirpath)
     repo_config = RepoConfig.new(
       config_reader: @inifile_reader,
@@ -41,7 +41,7 @@ class TeutonGet
     refresh # Refresh repo-cache just after config file creation
   end
 
-  def refresh()
+  def refresh
     cache_dirpath = Application.instance.get(:cache_dirpath)
     repo_data = RepoData.new(
       config_reader: @inifile_reader,
@@ -51,7 +51,7 @@ class TeutonGet
     repo_data.refresh
   end
 
-  def show_repo_list()
+  def show_repo_list
     repo_config = RepoConfig.new(
       config_reader: @inifile_reader,
       progress_writer: TerminalWriter.new
