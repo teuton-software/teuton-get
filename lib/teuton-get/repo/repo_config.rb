@@ -19,15 +19,15 @@ class RepoConfig
 
   def show_list
     rows = []
-    rows << ["E", "NAME", "DESCRIPTION"]
+    rows << ["E", "NAME", "DESCRIPTION", "TOTAL"]
     rows << :separator
 
     @data.each_pair do |key, value|
       enable = ""
       enable = "X" unless value["enable"]
       description = value["description"] || "?"
-
-      rows << [enable, key, description]
+      total = value["total"] || 0
+      rows << [enable, key, description, total]
     end
     @dev.writeln "Repository list"
     @dev.write_table(rows)
