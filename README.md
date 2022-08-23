@@ -24,4 +24,5 @@
 # Documentation
 
 * [Settings](docs/settings.md)
+* [Get](docs/get.md)
 * [Commands](docs/commands.md)
