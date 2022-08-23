@@ -15,12 +15,7 @@ class RepoData
   def refresh
     @database = {}
     dirpath = @cache_dirpath
-    if Dir.exist? dirpath
-      FileUtils.rm_r(dirpath)
-    else
-      @dev.writeln("[WARN] Execute 'teutonget init' command to create config files!")
-      return false
-    end
+    FileUtils.rm_r(dirpath) if Dir.exist? dirpath
 
     @dev.writeln "\nRefreshing active repos"
     @data.keys.sort.each do |key|

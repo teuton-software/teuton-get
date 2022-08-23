@@ -1,19 +1,16 @@
-
-require_relative '../application'
+require_relative "../application"
 
 # Create repo dir data and info file data
 class LocalRepo
-
-  # args
-  # * progress_writer: TerminalWriter.new
+  # args => progress_writer: TerminalWriter.new
   def initialize(args)
-    @testinfo_reader  = args[:testinfo_reader]
+    @testinfo_reader = args[:testinfo_reader]
     @repoindex_writer = args[:repoindex_writer]
     @dev = args[:progress_writer]
   end
 
   def create_info(testpath)
-    startfile = File.join(testpath, 'start.rb')
+    startfile = File.join(testpath, "start.rb")
     unless File.exist?(startfile)
       @dev.writeln "[ERROR] File start.rb not found!", color: :light_red
       return false
@@ -23,7 +20,7 @@ class LocalRepo
     @dev.writeln testpath, color: :light_cyan
     infofilename = Application::INFOFILENAME
     target = File.join(testpath, infofilename)
-    source = File.join(File.dirname(__FILE__), '..', 'files', infofilename)
+    source = File.join(File.dirname(__FILE__), "..", "files", infofilename)
     copyfile(source, target)
   end
 
@@ -34,7 +31,7 @@ class LocalRepo
     @dev.write "\nCreate repo into folder "
     @dev.writeln source_dir, color: :light_cyan
 
-    files = Dir.glob(File.join(source_dir, '**', infofilename))
+    files = Dir.glob(File.join(source_dir, "**", infofilename))
     data = read_files(files)
     filepath = File.join(source_dir, indexfilename)
 
@@ -54,9 +51,9 @@ class LocalRepo
     data = {}
     files.each do |filepath|
       cleanpath = filepath
-      if cleanpath.start_with? './'
+      if cleanpath.start_with? "./"
         # delete 2 chars at the begining. Example: "./"
-        cleanpath[0,2] = ''
+        cleanpath[0, 2] = ""
       end
       content = @testinfo_reader.read(cleanpath)
       dirpath = File.dirname(cleanpath)
@@ -75,12 +72,12 @@ class LocalRepo
       FileUtils.cp(target, dest)
       @dev.write " => Create file : "
       @dev.writeln dest, color: :light_green
-      return true
+      true
     rescue => e
       @dev.write " => Create file ERROR: "
       @dev.writeln dest, color: :light_red
       puts e
-      return false
+      false
     end
   end
 end

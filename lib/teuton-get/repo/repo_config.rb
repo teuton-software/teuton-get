@@ -7,7 +7,7 @@ class RepoConfig
     @data = @reader.read
     @dev = args[:progress_writer]
 
-    @config_dirpath = args[:config_dirpath] || ''
+    @config_dirpath = args[:config_dirpath] || ""
     @config_filepath = File.join(@config_dirpath, Application::CONFIGFILE)
   end
 
@@ -17,21 +17,21 @@ class RepoConfig
     create_ini_file
   end
 
-  def show_list()
+  def show_list
     rows = []
-    rows << ['E', 'NAME', 'DESCRIPTION']
+    rows << ["E", "NAME", "DESCRIPTION"]
     rows << :separator
 
     @data.each_pair do |key, value|
-      enable = ''
-      enable = 'X' unless value['enable']
-      description = value['description'] || '?'
+      enable = ""
+      enable = "X" unless value["enable"]
+      description = value["description"] || "?"
 
-      rows << [ enable, key, description ]
+      rows << [enable, key, description]
     end
     @dev.writeln "Repository list"
     @dev.write_table(rows)
-    @dev.write 'Config: '
+    @dev.write "Config: "
     @dev.writeln "#{@reader.source}\n", color: :white
   end
 
@@ -56,7 +56,7 @@ class RepoConfig
   end
 
   def create_ini_file
-    src = File.join(File.dirname(__FILE__), '..', 'files', Application::CONFIGFILE)
+    src = File.join(File.dirname(__FILE__), "..", "files", Application::CONFIGFILE)
     copyfile(src, @config_filepath)
   end
 
