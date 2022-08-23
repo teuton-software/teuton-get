@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
-require_relative 'teuton-get/application'
+require_relative "teuton-get/application"
 
-require_relative 'teuton-get/reader/inifile_reader'
-require_relative 'teuton-get/reader/yaml_reader'
-require_relative 'teuton-get/writer/file_writer'
-require_relative 'teuton-get/writer/terminal_writer'
+require_relative "teuton-get/reader/inifile_reader"
+require_relative "teuton-get/reader/yaml_reader"
+require_relative "teuton-get/writer/file_writer"
+require_relative "teuton-get/writer/terminal_writer"
 
-require_relative 'teuton-get/repo/local_repo'
-require_relative 'teuton-get/repo/repo_config'
-require_relative 'teuton-get/repo/repo_data'
-require_relative 'teuton-get/searcher'
+require_relative "teuton-get/repo/local_repo"
+require_relative "teuton-get/repo/repo_config"
+require_relative "teuton-get/repo/repo_data"
+require_relative "teuton-get/searcher"
 
 class TeutonGet
-
-  def initialize()
+  def initialize
     config_filepath = Application.instance.get(:config_filepath)
     @inifile_reader = IniFileReader.new(config_filepath)
   end

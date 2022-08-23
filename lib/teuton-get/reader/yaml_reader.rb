@@ -1,9 +1,9 @@
-
-require 'yaml'
-require_relative 'reader'
+require "date"
+require "yaml"
+require_relative "reader"
 
 class YamlReader < Reader
-  def initialize(filepath = '')
+  def initialize(filepath = "")
     @filepath = filepath
   end
 
@@ -15,6 +15,11 @@ class YamlReader < Reader
     @filepath = filepath unless filepath == :default
     return {} unless File.exist? filepath
 
-    YAML.load(File.open(filepath))
+    content = File.open(filepath)
+    # YAML.load(content)
+    YAML.safe_load(
+      content,
+      permitted_classes: [Array, Date, Hash, Symbol]
+    )
   end
 end

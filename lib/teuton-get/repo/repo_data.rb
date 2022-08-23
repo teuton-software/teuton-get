@@ -84,7 +84,6 @@ class RepoData
   def get_remote_database(url_repo)
     url_file = "#{url_repo}/#{Application::INDEXFILENAME}"
     content_page = URLReader.new(url_file).read
-    # yaml_content = YAML::load(content_page)
     YAML.safe_load(
       content_page,
       permitted_classes: [Array, Date, Hash, Symbol]

@@ -18,13 +18,15 @@ class YamlReaderTest < Test::Unit::TestCase
 
   def test_read_yamlfile_keys
     data = @reader.read(@filepath2)
-    assert_equal 6, data.keys.size
-    assert_equal "name", data.keys[0]
-    assert_equal "author", data.keys[1]
-    assert_equal "date", data.keys[2]
-    assert_equal "desc", data.keys[3]
-    assert_equal "require", data.keys[4]
-    assert_equal "tags", data.keys[5]
+    assert_equal 8, data.keys.size
+    assert_equal "version", data.keys[0]
+    assert_equal "type", data.keys[1]
+    assert_equal "name", data.keys[2]
+    assert_equal "author", data.keys[3]
+    assert_equal "date", data.keys[4]
+    assert_equal "desc", data.keys[5]
+    assert_equal "require", data.keys[6]
+    assert_equal "tags", data.keys[7]
   end
 
   def test_read_yamlfile_values

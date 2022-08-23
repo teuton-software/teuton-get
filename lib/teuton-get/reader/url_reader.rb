@@ -1,13 +1,12 @@
+require "net/http"
+require "uri"
 
-require 'net/http'
-require 'uri'
-
-require_relative 'reader'
+require_relative "reader"
 
 class URLReader < Reader
   attr_reader :page_content
 
-  def initialize(url = '')
+  def initialize(url = "")
     @url = url
   end
 
@@ -19,5 +18,4 @@ class URLReader < Reader
     @url = url unless url == :default
     @page_content = Net::HTTP.get(URI.parse(@url))
   end
-
 end
