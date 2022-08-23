@@ -33,18 +33,22 @@ class TeutonGet
 
   def init()
     config_dirpath = Application.instance.get(:config_dirpath)
-    repo_config = RepoConfig.new(config_reader: @inifile_reader,
-                                 progress_writer: TerminalWriter.new,
-                                 config_dirpath: config_dirpath)
-    repo_config.create_config
+    repo_config = RepoConfig.new(
+      config_reader: @inifile_reader,
+      progress_writer: TerminalWriter.new,
+      config_dirpath: config_dirpath
+    )
+    repo_config.create
     refresh # Refresh repo info cache just after config file creation
   end
 
   def refresh()
     cache_dirpath = Application.instance.get(:cache_dirpath)
-    repo_data = RepoData.new(config_reader:   @inifile_reader,
-                             progress_writer: TerminalWriter.new,
-                             cache_dirpath:   cache_dirpath)
+    repo_data = RepoData.new(
+      config_reader: @inifile_reader,
+      progress_writer: TerminalWriter.new,
+      cache_dirpath: cache_dirpath
+    )
     repo_data.refresh
   end
 

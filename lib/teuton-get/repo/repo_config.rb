@@ -1,9 +1,7 @@
-
-require 'fileutils'
-require_relative '../application'
+require "fileutils"
+require_relative "../application"
 
 class RepoConfig
-  
   def initialize(args)
     @reader = args[:config_reader]
     @data = @reader.read
@@ -13,7 +11,7 @@ class RepoConfig
     @config_filepath = File.join(@config_dirpath, Application::CONFIGFILE)
   end
 
-  def create_config()
+  def create
     @dev.writeln "\nCreating configuration files"
     create_dir
     create_ini_file
@@ -58,7 +56,7 @@ class RepoConfig
   end
 
   def create_ini_file
-    src = File.join(File.dirname(__FILE__), 'files', Application::CONFIGFILE)
+    src = File.join(File.dirname(__FILE__), '..', 'files', Application::CONFIGFILE)
     copyfile(src, @config_filepath)
   end
 

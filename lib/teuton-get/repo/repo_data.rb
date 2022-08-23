@@ -24,7 +24,7 @@ class RepoData
     save_database
   end
 
-  def database_filename()
+  def database_filename
     File.join(@cache_dirpath, "database.yaml")
   end
 
@@ -33,12 +33,12 @@ class RepoData
   def refresh_repo(reponame)
     unless enabled? reponame
       @dev.write "    Skiping repo "
-      @dev.writeln "#{reponame}", color: :light_red
+      @dev.writeln reponame.to_s, color: :light_red
       return false
     end
 
     @dev.write " => Refresh repo "
-    @dev.writeln "#{reponame}", color: :light_cyan
+    @dev.writeln reponame.to_s, color: :light_cyan
 
     dirpath = File.join(@cache_dirpath)
     ok1 = create_dir(dirpath)
@@ -68,10 +68,10 @@ class RepoData
   def get_database(reponame)
     data = @data[reponame]
 
-    if data["URL"].start_with? "http"
-      @database[reponame] = get_remote_database(data["URL"])
+    @database[reponame] = if data["URL"].start_with? "http"
+      get_remote_database(data["URL"])
     else
-      @database[reponame] = get_local_database(data["URL"])
+      get_local_database(data["URL"])
     end
     true
   end
@@ -84,7 +84,11 @@ class RepoData
   def get_remote_database(url_repo)
     url_file = "#{url_repo}/#{Application::INDEXFILENAME}"
     content_page = URLReader.new(url_file).read
-    yaml_content = YAML::load(content_page)
+    # yaml_content = YAML::load(content_page)
+    YAML.safe_load(
+      content_page,
+      permitted_classes: [Array, Date, Hash, Symbol]
+    )
   end
 
   def save_database
