@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
 
-require 'test/unit'
-require_relative '../../lib/teuton-get/reader/inifile_reader'
+require "test/unit"
+require_relative "../../lib/teuton-get/reader/inifile_reader"
 
 class IniFileReaderTest < Test::Unit::TestCase
-
   def setup
-    filepath1 = File.join(File.dirname(__FILE__), 'unkown', 'repos.ini')
+    filepath1 = File.join(File.dirname(__FILE__), "unkown", "repos.ini")
     @inifile1 = IniFileReader.new(filepath1)
-    filepath2 = File.join(File.dirname(__FILE__), '..', 'files', 'repos.ini')
+    filepath2 = File.join(File.dirname(__FILE__), "..", "files", "repos.ini")
     @inifile2 = IniFileReader.new(filepath2)
   end
 
@@ -21,9 +20,9 @@ class IniFileReaderTest < Test::Unit::TestCase
   def test_inifile2_repolist
     data = @inifile2.read
     assert_equal 3, data.keys.size
-    assert_equal 'main', data.keys[0]
-    assert_equal 'local', data.keys[1]
-    assert_equal 'foo', data.keys[2]
+    assert_equal "main", data.keys[0]
+    assert_equal "local", data.keys[1]
+    assert_equal "foo", data.keys[2]
   end
 
   def test_inifile2_reponame_main

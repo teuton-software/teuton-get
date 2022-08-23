@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'test/unit'
+require "test/unit"
 
 class CommandTest < Test::Unit::TestCase
-
   def test_teuton_get_help
     output = `teutonget help`
     lines = output.split("\n")
@@ -12,7 +11,7 @@ class CommandTest < Test::Unit::TestCase
   end
 
   def test_teuton_get_version
-    quietly = ' > /dev/null'
+    quietly = " > /dev/null"
     cmd = "teutonget v #{quietly}"
     ok = system(cmd)
 

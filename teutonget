@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative 'lib/teuton-get/cli'
+require_relative "lib/teuton-get/cli"
 
 CLI.start(ARGV)

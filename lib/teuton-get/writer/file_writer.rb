@@ -1,9 +1,8 @@
-
-require_relative 'writer'
+require_relative "writer"
 
 class FileWriter < Writer
   def open(filepath)
-    @file = File.open(filepath, 'w')
+    @file = File.open(filepath, "w")
   end
 
   def write(text)
