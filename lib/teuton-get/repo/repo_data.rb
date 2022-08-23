@@ -36,13 +36,14 @@ class RepoData
       @dev.writeln reponame.to_s, color: :light_red
       return false
     end
-
-    @dev.write " => Refresh repo "
-    @dev.writeln reponame.to_s, color: :light_cyan
-
     dirpath = File.join(@cache_dirpath)
     ok1 = create_dir(dirpath)
     ok2 = get_database(reponame)
+
+    @dev.write " => Refresh repo "
+    @dev.write reponame.to_s, color: :light_cyan
+    @dev.writeln " (#{ok2.size})"
+
     true && ok1 && ok2
   end
 
@@ -73,7 +74,6 @@ class RepoData
     else
       get_local_database(data["URL"])
     end
-    true
   end
 
   def get_local_database(dirpath)
