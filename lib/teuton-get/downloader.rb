@@ -1,7 +1,8 @@
+require "open-uri"
 
-
-require 'open-uri'
-
-File.open('/target/path/to/downloaded.file', "wb") do |file|
-  file.write open('http://example.com/your.file').read
+module Downloader
+  def self.get(url)
+    file = File.binwrite("/target/path/to/downloaded.file2")
+    file.write open("http://example.com/your.file").read
+  end
 end

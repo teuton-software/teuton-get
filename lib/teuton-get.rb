@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative "teuton-get/application"
 
 require_relative "teuton-get/reader/inifile_reader"
@@ -24,9 +22,11 @@ class TeutonGet
   end
 
   def create_repo(dirpath)
-    localrepo = LocalRepo.new(testinfo_reader: YamlReader.new,
-                              repoindex_writer: FileWriter.new,
-                              progress_writer: TerminalWriter.new)
+    localrepo = LocalRepo.new(
+      testinfo_reader: YamlReader.new,
+      repoindex_writer: FileWriter.new,
+      progress_writer: TerminalWriter.new
+    )
     localrepo.create_repo(dirpath)
   end
 
@@ -38,7 +38,7 @@ class TeutonGet
       config_dirpath: config_dirpath
     )
     repo_config.create
-    refresh # Refresh repo info cache just after config file creation
+    refresh # Refresh repo-cache just after config file creation
   end
 
   def refresh()
@@ -52,19 +52,25 @@ class TeutonGet
   end
 
   def show_repo_list()
-    repo_config = RepoConfig.new(config_reader: @inifile_reader,
-                                 progress_writer: TerminalWriter.new)
+    repo_config = RepoConfig.new(
+      config_reader: @inifile_reader,
+      progress_writer: TerminalWriter.new
+    )
     repo_config.show_list
   end
 
   def search(filter)
     cache_dirpath = Application.instance.get(:cache_dirpath)
-    repo_data = RepoData.new(config_reader:   @inifile_reader,
-                             progress_writer: TerminalWriter.new,
-                             cache_dirpath:   cache_dirpath)
-    searcher = Searcher.new(writer:   TerminalWriter.new,
-                            repodata: repo_data,
-                            reader:   YamlReader.new)
+    repo_data = RepoData.new(
+      config_reader: @inifile_reader,
+      progress_writer: TerminalWriter.new,
+      cache_dirpath: cache_dirpath
+    )
+    searcher = Searcher.new(
+      writer: TerminalWriter.new,
+      repodata: repo_data,
+      reader: YamlReader.new
+    )
     result = searcher.get(filter)
     searcher.show(result)
   end

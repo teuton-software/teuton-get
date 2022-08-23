@@ -38,8 +38,8 @@ class CLI < Thor
   long_desc <<-LONGDESC
     Create ini config file
   LONGDESC
-  def init()
-    TeutonGet.new.init()
+  def init
+    TeutonGet.new.init
   end
 
   map ["--repos"] => "repos"
@@ -47,8 +47,8 @@ class CLI < Thor
   long_desc <<-LONGDESC
     Show repo list.
   LONGDESC
-  def repos()
-    TeutonGet.new.show_repo_list()
+  def repos
+    TeutonGet.new.show_repo_list
   end
 
   map ["r", "-r", "--refresh"] => "refresh"
@@ -56,8 +56,8 @@ class CLI < Thor
   long_desc <<-LONGDESC
     Synchronize list of tests available.
   LONGDESC
-  def refresh()
-    TeutonGet.new.refresh()
+  def refresh
+    TeutonGet.new.refresh
   end
 
   map ["s", "-s", "--search"] => "search"
@@ -77,5 +77,4 @@ class CLI < Thor
   def download(testname)
     TeutonGet.new.download(testname)
   end
-
 end

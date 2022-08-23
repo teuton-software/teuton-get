@@ -1,8 +1,5 @@
-
 class Environment
-
-  def initialize(reader=nil)
-    #@env = reader.read
+  def initialize(reader = nil)
     @env = ENV
   end
 
