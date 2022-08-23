@@ -1,4 +1,3 @@
-
 class Result
   attr_accessor :score
   attr_reader :reponame
@@ -6,8 +5,8 @@ class Result
 
   def initialize(args)
     @score = args[:score] || 0
-    @reponame = args[:reponame] || '???'
-    @testname = args[:testname] || '???'
+    @reponame = args[:reponame] || "???"
+    @testname = args[:testname] || "???"
   end
 
   def id

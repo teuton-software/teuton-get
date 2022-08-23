@@ -1,6 +1,5 @@
-
-require_relative 'searcher/result'
-require_relative 'application'
+require_relative "application"
+require_relative "searcher/result"
 
 class Searcher
   def initialize(args)
@@ -31,22 +30,22 @@ class Searcher
   def parse_input(input)
     reponame_filter = :all
     filter = :all
-    options = input.split('@')
+    options = input.split("@")
     if options.size == 1
       reponame_filter = :all
       filter = options[0]
-    elsif options[0] == ''
-        reponame_filter = :all
-        filter = options[1]
+    elsif options[0] == ""
+      reponame_filter = :all
+      filter = options[1]
     elsif options.size == 2
       reponame_filter = options[0]
       filter = options[1]
     end
-    reponame_filter = :all if reponame_filter == 'ALL'
-    if filter == 'ALL'
-      filters = :all
+    reponame_filter = :all if reponame_filter == "ALL"
+    filters = if filter == "ALL"
+      :all
     else
-      filters = filter.split(',')
+      filter.split(",")
     end
     [reponame_filter, filters]
   end
@@ -64,22 +63,26 @@ class Searcher
   end
 
   def search_inside_repo(reponame, filters)
-    return if reponame != :all and @database[reponame].nil?
+    return if reponame != :all && @database[reponame].nil?
 
     @database[reponame].each do |testname, data|
-      result = Result.new(score: 0,
-                          reponame: reponame,
-                          testname: testname)
-      if (filters == :all)
+      result = Result.new(
+        score: 0,
+        reponame: reponame,
+        testname: testname
+      )
+      if filters == :all
         add_result(result)
         next
       end
       score = 0
       filters.each do |filter|
-        score += evaluate_test(testname: testname,
-                               data: data,
-                               filter: filter)
-        if (score > 0)
+        score += evaluate_test(
+          testname: testname,
+          data: data,
+          filter: filter
+        )
+        if score > 0
           result.score = score
           add_result result
         end
@@ -94,15 +97,15 @@ class Searcher
 
     score = 0
     data.each_pair do |key, value|
-      if value.class == String
-        score += 1 if (value.downcase.include? filter)
-      elsif value.class == Date
-        score += 1 if (value.to_s.include? filter)
-      elsif value.class == Array
-        score += 1 if (value.include? filter)
+      if value.instance_of? String
+        score += 1 if value.downcase.include? filter
+      elsif value.instance_of? Date
+        score += 1 if value.to_s.include? filter
+      elsif value.instance_of? Array
+        score += 1 if value.include? filter
       end
     end
-    score += 1 if (testname.include? filter)
+    score += 1 if testname.include? filter
     score
   end
 
@@ -115,7 +118,7 @@ class Searcher
     @results[key].score += result.score
   end
 
-  def sort_results()
+  def sort_results
     results = []
     @results.each_pair { |key, value| results += [value.to_h] }
 

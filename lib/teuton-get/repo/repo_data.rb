@@ -1,7 +1,6 @@
-
-require 'yaml'
-require_relative '../application'
-require_relative '../reader/url_reader'
+require "yaml"
+require_relative "../application"
+require_relative "../reader/url_reader"
 
 class RepoData
   attr_reader :data
@@ -26,7 +25,7 @@ class RepoData
   end
 
   def database_filename()
-    File.join(@cache_dirpath, 'database.yaml')
+    File.join(@cache_dirpath, "database.yaml")
   end
 
   private
@@ -48,7 +47,7 @@ class RepoData
   end
 
   def enabled?(reponame)
-    @data[reponame]['enable'] == true
+    @data[reponame]["enable"] == true
   end
 
   def create_dir(dirpath)
@@ -69,7 +68,7 @@ class RepoData
   def get_database(reponame)
     data = @data[reponame]
 
-    if data["URL"].start_with? 'http'
+    if data["URL"].start_with? "http"
       @database[reponame] = get_remote_database(data["URL"])
     else
       @database[reponame] = get_local_database(data["URL"])
@@ -88,8 +87,7 @@ class RepoData
     yaml_content = YAML::load(content_page)
   end
 
-  def save_database()
+  def save_database
     File.write(database_filename, @database.to_yaml)
   end
-
 end
