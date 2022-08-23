@@ -36,8 +36,7 @@ class IniFileReaderTest < Test::Unit::TestCase
   def test_inifile2_reponame_local
     data = @inifile2.read
     assert_equal "Local repo from my PC", data["local"]["description"]
-    username = `whoami`.chomp
-    assert_equal "/home/#{username}/teuton-tests", data["local"]["URL"]
+    assert_equal "/local/path/teuton-tests", data["local"]["URL"]
     assert_equal true, data["local"]["enable"]
   end
 
