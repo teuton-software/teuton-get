@@ -1,7 +1,8 @@
 
 # Teuton-Get
 
-Tool that find and download _Teuton Tests_ from remote repositories.
+* Find and download _Teuton Tests_ from remote or local repositories.
+* Create _Teuton Test_ repository.
 
 ![logo](./docs/images/logo.png)
 
@@ -12,8 +13,9 @@ Tool that find and download _Teuton Tests_ from remote repositories.
 
 # Use
 
-* First time we need to create config file with `teutonget init`.
-* `teutonget search debian`, search using "debian" filter.
+* At first, create config file with `teutonget init`.
+* Then, search tests with `teutonget search FILTER`. Example: `teutonget search debian`, will find test "debian".
+* `teutonget download REPONAME@TESTNAME`
 
 # Contact
 
@@ -21,15 +23,5 @@ Tool that find and download _Teuton Tests_ from remote repositories.
 
 # Documentation
 
-* Installation
-    1. Install Ruby on your system.
-    1. `gem install teuton-get`, to install Teuton.
+* [Settings](docs/settings.md)
 * [Commands](docs/commands.md)
-
-| Command        | Description |
-| -------------- | ------------------------- |
-| teutonget init | Create teutonget.ini file |
-| teutonget search FILTER [repo=REPONAME]| Find Teuton Test on REPO with FILTER |
-| teutonget download TESTNAME | Download Teuton Test |
-
-
