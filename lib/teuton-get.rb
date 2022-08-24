@@ -74,6 +74,6 @@ class TeutonGet
   end
 
   def download(test_id)
-    Downloader.run(test_id)
+    Downloader.new.run(test_id)
   end
 end
