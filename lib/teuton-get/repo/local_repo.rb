@@ -21,7 +21,12 @@ class LocalRepo
     infofilename = Application::INFOFILENAME
     target = File.join(testpath, infofilename)
     source = File.join(File.dirname(__FILE__), "..", "files", infofilename)
+
     copyfile(source, target)
+
+    files = Dir.glob("#{testpath}/**/*.*")
+    names = files.map { |i| i[testpath.size + 1, i.size] } - [ "tt-info.yaml" ]
+    puts names.to_s
   end
 
   def create_repo(source_dir)
