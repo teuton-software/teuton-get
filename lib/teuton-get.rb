@@ -9,6 +9,7 @@ require_relative "teuton-get/repo/local_repo"
 require_relative "teuton-get/repo/repo_config"
 require_relative "teuton-get/repo/repo_data"
 require_relative "teuton-get/searcher"
+require_relative "teuton-get/downloader"
 
 class TeutonGet
   def initialize
@@ -52,10 +53,7 @@ class TeutonGet
   end
 
   def show_repo_list
-    repo_config = RepoConfig.new(
-      config_reader: @inifile_reader,
-      progress_writer: TerminalWriter.new
-    )
+    repo_config = RepoConfig.new_by_default
     repo_config.show_list
   end
 
@@ -75,7 +73,7 @@ class TeutonGet
     searcher.show(result)
   end
 
-  def download(testname)
-    Downloader.get(testname)
+  def download(test_id)
+    Downloader.run(test_id)
   end
 end

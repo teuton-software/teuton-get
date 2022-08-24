@@ -1,7 +1,11 @@
 require "fileutils"
 require_relative "../application"
+require_relative "../reader/inifile_reader"
+require_relative "../writer/terminal_writer"
 
 class RepoConfig
+  attr_reader :data
+
   def initialize(args)
     @reader = args[:config_reader]
     @data = @reader.read
@@ -9,6 +13,15 @@ class RepoConfig
 
     @config_dirpath = args[:config_dirpath] || ""
     @config_filepath = File.join(@config_dirpath, Application::CONFIGFILE)
+  end
+
+  def self.new_by_default
+    config_filepath = Application.instance.get(:config_filepath)
+    inifile_reader = IniFileReader.new(config_filepath)
+    RepoConfig.new(
+      config_reader: inifile_reader,
+      progress_writer: TerminalWriter.new
+    )
   end
 
   def create
