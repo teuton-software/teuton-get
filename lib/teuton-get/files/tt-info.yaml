@@ -1,12 +1,12 @@
-#############################
-# DONT CHANGE THIS ATTRIBUTES
-# TeutonGet tt-info file
+##############################
+# DONT CHANGE THESE ATTRIBUTES
+# Created by teutonget
 version: 1
 type: teutontest
 
-###################################################
-# UPDATE VALUES
-# Keep this attribute names and update their values.
+####################################
+# UPDATE THESE VALUES
+# Keep names and update their values
 name: NODATA
 author: NODATA
 date: 2022-01-01

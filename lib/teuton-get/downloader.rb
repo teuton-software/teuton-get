@@ -16,7 +16,7 @@ class Downloader
     debug(reponame, testpath, repourl)
 
     filename = "start.rb"
-    @dev.writeln("===> File: #{filename}")
+    @dev.writeln("==> File: #{filename}")
     uri = "#{repourl}/#{testpath}/#{filename}"
     get(uri)
   end
