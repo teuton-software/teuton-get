@@ -24,9 +24,9 @@ module Downloader
   def self.get(uri)
     URI.open(uri) do |remotefile|
       puts remotefile.read
-      #File.open("./test.jpg", "wb") do |file|
+      # File.open("./test.jpg", "wb") do |file|
       #  file.write(image.read)
-      #end
+      # end
     end
   end
 end
