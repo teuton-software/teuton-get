@@ -2,7 +2,6 @@ require_relative "../application"
 
 # Create repo dir data and info file data
 class LocalRepo
-  # args => progress_writer: TerminalWriter.new
   def initialize(args)
     @testinfo_reader = args[:testinfo_reader]
     @repoindex_writer = args[:repoindex_writer]
@@ -10,30 +9,32 @@ class LocalRepo
   end
 
   def create_info(testpath)
+    @dev.write "\n==> Create info for "
+    @dev.writeln testpath, color: :light_cyan
+
     startfile = File.join(testpath, "start.rb")
     unless File.exist?(startfile)
-      @dev.writeln "[ERROR] File start.rb not found!", color: :light_red
+      @dev.writeln "    ERROR: File start.rb not found!", color: :light_red
       return false
     end
 
-    @dev.write "\nCreate info for "
-    @dev.writeln testpath, color: :light_cyan
     infofilename = Application::INFOFILENAME
-    target = File.join(testpath, infofilename)
-    source = File.join(File.dirname(__FILE__), "..", "files", infofilename)
+    targetpath = File.join(testpath, infofilename)
+    sourcepath = File.join(File.dirname(__FILE__), "..", "files", infofilename)
 
-    copyfile(source, target)
+    copyfile(sourcepath, targetpath)
 
     files = Dir.glob("#{testpath}/**/*.*")
-    names = files.map { |i| i[testpath.size + 1, i.size] } - [ "tt-info.yaml" ]
+    names = files.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
     puts names.to_s
+    true
   end
 
   def create_repo(source_dir)
     infofilename = Application::INFOFILENAME
     indexfilename = Application::INDEXFILENAME
 
-    @dev.write "\nCreate repo into folder "
+    @dev.write "\n==> Create repo into folder "
     @dev.writeln source_dir, color: :light_cyan
 
     files = Dir.glob(File.join(source_dir, "**", infofilename))
@@ -44,7 +45,7 @@ class LocalRepo
     @repoindex_writer.write data.to_yaml
     @repoindex_writer.close
 
-    @dev.write " => Creating file: "
+    @dev.write "==> Creating file: "
     @dev.writeln filepath, color: :light_cyan
     @dev.writeln "    Tests counter: #{data.keys.size}"
     true
@@ -69,17 +70,17 @@ class LocalRepo
 
   def copyfile(target, dest)
     if File.exist? dest
-      @dev.write "  * Exists file! : "
+      @dev.write "    WARN: exits file "
       @dev.writeln dest, color: :light_yellow
       return true
     end
     begin
       FileUtils.cp(target, dest)
-      @dev.write " => Create file : "
+      @dev.write "===> Created file "
       @dev.writeln dest, color: :light_green
       true
     rescue => e
-      @dev.write " => Create file ERROR: "
+      @dev.write "    ERROR: Creating file "
       @dev.writeln dest, color: :light_red
       puts e
       false
