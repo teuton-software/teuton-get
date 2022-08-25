@@ -9,7 +9,7 @@ type: teutontest
 #
 name: NODATA
 author: NODATA
-date: 2022-01-01
+date: <%=Time.now.strftime("%Y-%m-%d")+"\n"%>
 desc: NODATA
 tags:
 - NODATA

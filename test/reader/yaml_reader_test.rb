@@ -34,7 +34,7 @@ class YamlReaderTest < Test::Unit::TestCase
     assert_equal "NODATA", data["name"]
     assert_equal "NODATA", data["desc"]
     assert_equal "NODATA", data["author"]
-    assert_equal "2022-01-01", data["date"].to_s
+    assert_equal 10, data["date"].to_s.size
     assert_equal 1, data["tags"].size
     assert_equal "NODATA", data["tags"][0]
   end
