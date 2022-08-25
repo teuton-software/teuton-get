@@ -23,7 +23,7 @@ class LocalRepo
     targetpath = File.join(testpath, infofilename)
     sourcepath = File.join(File.dirname(__FILE__), "..", "files", infofilename)
     filepaths = Dir.glob("#{testpath}/**/*.*")
-    files = filepaths.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
+    _files = filepaths.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
 
     template = File.read(sourcepath)
     content = ERB.new(template, trim_mode: "%>")

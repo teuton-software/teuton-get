@@ -6,7 +6,6 @@ require "#{name}/version"
 Gem::Specification.new do |s|
   s.name = name
   s.version = Version::VERSION
-  # s.date = Date.today.strftime("%Y-%m-%d")
   s.summary = "TeutonGet (Teuton Software)"
   s.description = <<-EOF
     Find and download Teuton Test.

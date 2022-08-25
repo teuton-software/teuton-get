@@ -1,5 +1,3 @@
-require "date"
-
 module Version
   NAME = "teuton-get"
   VERSION = "0.0.0"

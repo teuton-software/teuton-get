@@ -14,7 +14,7 @@ desc: NODATA
 tags:
 - NODATA
 files:
-<% files.each do |name| output = "- #{name}\n" %>
+<% _files.each do |name| output = "- #{name}\n" %>
 <%=output%>
 <% end %>
 ###################################
