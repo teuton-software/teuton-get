@@ -26,7 +26,7 @@ class LocalRepo
     files = filepaths.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
 
     template = File.read(sourcepath)
-    content = ERB.new(template, trim_mode: '%>')
+    content = ERB.new(template, trim_mode: "%>")
     File.write(targetpath, content.result(binding))
     true
   end

@@ -1,20 +1,24 @@
-#############################
-# DONT CHANGE THIS ATTRIBUTES
-# TeutonGet tt-info file
+#####################################################
+# DONT CHANGE THESE ATTRIBUTES (Created by teutonget)
+#
 version: 1
 type: teutontest
 
-###################################################
-# UPDATE VALUES
-# Keep this attribute names and update their values.
+#########################################################
+# UPDATE THESE VALUES (Keep names and update their values
+#
 name: NODATA
 author: NODATA
 date: 2022-01-01
 desc: NODATA
-require:
-- NODATA
 tags:
 - NODATA
-
-############################################
-# Add your custom attributes after this line
+files:
+- README.md
+- config.yaml
+- rock.yaml
+- start.rb
+- starwars.yaml
+###################################
+# Custom attributes after this line
+#
