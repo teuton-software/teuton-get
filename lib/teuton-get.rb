@@ -5,6 +5,7 @@ require_relative "teuton-get/reader/yaml_reader"
 require_relative "teuton-get/writer/file_writer"
 require_relative "teuton-get/writer/terminal_writer"
 
+require_relative "teuton-get/repo/local_info"
 require_relative "teuton-get/repo/local_repo"
 require_relative "teuton-get/repo/repo_config"
 require_relative "teuton-get/repo/repo_data"
@@ -18,8 +19,7 @@ class TeutonGet
   end
 
   def create_info(testpath)
-    localrepo = LocalRepo.new(progress_writer: TerminalWriter.new)
-    localrepo.create_info(testpath)
+    LocalInfo.new.create_info(testpath)
   end
 
   def create_repo(dirpath)
