@@ -7,9 +7,9 @@ type: teutontest
 #########################################################
 # UPDATE THESE VALUES (Keep names and update their values
 #
-name: <%=File.basename(testpath)+"\n"%>
-author: <%=ENV["USER"]+"\n"%>
-date: <%=Time.now.strftime("%Y-%m-%d")+"\n"%>
+name: <%=File.basename(testpath) + "\n"%>
+author: <%=ENV["USER"] + "\n"%>
+date: <%=Time.now.strftime("%Y-%m-%d") + "\n"%>
 desc: NODATA
 tags:
 - NODATA
