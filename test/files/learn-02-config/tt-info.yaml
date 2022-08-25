@@ -7,8 +7,8 @@ type: teutontest
 #########################################################
 # UPDATE THESE VALUES (Keep names and update their values
 #
-name: NODATA
-author: NODATA
+name: learn-02-config
+author: quigon
 date: 2022-08-25
 desc: NODATA
 tags:

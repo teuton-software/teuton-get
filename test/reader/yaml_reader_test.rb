@@ -31,9 +31,10 @@ class YamlReaderTest < Test::Unit::TestCase
 
   def test_read_yamlfile_values
     data = @reader.read(@filepath2)
-    assert_equal "NODATA", data["name"]
+    dirpath = File.dirname(@filepath2)
+    assert_equal File.basename(dirpath), data["name"]
     assert_equal "NODATA", data["desc"]
-    assert_equal "NODATA", data["author"]
+    assert_equal ENV["USER"], data["author"]
     assert_equal 10, data["date"].to_s.size
     assert_equal 1, data["tags"].size
     assert_equal "NODATA", data["tags"][0]
