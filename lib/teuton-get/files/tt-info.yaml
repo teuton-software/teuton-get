@@ -1,12 +1,12 @@
-##############################
-# DONT CHANGE THESE ATTRIBUTES
-# Created by teutonget
+#####################################################
+# DONT CHANGE THESE ATTRIBUTES (Created by teutonget)
+#
 version: 1
 type: teutontest
 
-####################################
-# UPDATE THESE VALUES
-# Keep names and update their values
+#########################################################
+# UPDATE THESE VALUES (Keep names and update their values
+#
 name: NODATA
 author: NODATA
 date: 2022-01-01
@@ -19,5 +19,6 @@ files:
 <% files.each do |name| output = "- #{name}\n" %>
 <%=output%>
 <% end %>
-############################################
-# Add your custom attributes after this line
+###################################
+# Custom attributes after this line
+#

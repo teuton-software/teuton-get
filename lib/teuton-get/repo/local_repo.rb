@@ -24,13 +24,10 @@ class LocalRepo
     sourcepath = File.join(File.dirname(__FILE__), "..", "files", infofilename)
     filepaths = Dir.glob("#{testpath}/**/*.*")
     files = filepaths.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
-    puts files.to_s
 
-    # copyfile(sourcepath, targetpath)
     template = File.read(sourcepath)
-    puts template
     content = ERB.new(template, trim_mode: '%>')
-    puts content.result(binding)
+    File.write(targetpath, content.result(binding))
     true
   end
 
