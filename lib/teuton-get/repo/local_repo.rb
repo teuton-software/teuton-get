@@ -1,4 +1,5 @@
 require_relative "../application"
+require "erb"
 
 # Create repo dir data and info file data
 class LocalRepo
@@ -21,12 +22,15 @@ class LocalRepo
     infofilename = Application::INFOFILENAME
     targetpath = File.join(testpath, infofilename)
     sourcepath = File.join(File.dirname(__FILE__), "..", "files", infofilename)
+    filepaths = Dir.glob("#{testpath}/**/*.*")
+    files = filepaths.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
+    puts files.to_s
 
-    copyfile(sourcepath, targetpath)
-
-    files = Dir.glob("#{testpath}/**/*.*")
-    names = files.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
-    puts names.to_s
+    # copyfile(sourcepath, targetpath)
+    template = File.read(sourcepath)
+    puts template
+    content = ERB.new(template, trim_mode: '%>')
+    puts content.result(binding)
     true
   end
 
