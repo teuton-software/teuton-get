@@ -7,7 +7,7 @@ class LocalInfo
     @dev = dev
   end
 
-  def create_info(testpath)
+  def create(testpath)
     @dev.write "\n==> Create info for "
     @dev.writeln testpath, color: :light_cyan
 
@@ -27,5 +27,8 @@ class LocalInfo
     content = ERB.new(template, trim_mode: "%>")
     File.write(targetpath, content.result(binding))
     true
+  end
+
+  def read(filepath)
   end
 end
