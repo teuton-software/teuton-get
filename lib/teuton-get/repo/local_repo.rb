@@ -6,7 +6,7 @@ class LocalRepo
     @dev = args[:progress_writer]
   end
 
-  def create_repo(source_dir)
+  def create(source_dir)
     infofilename = Application::INFOFILENAME
     indexfilename = Application::INDEXFILENAME
 

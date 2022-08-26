@@ -27,7 +27,7 @@ class TeutonGet
       repoindex_writer: FileWriter.new,
       progress_writer: TerminalWriter.new
     )
-    localrepo.create_repo(dirpath)
+    localrepo.create(dirpath)
   end
 
   def init

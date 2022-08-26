@@ -36,7 +36,7 @@ class LocalRepoTest < Test::Unit::TestCase
     indexfilepath = File.join("test", "files", Application::INDEXFILENAME)
     assert_equal false, File.exist?(indexfilepath)
 
-    assert_equal true, @localrepo.create_repo(File.join("test", "files"))
+    assert_equal true, @localrepo.create(File.join("test", "files"))
     assert_equal true, File.exist?(indexfilepath)
     tempfiles << indexfilepath
 
