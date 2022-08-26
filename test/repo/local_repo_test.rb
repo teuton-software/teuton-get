@@ -13,7 +13,6 @@ class LocalRepoTest < Test::Unit::TestCase
     @tmpdir = "var"
     @localinfo = LocalInfo.new(NullWriter.new)
     @localrepo = LocalRepo.new(
-      testinfo_reader: YamlReader.new,
       repoindex_writer: FileWriter.new,
       progress_writer: NullWriter.new
     )
