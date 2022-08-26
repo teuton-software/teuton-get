@@ -36,8 +36,8 @@ class RepoConfig
     rows << :separator
 
     @data.each_pair do |key, value|
-      enable = ""
-      enable = "X" unless value["enable"]
+      enable = "\u{2714}"
+      enable = " " unless value["enable"]
       description = value["description"] || "?"
       rows << [enable, key, description]
     end
