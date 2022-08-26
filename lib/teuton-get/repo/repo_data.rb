@@ -1,6 +1,7 @@
 require "yaml"
 require_relative "../application"
 require_relative "../reader/url_reader"
+require_relative "../reader/yaml_reader"
 
 class RepoData
   attr_reader :data
@@ -24,7 +25,20 @@ class RepoData
     save_database
   end
 
+  def get(test_id)
+    reponame, id = test_id.split("@")
+    database = YamlReader.new.read(database_filename)
+    item = database[reponame][id]
+    # Show info
+    @dev.writeln "name   : #{item["name"]}"
+    @dev.writeln "author : #{item["author"]}"
+    @dev.writeln "date   : #{item["date"]}"
+    @dev.writeln "desc   : #{item["desc"]}"
+    @dev.writeln "tags   : #{item["tags"].join(", ")}"
+  end
+
   def database_filename
+    # REVISE: Used by teutonget search... replace by #get()
     File.join(@cache_dirpath, "database.yaml")
   end
 

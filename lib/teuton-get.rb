@@ -56,9 +56,14 @@ class TeutonGet
     repo_config.show_list
   end
 
-  def show_info(filepath)
-    data = LocalInfo.new.read(filepath)
-    puts data
+  def show_info(test_id)
+    cache_dirpath = Application.instance.get(:cache_dirpath)
+    repo_data = RepoData.new(
+      config_reader: @inifile_reader,
+      progress_writer: TerminalWriter.new,
+      cache_dirpath: cache_dirpath
+    )
+    repo_data.get(test_id)
   end
 
   def search(filter)
