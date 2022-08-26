@@ -38,4 +38,18 @@ class LocalInfoTest < Test::Unit::TestCase
     assert_equal true, File.exist?(filepath)
     FileUtils.rm(filepath)
   end
+
+  def test_read_no_exist_info
+    dirpath = @dirpaths[1]
+    filepath = File.join(dirpath, Application::INFOFILENAME)
+    data = @localinfo.read(filepath)
+    assert_equal({}, data)
+  end
+
+  def test_read_info_file
+    dirpath = @dirpaths[2]
+    filepath = File.join(dirpath, Application::INFOFILENAME)
+    data = @localinfo.read(filepath)
+    assert_equal(8, data.size)
+  end
 end
