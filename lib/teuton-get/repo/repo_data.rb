@@ -40,7 +40,7 @@ class RepoData
     ok1 = create_dir(dirpath)
     ok2 = get_database(reponame)
 
-    @dev.write "    Refresh repo "
+    @dev.write "    Repo "
     @dev.write reponame.to_s, color: :light_cyan
     @dev.writeln " (x#{ok2.size})"
 
