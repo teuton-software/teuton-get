@@ -24,6 +24,15 @@ class CLI < Thor
     TeutonGet.new.create_info(testpath)
   end
 
+  map ["si", "-si", "--show-info"] => "show_info"
+  desc "show-info [TEST-PATH]", "Show info data for Teuton test"
+  long_desc <<-LONGDESC
+  Show info data for Teuton test.
+  LONGDESC
+  def show_info(testpath)
+    TeutonGet.new.show_info(testpath)
+  end
+
   map ["cr", "-cr", "--create-repo"] => "create_repo"
   desc "create-repo [SOURCE-DIR]", "Create repo into SOURCE directory"
   long_desc <<-LONGDESC

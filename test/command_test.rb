@@ -7,7 +7,7 @@ class CommandTest < Test::Unit::TestCase
     output = `teutonget help`
     lines = output.split("\n")
 
-    assert_equal 10, lines.size
+    assert_equal 11, lines.size
   end
 
   def test_teuton_get_version
