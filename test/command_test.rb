@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require "test/unit"
 
 class CommandTest < Test::Unit::TestCase
