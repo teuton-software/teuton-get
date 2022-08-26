@@ -13,10 +13,9 @@ class YamlReader < Reader
 
   def read(filepath = :default)
     @filepath = filepath unless filepath == :default
-    return {} unless File.exist? filepath
+    return {} unless File.exist? @filepath
 
-    content = File.open(filepath)
-    # YAML.load(content)
+    content = File.open(@filepath)
     YAML.safe_load(
       content,
       permitted_classes: [Array, Date, Hash, Symbol]

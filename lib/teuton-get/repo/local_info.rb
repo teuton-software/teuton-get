@@ -1,5 +1,6 @@
 require_relative "../application"
 require_relative "../writer/terminal_writer"
+require_relative "../reader/yaml_reader"
 require "erb"
 
 class LocalInfo
@@ -30,5 +31,6 @@ class LocalInfo
   end
 
   def read(filepath)
+    YamlReader.new(filepath).read
   end
 end

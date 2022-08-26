@@ -1,9 +1,7 @@
 require_relative "../application"
 
-# Create repo dir data and info file data
 class LocalRepo
   def initialize(args)
-    @testinfo_reader = args[:testinfo_reader]
     @repoindex_writer = args[:repoindex_writer]
     @dev = args[:progress_writer]
   end
@@ -39,7 +37,7 @@ class LocalRepo
         # delete 2 chars at the begining. Example: "./"
         cleanpath[0, 2] = ""
       end
-      content = @testinfo_reader.read(cleanpath)
+      content = LocalInfo.new.read(cleanpath)
       dirpath = File.dirname(cleanpath)
       data[dirpath] = content
     end
