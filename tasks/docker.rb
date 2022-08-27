@@ -1,3 +1,4 @@
+# NO USED
 namespace :docker do
   desc "Push docker"
   task :push do
