@@ -16,7 +16,7 @@ class CLI < Thor
   end
 
   map ["ci", "-ci", "--create-info"] => "create_info"
-  desc "create-info [TEST-PATH]", "Create info data for Teuton test"
+  desc "create-info [DIRPATH]", "Create info data for Teuton test"
   long_desc <<-LONGDESC
   Create info data for Teuton test.
   LONGDESC
@@ -25,7 +25,7 @@ class CLI < Thor
   end
 
   map ["i", "-i", "--info"] => "info"
-  desc "info [TEST-ID]", "Show info data for Teuton test"
+  desc "info TESTID", "Show info data for Teuton test"
   long_desc <<-LONGDESC
   Show info data for Teuton test.
   LONGDESC
@@ -34,7 +34,7 @@ class CLI < Thor
   end
 
   map ["cr", "-cr", "--create-repo"] => "create_repo"
-  desc "create-repo [SOURCE-DIR]", "Create repo into SOURCE directory"
+  desc "create-repo [DIRPATH]", "Create repo into DIRPATH directory"
   long_desc <<-LONGDESC
   Create index from SOURCE directory.
   LONGDESC
@@ -61,7 +61,7 @@ class CLI < Thor
   end
 
   map ["r", "-r", "--refresh"] => "refresh"
-  desc "refresh", "Synchronize list of tests available."
+  desc "refresh", "Synchronize list of available tests."
   long_desc <<-LONGDESC
     Synchronize list of tests available.
   LONGDESC
@@ -79,7 +79,7 @@ class CLI < Thor
   end
 
   map ["d", "-d", "--download"] => "download"
-  desc "download REPONAME@TESTNAME", "Download Teuton test"
+  desc "download TESTID", "Download Teuton test"
   long_desc <<-LONGDESC
     Download Teuton test. Example: "teutonget main@system/opensuse"
   LONGDESC
