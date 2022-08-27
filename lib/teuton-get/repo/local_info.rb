@@ -2,6 +2,7 @@ require_relative "../application"
 require_relative "../writer/terminal_writer"
 require_relative "../reader/yaml_reader"
 require "erb"
+require "tty-prompt"
 
 class LocalInfo
   def initialize(dev = TerminalWriter.new)
@@ -16,8 +17,6 @@ class LocalInfo
   end
 
   def create(testpath)
-    fill_data(testpath, :default)
-
     startfile = File.join(testpath, "start.rb")
     unless File.exist?(startfile)
       @dev.writeln "    ERROR: File start.rb not found!", color: :light_red

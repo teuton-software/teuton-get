@@ -27,10 +27,12 @@ class LocalRepoTest < Test::Unit::TestCase
     tempfiles = []
 
     dirpath = @dirpaths[1]
+    @localinfo.fill_data(dirpath)
     @localinfo.create(dirpath)
     tempfiles << File.join(dirpath, Application::INFOFILENAME)
 
     dirpath = @dirpaths[2]
+    @localinfo.fill_data(dirpath)
     @localinfo.create(dirpath)
 
     indexfilepath = File.join("test", "files", Application::INDEXFILENAME)
