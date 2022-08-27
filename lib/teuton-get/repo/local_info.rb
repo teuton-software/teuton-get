@@ -11,7 +11,7 @@ class LocalInfo
   end
 
   def default_create(testpath)
-    fill_data(testpath)
+    set_default_data(testpath)
     create(testpath)
   end
 
@@ -21,7 +21,7 @@ class LocalInfo
 
   private
 
-  def fill_data(testpath, items = :default)
+  def set_default_data(testpath)
     @data[:name] = File.basename(testpath)
     @data[:author] = ENV["USER"]
     @data[:date] = Time.now.strftime("%Y-%m-%d")
