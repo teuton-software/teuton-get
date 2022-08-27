@@ -1,6 +1,4 @@
 require_relative "../application"
-# filepaths = Dir.glob("#{testpath}/**/*.*")
-# _files = filepaths.map { |i| i[testpath.size + 1, i.size] } - [infofilename]
 
 class LocalRepo
   def initialize(args)

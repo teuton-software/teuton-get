@@ -21,9 +21,13 @@ class LocalInfo
   end
 
   def read(filepath)
-    data = YamlReader.new(filepath).read
     dirpath = File.dirname(filepath)
     @dev.writeln "    Reading #{dirpath}"
+    data = YamlReader.new(filepath).read
+
+    filepaths = Dir.glob("#{dirpath}/**/*.*")
+    files = filepaths.map { |i| i[dirpath.size + 1, i.size] } - [Application::INFOFILENAME]
+    data["files"] = files
     data
   end
 
