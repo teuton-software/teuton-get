@@ -1,5 +1,5 @@
 require "colorize"
-require "terminal-table"
+require "tty-table"
 require_relative "writer"
 
 class TerminalWriter < Writer
@@ -13,6 +13,8 @@ class TerminalWriter < Writer
   end
 
   def write_table(rows)
-    puts Terminal::Table.new rows: rows
+    table = TTY::Table.new(rows)
+    # puts table.render(:basic)
+    puts table.render(:ascii)
   end
 end
