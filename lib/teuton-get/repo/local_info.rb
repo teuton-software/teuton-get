@@ -21,7 +21,10 @@ class LocalInfo
   end
 
   def read(filepath)
-    YamlReader.new(filepath).read
+    data = YamlReader.new(filepath).read
+    dirpath = File.dirname(filepath)
+    @dev.writeln dirpath
+    data
   end
 
   private

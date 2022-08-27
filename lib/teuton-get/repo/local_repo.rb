@@ -8,16 +8,15 @@ class LocalRepo
     @dev = args[:progress_writer]
   end
 
-  def create(source_dir)
+  def create(dirpath)
     infofilename = Application::INFOFILENAME
-    indexfilename = Application::INDEXFILENAME
+    infofiles = Dir.glob(File.join(dirpath, "**", infofilename))
+    return if infofiles.size.zero?
 
     @dev.writeln "\n==> Creating repository", color: :light_yellow
+    data = read_files(infofiles)
 
-    files = Dir.glob(File.join(source_dir, "**", infofilename))
-    data = read_files(files)
-    filepath = File.join(source_dir, indexfilename)
-
+    filepath = File.join(dirpath, Application::INDEXFILENAME)
     @repoindex_writer.open(filepath)
     @repoindex_writer.write data.to_yaml
     @repoindex_writer.close
@@ -30,17 +29,17 @@ class LocalRepo
 
   private
 
-  def read_files(files)
+  def read_files(infofiles)
     data = {}
-    files.each do |filepath|
+    infofiles.each do |filepath|
       cleanpath = filepath
       if cleanpath.start_with? "./"
         # delete 2 chars at the begining. Example: "./"
         cleanpath[0, 2] = ""
       end
-      content = LocalInfo.new.read(cleanpath)
+      infodata = LocalInfo.new(@dev).read(cleanpath)
       dirpath = File.dirname(cleanpath)
-      data[dirpath] = content
+      data[dirpath] = infodata
     end
     data
   end
