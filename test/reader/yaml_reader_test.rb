@@ -32,10 +32,9 @@ class YamlReaderTest < Test::Unit::TestCase
     data = @reader.read(@filepath2)
     dirpath = File.dirname(@filepath2)
     assert_equal File.basename(dirpath), data["name"]
-    assert_equal "NODATA", data["desc"]
+    assert_equal String, data["desc"].class
     assert_equal ENV["USER"], data["author"]
     assert_equal 10, data["date"].to_s.size
-    assert_equal 1, data["tags"].size
-    assert_equal "NODATA", data["tags"][0]
+    assert_equal Array, data["tags"].class
   end
 end

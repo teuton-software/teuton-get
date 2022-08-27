@@ -10,9 +10,12 @@ type: teutontest
 name: <%=@data[:name] + "\n"%>
 author: <%=@data[:author] + "\n"%>
 date: <%=@data[:date] + "\n"%>
-desc: NODATA
+desc: <%=@data[:desc] + "\n"%>
 tags:
-- NODATA
+<% @data[:tags].each do |tag| %>
+- <%=tag + "\n"%>
+<% end %>
+
 ###################################
 # Custom attributes after this line
 #

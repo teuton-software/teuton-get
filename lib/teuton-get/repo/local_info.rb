@@ -15,6 +15,11 @@ class LocalInfo
     create(testpath)
   end
 
+  def user_create(testpath)
+    ask_data(testpath)
+    create(testpath)
+  end
+
   def read(filepath)
     YamlReader.new(filepath).read
   end
@@ -25,6 +30,18 @@ class LocalInfo
     @data[:name] = File.basename(testpath)
     @data[:author] = ENV["USER"]
     @data[:date] = Time.now.strftime("%Y-%m-%d")
+    @data[:desc] = "Write your description"
+    @data[:tags] = ["Write your", "comma separated", "tags"]
+  end
+
+  def ask_data(testpath)
+    set_default_data(testpath)
+    prompt = TTY::Prompt.new
+    @data[:name] = prompt.ask("name?", default: @data[:name])
+    @data[:author] = prompt.ask("author?", default: @data[:author])
+    @data[:date] = prompt.ask("date?", default: @data[:date])
+    @data[:desc] = prompt.ask("desc?", default: @data[:desc])
+    @data[:tags] = prompt.ask("tags?", default: @data[:tags])
   end
 
   def create(testpath)

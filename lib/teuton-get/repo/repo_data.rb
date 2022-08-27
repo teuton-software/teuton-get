@@ -18,7 +18,7 @@ class RepoData
     dirpath = @cache_dirpath
     FileUtils.rm_r(dirpath) if Dir.exist? dirpath
 
-    @dev.writeln "\n==> Refreshing active repos"
+    @dev.writeln "\n==> Refreshing active repos", color: :light_yellow
     @data.keys.sort.each do |key|
       refresh_repo key
     end
@@ -56,7 +56,7 @@ class RepoData
 
     @dev.write "    Repo "
     @dev.write reponame.to_s, color: :light_cyan
-    @dev.writeln " (x#{ok2.size})"
+    @dev.writeln " (#{ok2.size} tests)"
 
     true && ok1 && ok2
   end
