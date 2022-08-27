@@ -6,11 +6,23 @@ require "erb"
 class LocalInfo
   def initialize(dev = TerminalWriter.new)
     @dev = dev
+    @data = {}
+  end
+
+  def fill_data(items = :default)
+    @data[:name] = File.basename(@testpath)
+    @data[:author] = ENV["USER"]
+    @data[:date] = Time.now.strftime("%Y-%m-%d")
+    # filepaths = Dir.glob("#{testpath}/**/*.*")
+    # _files = filepaths.map { |i| i[testpath.size + 1, i.size] } - [infofilename]
   end
 
   def create(testpath)
     @dev.write "\n==> Create info for "
     @dev.writeln testpath, color: :light_cyan
+
+    @testpath = testpath
+    fill_data(:default)
 
     startfile = File.join(testpath, "start.rb")
     unless File.exist?(startfile)
@@ -19,14 +31,12 @@ class LocalInfo
     end
 
     infofilename = Application::INFOFILENAME
-    targetpath = File.join(testpath, infofilename)
     sourcepath = File.join(File.dirname(__FILE__), "..", "files", infofilename)
-    filepaths = Dir.glob("#{testpath}/**/*.*")
-    _files = filepaths.map { |i| i[testpath.size + 1, i.size] } - ["tt-info.yaml"]
-
     template = File.read(sourcepath)
     content = ERB.new(template, trim_mode: "%>")
+    targetpath = File.join(testpath, infofilename)
     File.write(targetpath, content.result(binding))
+
     true
   end
 

@@ -50,6 +50,6 @@ class LocalInfoTest < Test::Unit::TestCase
     dirpath = @dirpaths[2]
     filepath = File.join(dirpath, Application::INFOFILENAME)
     data = @localinfo.read(filepath)
-    assert_equal(8, data.size)
+    assert_equal(7, data.size)
   end
 end

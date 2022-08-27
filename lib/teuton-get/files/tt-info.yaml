@@ -7,16 +7,12 @@ type: teutontest
 #########################################################
 # UPDATE THESE VALUES (Keep names and update their values
 #
-name: <%=File.basename(testpath) + "\n"%>
-author: <%=ENV["USER"] + "\n"%>
-date: <%=Time.now.strftime("%Y-%m-%d") + "\n"%>
+name: <%=@data[:name] + "\n"%>
+author: <%=@data[:author] + "\n"%>
+date: <%=@data[:date] + "\n"%>
 desc: NODATA
 tags:
 - NODATA
-files:
-<% _files.each do |name| output = "- #{name}\n" %>
-<%=output%>
-<% end %>
 ###################################
 # Custom attributes after this line
 #
