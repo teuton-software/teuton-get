@@ -19,8 +19,7 @@ class TeutonGet
   end
 
   def create_info(testpath)
-    info = LocalInfo.new.fill_data(testpath)
-    info.create(testpath)
+    LocalInfo.new.default_create(testpath)
   end
 
   def create_repo(dirpath)

@@ -10,6 +10,17 @@ class LocalInfo
     @data = {}
   end
 
+  def default_create(testpath)
+    fill_data(testpath)
+    create(testpath)
+  end
+
+  def read(filepath)
+    YamlReader.new(filepath).read
+  end
+
+  private
+
   def fill_data(testpath, items = :default)
     @data[:name] = File.basename(testpath)
     @data[:author] = ENV["USER"]
@@ -31,9 +42,5 @@ class LocalInfo
     File.write(targetpath, content.result(binding))
 
     true
-  end
-
-  def read(filepath)
-    YamlReader.new(filepath).read
   end
 end

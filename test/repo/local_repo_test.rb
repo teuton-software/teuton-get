@@ -27,13 +27,11 @@ class LocalRepoTest < Test::Unit::TestCase
     tempfiles = []
 
     dirpath = @dirpaths[1]
-    @localinfo.fill_data(dirpath)
-    @localinfo.create(dirpath)
+    @localinfo.default_create(dirpath)
     tempfiles << File.join(dirpath, Application::INFOFILENAME)
 
     dirpath = @dirpaths[2]
-    @localinfo.fill_data(dirpath)
-    @localinfo.create(dirpath)
+    @localinfo.default_create(dirpath)
 
     indexfilepath = File.join("test", "files", Application::INDEXFILENAME)
     assert_equal false, File.exist?(indexfilepath)
