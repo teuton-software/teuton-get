@@ -28,8 +28,13 @@ class RepoData
   def get(test_id)
     reponame, id = test_id.split("@")
     database = YamlReader.new.read(database_filename)
-    item = database[reponame][id]
+    database[reponame][id]
+  end
+
+  def show_testinfo(item)
+    return unless item
     # Show info
+    @dev.writeln ""
     @dev.writeln "name   : #{item["name"]}"
     @dev.writeln "author : #{item["author"]}"
     @dev.writeln "date   : #{item["date"]}"

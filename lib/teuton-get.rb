@@ -63,7 +63,8 @@ class TeutonGet
       progress_writer: TerminalWriter.new,
       cache_dirpath: cache_dirpath
     )
-    repo_data.get(test_id)
+    info = repo_data.get(test_id)
+    repo_data.show_testinfo(info)
   end
 
   def search(filter)
