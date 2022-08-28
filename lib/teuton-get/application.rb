@@ -8,6 +8,7 @@ class Application
   INDEXFILENAME = "tt-repo.yaml"
   INFOFILENAME = "tt-info.yaml"
   MAGICNUMBER = 999
+  SEPARATOR = ":"
 
   def initialize
     @env = Environment.new

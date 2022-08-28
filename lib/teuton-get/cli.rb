@@ -70,7 +70,7 @@ class CLI < Thor
   end
 
   map ["s", "-s", "--search"] => "search"
-  desc "search [REPONAME@]FILTER", "Search Teuton test with FILTER"
+  desc "search [REPONAME:]FILTER", "Search Teuton test with FILTER"
   long_desc <<-LONGDESC
   Search Teuton test with FILTER.
   LONGDESC

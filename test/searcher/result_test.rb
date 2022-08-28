@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "test/unit"
+require_relative "../../lib/teuton-get/application"
 require_relative "../../lib/teuton-get/searcher/result"
 
 class ResultTest < Test::Unit::TestCase
@@ -10,7 +11,7 @@ class ResultTest < Test::Unit::TestCase
     assert_equal 0, result.score
     assert_equal "???", result.reponame
     assert_equal "???", result.testname
-    assert_equal "???@???", result.id
+    assert_equal "???#{Application::SEPARATOR}???", result.id
   end
 
   def test_result
@@ -19,6 +20,6 @@ class ResultTest < Test::Unit::TestCase
     assert_equal 16, result.score
     assert_equal "main", result.reponame
     assert_equal "sysadmin/debian", result.testname
-    assert_equal "main@sysadmin/debian", result.id
+    assert_equal "main#{Application::SEPARATOR}sysadmin/debian", result.id
   end
 end

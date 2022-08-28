@@ -1,3 +1,5 @@
+require_relative "../application"
+
 class Result
   attr_accessor :score
   attr_reader :reponame
@@ -10,7 +12,7 @@ class Result
   end
 
   def id
-    "#{reponame}@#{testname}"
+    "#{reponame}#{Application::SEPARATOR}#{testname}"
   end
 
   def to_h

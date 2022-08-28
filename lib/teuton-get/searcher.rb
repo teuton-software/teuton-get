@@ -21,7 +21,7 @@ class Searcher
 
   def show(result)
     @results.each do |i|
-      @dev.writeln "(#{i[:score]}) #{i[:reponame]}@#{i[:testname]}"
+      @dev.writeln "(#{i[:score]}) #{i[:reponame]}#{Application::SEPARATOR}#{i[:testname]}"
     end
   end
 
@@ -30,7 +30,7 @@ class Searcher
   def parse_input(input)
     reponame_filter = :all
     filter = :all
-    options = input.split("@")
+    options = input.split(Application::SEPARATOR)
     if options.size == 1
       reponame_filter = :all
       filter = options[0]

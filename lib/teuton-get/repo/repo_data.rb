@@ -26,7 +26,7 @@ class RepoData
   end
 
   def get(test_id)
-    reponame, id = test_id.split("@")
+    reponame, id = test_id.split(Application::SEPARATOR)
     database = YamlReader.new.read(database_filename)
     database[reponame][id]
   end
