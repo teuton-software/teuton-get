@@ -48,7 +48,8 @@ class LocalInfo
     @data[:author] = prompt.ask("author?", default: @data[:author])
     @data[:date] = prompt.ask("date?", default: @data[:date])
     @data[:desc] = prompt.ask("desc?", default: @data[:desc])
-    @data[:tags] = prompt.ask("tags?", default: @data[:tags]).split(",")
+    input = prompt.ask("tags?", default: @data[:tags].join(","))
+    @data[:tags] = input.split(",")
   end
 
   def create(testpath)

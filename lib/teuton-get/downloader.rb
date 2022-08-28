@@ -9,7 +9,7 @@ class Downloader
   end
 
   def run(id)
-    reponame, testpath = id.split("@")
+    reponame, testpath = id.split(Application::SEPARATOR)
     repolist = RepoConfig.new_by_default.data
     repourl = repolist[reponame]["URL"]
     files = repolist[reponame]["files"]

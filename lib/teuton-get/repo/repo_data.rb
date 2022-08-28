@@ -40,6 +40,7 @@ class RepoData
     @dev.writeln "date   : #{item["date"]}"
     @dev.writeln "desc   : #{item["desc"]}"
     @dev.writeln "tags   : #{item["tags"].join(", ")}"
+    @dev.writeln "files  : #{item["files"].join(", ")}"
   end
 
   def database_filename
