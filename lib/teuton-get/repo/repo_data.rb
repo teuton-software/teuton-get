@@ -63,17 +63,14 @@ class RepoData
 
   def refresh_repo(reponame)
     unless enabled? reponame
-      @dev.write "    Skiping repo "
-      @dev.writeln reponame.to_s, color: :light_red
+      @dev.writeln "    \u{2716} Skiping repo #{reponame}"
       return false
     end
     dirpath = File.join(@cache_dirpath)
     ok1 = create_dir(dirpath)
     ok2 = get_database(reponame)
 
-    @dev.write "    Repo "
-    @dev.write reponame.to_s, color: :light_cyan
-    @dev.writeln " (#{ok2.size} tests)"
+    @dev.writeln "    \u{2714} Repo #{reponame} (#{ok2.size} tests)"
 
     true && ok1 && ok2
   end
