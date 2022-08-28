@@ -41,8 +41,9 @@ class Downloader
 
   def get(uri)
     URI.open(uri) do |f|
-    # File.open("./test.jpg", "wb") do |file|
-    #  file.write(image.read) # end
+      # File.open("./test.jpg", "wb") do |file|
+      #   file.write(image.read)
+      # end
     end
   end
 
@@ -53,7 +54,7 @@ class Downloader
     return nil, "ERROR: undefined repo name!" if repo.nil?
     url = repo["URL"]
     return nil, "ERROR: undefined repo URL!" if url.nil?
-    return url, :ok
+    [url, :ok]
   end
 
   def get_files(id)
@@ -62,6 +63,6 @@ class Downloader
     files = info["files"]
     return [], "WARN: files no defined!" if files.nil?
     return [], "WARN: 0 files defined!" if files.size.zero?
-    return files, :ok
+    [files, :ok]
   end
 end
