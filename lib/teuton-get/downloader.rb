@@ -26,19 +26,13 @@ class Downloader
       return false
     end
 
-    require "debug"
-    binding.break
     files, status = get_files(id)
     unless status == :ok
       @dev.writeln "    #{status}"
       return false
     end
 
-    @dev.writeln "==> Downloading...", color: :light_yellow
-    filename = files[0]
-    @dev.writeln("==> File: #{filename}")
-    uri = "#{repo_url}/#{testpath}/#{filename}"
-    get(uri)
+    download(repo_url, testpath, files)
   end
 
   def get(uri)
@@ -60,11 +54,19 @@ class Downloader
   end
 
   def get_files(id)
-    info = @repo_data.get(id)
-    return [], "ERROR: not found!" if info.nil?
-    files = info["files"]
+    testdata = @repo_data.get(id)
+    return [], "ERROR: not found!" if testdata.nil?
+    files = testdata["files"]
     return [], "WARN: files no defined!" if files.nil?
     return [], "WARN: 0 files defined!" if files.size.zero?
     [files, :ok]
+  end
+
+  def download(url, testpath, files)
+    @dev.writeln "==> Downloading...", color: :light_yellow
+    files.each do |filename|
+      @dev.writeln "==> File: #{filename} ", color: :white
+      # get(uri)
+    end
   end
 end
