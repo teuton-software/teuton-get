@@ -1,6 +1,7 @@
 require "yaml"
 require_relative "../application"
 require_relative "../reader/url_reader"
+require_relative "../reader/inifile_reader"
 require_relative "../reader/yaml_reader"
 
 class RepoData
@@ -11,6 +12,15 @@ class RepoData
     @data = @reader.read
     @dev = args[:progress_writer]
     @cache_dirpath = args[:cache_dirpath]
+  end
+
+  def self.new_by_default
+    config_filepath = Application.instance.get(:config_filepath)
+    RepoData.new(
+      config_reader: IniFileReader.new(config_filepath),
+      progress_writer: TerminalWriter.new,
+      cache_dirpath: Application.instance.get(:cache_dirpath)
+    )
   end
 
   def refresh
@@ -33,14 +43,15 @@ class RepoData
 
   def show_testinfo(item)
     return unless item
-    # Show info
     @dev.writeln ""
-    @dev.writeln "name   : #{item["name"]}"
-    @dev.writeln "author : #{item["author"]}"
-    @dev.writeln "date   : #{item["date"]}"
-    @dev.writeln "desc   : #{item["desc"]}"
-    @dev.writeln "tags   : #{item["tags"].join(", ")}"
-    @dev.writeln "files  : #{item["files"].join(", ")}"
+    ["name", "author", "date", "desc"].each do |key|
+      @dev.write "#{key.ljust(7)} : ", color: :white
+      @dev.writeln item[key].to_s
+    end
+    ["tags", "files"].each do |key|
+      @dev.write "#{key.ljust(7)} : ", color: :white
+      @dev.writeln item[key].join(", ")
+    end
   end
 
   def database_filename

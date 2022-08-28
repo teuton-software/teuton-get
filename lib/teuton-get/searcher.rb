@@ -21,7 +21,8 @@ class Searcher
 
   def show(result)
     @results.each do |i|
-      @dev.writeln "(#{i[:score]}) #{i[:reponame]}#{Application::SEPARATOR}#{i[:testname]}"
+      @dev.write "(x#{i[:score]}) ", color: :white
+      @dev.writeln "#{i[:reponame]}#{Application::SEPARATOR}#{i[:testname]}"
     end
   end
 

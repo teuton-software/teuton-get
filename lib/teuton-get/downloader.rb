@@ -26,7 +26,9 @@ class Downloader
       return false
     end
 
-    files, status = get_files(reponame)
+    require "debug"
+    binding.break
+    files, status = get_files(id)
     unless status == :ok
       @dev.writeln "    #{status}"
       return false

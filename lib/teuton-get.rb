@@ -42,41 +42,23 @@ class TeutonGet
   end
 
   def refresh
-    cache_dirpath = Application.instance.get(:cache_dirpath)
-    repo_data = RepoData.new(
-      config_reader: @inifile_reader,
-      progress_writer: TerminalWriter.new,
-      cache_dirpath: cache_dirpath
-    )
-    repo_data.refresh
+    RepoData.new_by_default.refresh
   end
 
   def show_repo_list
-    repo_config = RepoConfig.new_by_default
-    repo_config.show_list
+    RepoConfig.new_by_default.show_list
   end
 
   def show_info(test_id)
-    cache_dirpath = Application.instance.get(:cache_dirpath)
-    repo_data = RepoData.new(
-      config_reader: @inifile_reader,
-      progress_writer: TerminalWriter.new,
-      cache_dirpath: cache_dirpath
-    )
+    repo_data = RepoData.new_by_default
     info = repo_data.get(test_id)
     repo_data.show_testinfo(info)
   end
 
   def search(filter)
-    cache_dirpath = Application.instance.get(:cache_dirpath)
-    repo_data = RepoData.new(
-      config_reader: @inifile_reader,
-      progress_writer: TerminalWriter.new,
-      cache_dirpath: cache_dirpath
-    )
     searcher = Searcher.new(
       writer: TerminalWriter.new,
-      repodata: repo_data,
+      repodata: RepoData.new_by_default,
       reader: YamlReader.new
     )
     result = searcher.get(filter)
