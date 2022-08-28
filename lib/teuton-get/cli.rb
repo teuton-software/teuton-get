@@ -12,7 +12,7 @@ class CLI < Thor
   desc "version", "Show the program version"
 
   def version
-    puts "#{Version::NAME} (version #{Version::VERSION})"
+    puts "#{Version::EXECUTABLE} (version #{Version::VERSION})"
   end
 
   map ["ci", "-ci", "--create-info"] => "create_info"
