@@ -1,5 +1,8 @@
 require_relative "application"
+require_relative "reader/yaml_reader"
+require_relative "repo/repo_data"
 require_relative "searcher/result"
+require_relative "writer/terminal_writer"
 
 class Searcher
   def initialize(args)
@@ -12,6 +15,14 @@ class Searcher
     @database = @reader.read(filename)
 
     @results = {}
+  end
+
+  def self.new_by_default
+    Searcher.new(
+      writer: TerminalWriter.new,
+      repodata: RepoData.new_by_default,
+      reader: YamlReader.new
+    )
   end
 
   def get(input)

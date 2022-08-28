@@ -1,10 +1,3 @@
-require_relative "teuton-get/application"
-
-require_relative "teuton-get/reader/inifile_reader"
-require_relative "teuton-get/reader/yaml_reader"
-require_relative "teuton-get/writer/file_writer"
-require_relative "teuton-get/writer/terminal_writer"
-
 require_relative "teuton-get/repo/local_info"
 require_relative "teuton-get/repo/local_repo"
 require_relative "teuton-get/repo/repo_config"
@@ -13,21 +6,12 @@ require_relative "teuton-get/searcher"
 require_relative "teuton-get/downloader"
 
 class TeutonGet
-  def initialize
-    config_filepath = Application.instance.get(:config_filepath)
-    @inifile_reader = IniFileReader.new(config_filepath)
-  end
-
   def create_info(testpath)
     LocalInfo.new.user_create(testpath)
   end
 
   def create_repo(dirpath)
-    localrepo = LocalRepo.new(
-      repoindex_writer: FileWriter.new,
-      progress_writer: TerminalWriter.new
-    )
-    localrepo.create(dirpath)
+    LocalRepo.new_by_default.create(dirpath)
   end
 
   def init
@@ -50,11 +34,7 @@ class TeutonGet
   end
 
   def search(filter)
-    searcher = Searcher.new(
-      writer: TerminalWriter.new,
-      repodata: RepoData.new_by_default,
-      reader: YamlReader.new
-    )
+    searcher = Searcher.new_by_default
     result = searcher.get(filter)
     searcher.show(result)
   end

@@ -1,9 +1,18 @@
 require_relative "../application"
+require_relative "../writer/file_writer"
+require_relative "../writer/terminal_writer"
 
 class LocalRepo
   def initialize(args)
     @repoindex_writer = args[:repoindex_writer]
     @dev = args[:progress_writer]
+  end
+
+  def self.new_by_default
+    LocalRepo.new(
+      repoindex_writer: FileWriter.new,
+      progress_writer: TerminalWriter.new
+    )
   end
 
   def create(dirpath)
