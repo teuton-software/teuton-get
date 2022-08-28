@@ -26,7 +26,7 @@ class RepoConfig
   end
 
   def create
-    @dev.writeln "\nCreating configuration files"
+    @dev.writeln "\n==> Creating configuration files", color: :light_yellow
     create_dir
     create_ini_file
   end
@@ -53,15 +53,15 @@ class RepoConfig
   def create_dir
     dirpath = @config_dirpath
     if Dir.exist? dirpath
-      @dev.write "  * Exists dir!      : "
+      @dev.write "    \u{2716} Exists dir!      : "
       @dev.writeln dirpath, color: :yellow
     else
       begin
         FileUtils.mkdir_p(dirpath)
-        @dev.write " => Create dir       : "
+        @dev.write "    \u{2714} Create dir       : "
         @dev.writeln dirpath, color: :green
       rescue => e
-        @dev.write " => Create dir  ERROR: "
+        @dev.write "    \u{2716} Create dir  ERROR: "
         @dev.writeln dirpath, color: :red
         puts e
       end
@@ -75,16 +75,16 @@ class RepoConfig
 
   def copyfile(target, dest)
     if File.exist? dest
-      @dev.write "  * Exists file!     : "
+      @dev.write "    \u{2716} Exists file!     : "
       @dev.writeln dest, color: :yellow
       return true
     end
     begin
       FileUtils.cp(target, dest)
-      @dev.write " => Create file      : "
+      @dev.write "    \u{2714} Create file      : "
       @dev.writeln dest, color: :green
     rescue => e
-      @dev.write " => Create file ERROR: "
+      @dev.write "    \u{2716} Create file ERROR: "
       @dev.writeln dest, color: :red
       puts e
     end

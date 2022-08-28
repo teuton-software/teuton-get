@@ -14,8 +14,8 @@
 # Use
 
 * At first, create config file with `teutonget init`.
-* Then, search tests with `teutonget search FILTER`. Example: `teutonget search debian`, will find test "debian".
-* `teutonget download REPONAME@TESTNAME`
+* Then, search tests with `teutonget search FILTER`. Example: `teutonget search linux`, will show a list with "linux" related tests.
+* `teutonget download REPONAME:TESTPATH`
 
 # Contact
 
