@@ -17,10 +17,11 @@ class RepoConfig
 
   def self.new_by_default
     config_filepath = Application.instance.get(:config_filepath)
-    inifile_reader = IniFileReader.new(config_filepath)
+
     RepoConfig.new(
-      config_reader: inifile_reader,
-      progress_writer: TerminalWriter.new
+      config_reader: IniFileReader.new(config_filepath),
+      progress_writer: TerminalWriter.new,
+      config_dirpath: Application.instance.get(:config_dirpath)
     )
   end
 
