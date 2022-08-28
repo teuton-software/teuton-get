@@ -1,9 +1,9 @@
 # require "open-uri"
 require_relative "writer/terminal_writer"
 require_relative "reader/inifile_reader"
+require_relative "reader/url_reader"
 require_relative "repo/repo_config"
 require_relative "repo/repo_data"
-require "open-uri"
 
 class Downloader
   def initialize
@@ -32,15 +32,7 @@ class Downloader
       return false
     end
 
-    download(repo_url, testpath, files)
-  end
-
-  def get(uri)
-    URI.open(uri) do |f|
-      # File.open("./test.jpg", "wb") do |file|
-      #   file.write(image.read)
-      # end
-    end
+    download(reponame, repo_url, testpath, files)
   end
 
   private
@@ -62,11 +54,12 @@ class Downloader
     [files, :ok]
   end
 
-  def download(url, testpath, files)
-    @dev.writeln "==> Downloading...", color: :light_yellow
+  def download(reponame, url, path, files)
+    @dev.writeln "==> Downloading #{path} from #{reponame}...", color: :light_yellow
     files.each do |filename|
       @dev.writeln "==> File: #{filename} ", color: :white
-      # get(uri)
+      uri = "#{url}/#{path}/#{filename}"
+      puts URLReader.new(uri).read
     end
   end
 end
