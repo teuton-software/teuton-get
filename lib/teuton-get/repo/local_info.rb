@@ -21,7 +21,14 @@ class LocalInfo
   end
 
   def read(filepath)
-    YamlReader.new(filepath).read
+    dirpath = File.dirname(filepath)
+    @dev.writeln "    Reading #{dirpath}"
+    data = YamlReader.new(filepath).read
+
+    filepaths = Dir.glob("#{dirpath}/**/*.*")
+    files = filepaths.map { |i| i[dirpath.size + 1, i.size] } - [Application::INFOFILENAME]
+    data["files"] = files
+    data
   end
 
   private
@@ -41,7 +48,7 @@ class LocalInfo
     @data[:author] = prompt.ask("author?", default: @data[:author])
     @data[:date] = prompt.ask("date?", default: @data[:date])
     @data[:desc] = prompt.ask("desc?", default: @data[:desc])
-    @data[:tags] = prompt.ask("tags?", default: @data[:tags])
+    @data[:tags] = prompt.ask("tags?", default: @data[:tags]).split(",")
   end
 
   def create(testpath)

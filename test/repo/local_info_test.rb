@@ -43,13 +43,13 @@ class LocalInfoTest < Test::Unit::TestCase
     dirpath = @dirpaths[1]
     filepath = File.join(dirpath, Application::INFOFILENAME)
     data = @localinfo.read(filepath)
-    assert_equal({}, data)
+    assert_equal({"files" => ["README.md", "start.rb"]}, data)
   end
 
   def test_read_info_file
     dirpath = @dirpaths[2]
     filepath = File.join(dirpath, Application::INFOFILENAME)
     data = @localinfo.read(filepath)
-    assert_equal(7, data.size)
+    assert_equal(8, data.size)
   end
 end

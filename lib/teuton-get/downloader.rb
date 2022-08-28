@@ -6,15 +6,16 @@ require "open-uri"
 class Downloader
   def initialize
     @dev = TerminalWriter.new
-    @dev.writeln("==> Downloading...")
   end
 
   def run(id)
     reponame, testpath = id.split("@")
     repolist = RepoConfig.new_by_default.data
     repourl = repolist[reponame]["URL"]
-    debug(reponame, testpath, repourl)
+    files = repolist[reponame]["files"]
+    return if files.nil?
 
+    @dev.writeln "==> Downloading...", color: :light_yellow
     filename = "start.rb"
     @dev.writeln("==> File: #{filename}")
     uri = "#{repourl}/#{testpath}/#{filename}"
@@ -22,7 +23,6 @@ class Downloader
   end
 
   def debug(reponame, testpath, url)
-    @dev.writeln("    reponame = #{reponame}")
     @dev.writeln("    testpath = #{testpath}")
     @dev.writeln("    URL repo = #{url}")
   end

@@ -13,7 +13,7 @@ date: <%=@data[:date] + "\n"%>
 desc: <%=@data[:desc] + "\n"%>
 tags:
 <% @data[:tags].each do |tag| %>
-- <%=tag + "\n"%>
+- <%=tag.strip + "\n"%>
 <% end %>
 
 ###################################
