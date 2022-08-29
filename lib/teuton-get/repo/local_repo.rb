@@ -28,9 +28,7 @@ class LocalRepo
     @repoindex_writer.write data.to_yaml
     @repoindex_writer.close
 
-    @dev.write "    File: "
-    @dev.write filepath, color: :light_cyan
-    @dev.writeln " (#{data.keys.size} tests)"
+    @dev.writeln "    Created file #{filepath} with #{data.keys.size} tests.", color: :white
     true
   end
 

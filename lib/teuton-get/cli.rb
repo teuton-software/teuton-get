@@ -34,12 +34,12 @@ class CLI < Thor
   end
 
   map ["cr", "-cr", "--create-repo"] => "create_repo"
-  desc "create-repo [DIRPATH]", "Create repo into DIRPATH directory"
+  desc "create-repo", "Create repo into current directory"
   long_desc <<-LONGDESC
   Create index from SOURCE directory.
   LONGDESC
-  def create_repo(source_dir)
-    TeutonGet.create_repo(source_dir)
+  def create_repo
+    TeutonGet.create_repo(".")
   end
 
   map ["i", "-i", "--init"] => "init"

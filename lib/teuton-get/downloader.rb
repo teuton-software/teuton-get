@@ -1,4 +1,5 @@
-# require "open-uri"
+require "fileutils"
+require_relative "writer/file_writer"
 require_relative "writer/terminal_writer"
 require_relative "reader/inifile_reader"
 require_relative "reader/url_reader"
@@ -20,13 +21,13 @@ class Downloader
   def run(id)
     reponame, testpath = id.split(Application::SEPARATOR)
 
-    repo_url, status = get_url(reponame)
+    repo_url, status = get_url_for reponame
     unless status == :ok
       @dev.writeln "    #{status}"
       return false
     end
 
-    files, status = get_files(id)
+    files, status = get_files_for_test id
     unless status == :ok
       @dev.writeln "    #{status}"
       return false
@@ -37,7 +38,7 @@ class Downloader
 
   private
 
-  def get_url(reponame)
+  def get_url_for(reponame)
     repo = @repo_config[reponame]
     return nil, "ERROR: undefined repo name!" if repo.nil?
     url = repo["URL"]
@@ -45,7 +46,7 @@ class Downloader
     [url, :ok]
   end
 
-  def get_files(id)
+  def get_files_for_test(id)
     testdata = @repo_data.get(id)
     return [], "ERROR: not found!" if testdata.nil?
     files = testdata["files"]
@@ -56,10 +57,15 @@ class Downloader
 
   def download(reponame, url, path, files)
     @dev.writeln "==> Downloading #{path} from #{reponame}...", color: :light_yellow
+    localpath = path.tr("/", "_")
+    FileUtils.mkdir(localpath) unless File.exist? localpath
     files.each do |filename|
       @dev.writeln "==> File: #{filename} ", color: :white
       uri = "#{url}/#{path}/#{filename}"
-      puts URLReader.new(uri).read
+      out = FileWriter.new
+      out.open(File.join(localpath, filename))
+      out.write(URLReader.new(uri).read)
+      out.close
     end
   end
 end

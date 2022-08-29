@@ -46,3 +46,5 @@ Download test by TESTID. Example:
 ==> File: network.rb
 ==> File: start.rb
 ```
+
+Test files will be downloaded into `systems.1_03-debian-conf` local directory.
