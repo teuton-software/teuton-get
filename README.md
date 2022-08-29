@@ -25,4 +25,5 @@
 
 * [Settings](docs/settings.md)
 * [Get](docs/get.md)
+* [Repository](docs/repo.md)
 * [Commands](docs/commands.md)
