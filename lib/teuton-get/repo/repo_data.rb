@@ -38,6 +38,7 @@ class RepoData
   def get(test_id)
     reponame, id = test_id.split(Application::SEPARATOR)
     database = YamlReader.new.read(database_filename)
+    return {} if database[reponame].nil?
     database[reponame][id]
   end
 
@@ -49,6 +50,7 @@ class RepoData
       @dev.writeln item[key].to_s
     end
     ["tags", "files"].each do |key|
+      next if item[key].nil?
       @dev.write "#{key.ljust(7)} : ", color: :white
       @dev.writeln item[key].join(", ")
     end

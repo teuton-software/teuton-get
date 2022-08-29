@@ -30,7 +30,7 @@ module TeutonGet
   def self.show_info(test_id)
     repo_data = RepoData.new_by_default
     info = repo_data.get(test_id)
-    repo_data.show_testinfo(info)
+    repo_data.show_testinfo(info) unless info == {}
   end
 
   def self.search(filter)
