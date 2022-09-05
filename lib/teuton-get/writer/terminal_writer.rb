@@ -1,12 +1,19 @@
 require "colorize"
-require "pastel"
 require "tty-table"
 require_relative "writer"
 
 class TerminalWriter < Writer
-  COLORS = [:red, :green, :yellow, :blue, :magenta, :cyan, :white]
+  COLORS = [:blue, :magenta, :cyan, :red, :green, :yellow]
   def write(text = "", args = {})
-    color = args[:color] || :silver
+    color = if args[:color].nil?
+      :silver
+    elsif args[:color].instance_of? Integer
+      COLORS[args[:color]]
+    elsif args[:color].instance_of? Symbol
+      args[:color]
+    else
+      :silver
+    end
     print colorize_text(color, text)
   end
 
