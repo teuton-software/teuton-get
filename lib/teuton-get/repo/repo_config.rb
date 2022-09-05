@@ -37,14 +37,13 @@ class RepoConfig
     rows << ["E", "NAME", "DESCRIPTION"]
     rows << :separator
 
-    i = 0
+    index = 0
     @data.each_pair do |key, value|
       enable = "\u{2714}"
       enable = " " unless value["enable"]
       description = value["description"] || "?"
-      key2 = TeutonGet::Format.colorize(key, i)
-      i += 1
-      rows << [enable, key2, description]
+      rows << [enable, TeutonGet::Format.colorize(key, index), description]
+      index += 1
     end
     @dev.writeln "Repository list"
     @dev.write_table(rows)
