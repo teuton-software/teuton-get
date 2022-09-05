@@ -1,6 +1,8 @@
 require_relative "../application"
 
 class Result
+  @@repoindex = Set.new
+
   attr_accessor :score
   attr_reader :reponame
   attr_reader :testname
@@ -9,6 +11,7 @@ class Result
     @score = args[:score] || 0
     @reponame = args[:reponame] || "???"
     @testname = args[:testname] || "???"
+    @@repoindex << @reponame
   end
 
   def id
@@ -16,6 +19,15 @@ class Result
   end
 
   def to_h
-    {score: @score, id: id, reponame: @reponame, testname: @testname}
+    {
+      score: @score,
+      id: id, reponame: @reponame,
+      testname: @testname,
+      repoindex: repoindex
+    }
+  end
+
+  def repoindex
+    @@repoindex.to_a.index(@reponame)
   end
 end

@@ -1,4 +1,5 @@
 require_relative "application"
+require_relative "format"
 require_relative "reader/yaml_reader"
 require_relative "repo/repo_data"
 require_relative "searcher/result"
@@ -33,7 +34,8 @@ class Searcher
   def show_result
     @results.each do |i|
       @dev.write "(x#{i[:score]}) ", color: :white
-      @dev.writeln "#{i[:reponame]}#{Application::SEPARATOR}#{i[:testname]}"
+      reponame = TeutonGet::Format.colorize(i[:reponame], i[:repoindex])
+      @dev.writeln "#{reponame}#{Application::SEPARATOR}#{i[:testname]}"
     end
   end
 
