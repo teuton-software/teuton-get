@@ -1,5 +1,6 @@
 require "fileutils"
 require_relative "../application"
+require_relative "../format"
 require_relative "../reader/inifile_reader"
 require_relative "../writer/terminal_writer"
 
@@ -36,11 +37,14 @@ class RepoConfig
     rows << ["E", "NAME", "DESCRIPTION"]
     rows << :separator
 
+    i = 0
     @data.each_pair do |key, value|
       enable = "\u{2714}"
       enable = " " unless value["enable"]
       description = value["description"] || "?"
-      rows << [enable, key, description]
+      key2 = TeutonGet::Format.colorize(key, i)
+      i += 1
+      rows << [enable, key2, description]
     end
     @dev.writeln "Repository list"
     @dev.write_table(rows)

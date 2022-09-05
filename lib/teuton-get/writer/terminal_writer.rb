@@ -1,20 +1,10 @@
-require "colorize"
 require "tty-table"
 require_relative "writer"
+require_relative "../format"
 
 class TerminalWriter < Writer
-  COLORS = [:blue, :magenta, :cyan, :red, :green, :yellow]
   def write(text = "", args = {})
-    color = if args[:color].nil?
-      :silver
-    elsif args[:color].instance_of? Integer
-      COLORS[args[:color]]
-    elsif args[:color].instance_of? Symbol
-      args[:color]
-    else
-      :silver
-    end
-    print colorize_text(color, text)
+    print TeutonGet::Format.colorize(text, args[:color])
   end
 
   def writeln(text = "", args = {})
@@ -25,9 +15,5 @@ class TerminalWriter < Writer
     table = TTY::Table.new(rows)
     # puts table.render(:basic)
     puts table.render(:ascii)
-  end
-
-  def colorize_text(color, text)
-    text.colorize(color)
   end
 end
