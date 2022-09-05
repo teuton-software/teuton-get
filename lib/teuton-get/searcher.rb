@@ -30,7 +30,7 @@ class Searcher
     search_inside(reponame_filter, filters)
   end
 
-  def show(result)
+  def show_result
     @results.each do |i|
       @dev.write "(x#{i[:score]}) ", color: :white
       @dev.writeln "#{i[:reponame]}#{Application::SEPARATOR}#{i[:testname]}"

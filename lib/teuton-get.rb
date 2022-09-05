@@ -35,8 +35,8 @@ module TeutonGet
 
   def self.search(filter)
     searcher = Searcher.new_by_default
-    result = searcher.get(filter)
-    searcher.show(result)
+    searcher.get(filter)
+    searcher.show_result
   end
 
   def self.download(test_id)
