@@ -21,24 +21,13 @@
 
 ## Example
 
-```bash
-❯ teutonget search conf    
-(x3) teuton.en:systems.1/01-windows-conf
-(x3) teuton.en:systems.1/02-opensuse-conf
-(x3) teuton.en:systems.1/03-debian-conf
-(x3) teuton.en:systems.1/04-winserver-conf
-(x2) teuton.en:systems.2/01-install-w10-vbox
-(x2) teuton.en:systems.2/02-debian-basic-configuration
+* Search and download test:
 
-❯ teutonget download teuton.en:systems.1/02-opensuse-conf
-==> Downloading systems.1/02-opensuse-conf from teuton.en...
-==> File: README.md 
-==> File: config.yaml 
-==> File: network.rb 
-==> File: opensuse.rb 
-==> File: start.rb 
-==> File: tt-info.yaml
-```
+![](docs/images/teutonget-download.png)
+
+* Refresh repos and show test details:
+
+![](docs/images/teutonget-info.png)
 
 # Contact
 
