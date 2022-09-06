@@ -47,7 +47,7 @@ class LocalInfo
     @data[:name] = prompt.ask("name?", default: @data[:name])
     @data[:author] = prompt.ask("author?", default: @data[:author])
     @data[:date] = prompt.ask("date?", default: @data[:date])
-    @data[:desc] = prompt.ask("desc?", default: @data[:desc])
+    @data[:desc] = sanityze(prompt.ask("desc?", default: @data[:desc]))
     input = prompt.ask("tags?", default: @data[:tags].join(","))
     @data[:tags] = input.split(",")
   end
@@ -67,5 +67,9 @@ class LocalInfo
     File.write(targetpath, content.result(binding))
 
     true
+  end
+
+  def sanityze(text)
+    text.tr(":", " ")
   end
 end

@@ -44,7 +44,7 @@ class RepoData
 
   def show_testinfo(item)
     return unless item
-    @dev.writeln ""
+
     ["name", "author", "date", "desc"].each do |key|
       @dev.write "#{key.ljust(7)} : ", color: :white
       @dev.writeln item[key].to_s
