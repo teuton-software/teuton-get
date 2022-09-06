@@ -9,3 +9,4 @@
 ## [0.3.0]
 
 - Main command: teutonget and teuton-get.
+- Sanityze text input for YAML content file.
