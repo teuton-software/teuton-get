@@ -56,7 +56,7 @@ class Downloader
   end
 
   def download(reponame, url, path, files)
-    @dev.writeln "==> Downloading #{path} from #{reponame}...", color: :light_yellow
+    @dev.writeln "==> Downloading '#{path}' from repo '#{reponame}'...", color: :light_yellow
     localpath = path.tr("/", "_")
     FileUtils.mkdir(localpath) unless File.exist? localpath
     files.each do |filename|
