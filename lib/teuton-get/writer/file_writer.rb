@@ -3,7 +3,7 @@ require "fileutils"
 
 class FileWriter < Writer
   def open(filepath)
-    dirpath =  File.dirname(filepath)
+    dirpath = File.dirname(filepath)
     FileUtils.mkdir_p(dirpath) unless Dir.exist? dirpath
     @file = File.open(filepath, "w")
   end
