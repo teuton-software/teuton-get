@@ -27,6 +27,7 @@ module TeutonGet
     refresh # Auto repo refresh
   end
 
+  # Refresh Teuton Repo Data
   def self.refresh
     RepoData.new_by_default.refresh
   end
