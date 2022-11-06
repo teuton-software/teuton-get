@@ -6,14 +6,17 @@ require_relative "teuton-get/searcher"
 require_relative "teuton-get/downloader"
 
 module TeutonGet
+  # Create metadata for local user teuton test
   def self.create_info(testpath)
     LocalInfo.new.user_create(testpath)
   end
 
+  # Create metadata for local user teuton repository
   def self.create_repo(dirpath)
     LocalRepo.new_by_default.create(dirpath)
   end
 
+  # Download remote teuton test
   def self.download(test_id)
     Downloader.new.run(test_id)
   end

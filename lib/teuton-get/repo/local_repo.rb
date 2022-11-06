@@ -2,6 +2,7 @@ require_relative "../application"
 require_relative "../writer/file_writer"
 require_relative "../writer/terminal_writer"
 
+# Create metadata for local user teuton repository
 class LocalRepo
   def initialize(args)
     @repoindex_writer = args[:repoindex_writer]

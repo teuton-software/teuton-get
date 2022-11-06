@@ -4,6 +4,7 @@ require_relative "../reader/yaml_reader"
 require "erb"
 require "tty-prompt"
 
+# Create metadata for local user teuton test
 class LocalInfo
   def initialize(dev = TerminalWriter.new)
     @dev = dev
