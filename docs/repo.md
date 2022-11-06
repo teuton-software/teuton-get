@@ -4,7 +4,12 @@
 
 Manage repositories: configure and creation.
 
-## Create info
+1. Create info
+2. Create repository
+3. Configure remote repository
+4. Configure local repository
+
+## 1. Create info
 
 Teuton test files are located into remote machines. Every Teuton test requires
 a special info file that acts as manifest or test metadata.
@@ -23,11 +28,11 @@ desc? Practice basic commands into Debian host.
 tags? practice,basic,command,debian,host
 ```
 
-Every Teuton test that you want to be downdable, requires test info file (tt-info.yaml).
+Every downdable Teuton test requires metadata file. Test info file called `tt-info.yaml`.
 
-## Create repository
+## 2. Create repository
 
-We need to summarize all our test information into repo info file (tt-repo-yaml).
+All tests metadata is summarized into repo metadata. Repo info file called `tt-repo-yaml`.
 
 * Go to your remote repository server host.
 * Move to your repository root directory.
@@ -48,7 +53,7 @@ Example:
     Created file ./tt-repo.yaml with 7 tests.
 ```
 
-## Configure remote repository
+## 3. Configure remote repository
 
 Finaly we have to configure the new remote repo.
 
@@ -66,3 +71,21 @@ enable = true
 ```
 
 * Run `teutonget repos` to check configuration.
+
+## 4. Configure local repository
+
+The usual thing will be to have remote repositories from where to download the tests. This process requires a network connection between our local machine and the remote repository.
+
+But it is possible to have a repository on our local machine and not use the network for test downloads.
+
+To do this we will create the repository on our local machine as indicated above, but instead of using https:// the URL will use a path to a local directory.
+
+
+Example:
+
+```
+[LOCALREPONAME]
+description = WRITE LOCAL REPO DESCRIPTION
+URL = /path/to/your/local/repo/folder
+enable=true
+```

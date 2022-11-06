@@ -2,21 +2,36 @@
 
 # Get
 
-Find and download local or remote files.
+Find and download local or remote test files.
 
 ## Search
 
-At first we need to locate the files according to some criterios.
+At first we need to locate the test according to some criterios.
 
-* `teutonget search FILTER` is used to find files with FILTER criterio.
+```
+teutonget search FILTER
+```
 
 Example:
 
 ```
-❯ teutonget search debian
-(3) teuton.en:en/systems.1/03-debian-conf
-(2) teuton.en:en/systems.2/02-debian-basic-configuration
+❯ teutonget se window
+(x3) teuton.en:systems.1/01-windows-conf
+(x1) teuton.en:systems.1/04-winserver-conf
+(x1) teuton.en:systems.2/01-install-w10-vbox
+
 ```
+
+As a result we have a list of tests ordered from highest to lowest value according to the search requirement. In this example, the test with value x3 has greater weight than x1 and therefore appears recommended in the first position.
+
+Ejample:
+```
+❯ teutonget se script,fvarrui
+(x6) teuton.es:sistemas.3/scripting/usermin
+(x1) teuton.en:systems.2/01-install-w10-vbox
+```
+
+In this example, the filter is form by multiple words separated by commas. As result, will be shown tests that contain word 1 or word 2, or both. And appear in order from highest to lowest according to the number of times these words appear in the test metadata.
 
 ## Info
 
