@@ -1,6 +1,6 @@
 require "tty-table"
 require_relative "writer"
-require_relative "../format"
+require_relative "../utils/format"
 
 class TerminalWriter < Writer
   def write(text = "", args = {})

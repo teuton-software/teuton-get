@@ -14,6 +14,10 @@ module TeutonGet
     LocalRepo.new_by_default.create(dirpath)
   end
 
+  def self.download(test_id)
+    Downloader.new.run(test_id)
+  end
+
   def self.init
     RepoConfig.new_by_default.create
     refresh # Auto repo refresh
@@ -37,9 +41,5 @@ module TeutonGet
     searcher = Searcher.new_by_default
     searcher.get(filter)
     searcher.show_result
-  end
-
-  def self.download(test_id)
-    Downloader.new.run(test_id)
   end
 end

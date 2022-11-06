@@ -1,8 +1,8 @@
 require_relative "application"
-require_relative "format"
 require_relative "reader/yaml_reader"
 require_relative "repo/repo_data"
 require_relative "searcher/result"
+require_relative "utils/format"
 require_relative "writer/terminal_writer"
 
 class Searcher

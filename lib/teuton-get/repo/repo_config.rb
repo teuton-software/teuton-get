@@ -1,7 +1,7 @@
 require "fileutils"
 require_relative "../application"
-require_relative "../format"
 require_relative "../reader/inifile_reader"
+require_relative "../utils/format"
 require_relative "../writer/terminal_writer"
 
 class RepoConfig
