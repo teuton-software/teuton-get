@@ -21,6 +21,7 @@ module TeutonGet
     Downloader.new.run(test_id)
   end
 
+  # Create Teuton Repo config file
   def self.init
     RepoConfig.new_by_default.create
     refresh # Auto repo refresh

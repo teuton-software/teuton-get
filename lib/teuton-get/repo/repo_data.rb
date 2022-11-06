@@ -28,7 +28,7 @@ class RepoData
     dirpath = @cache_dirpath
     FileUtils.rm_r(dirpath) if Dir.exist? dirpath
 
-    @dev.writeln "\n==> Refreshing active repos", color: :light_yellow
+    @dev.writeln "\n==> Refreshing active repos"
     @data.keys.sort.each do |key|
       refresh_repo key
     end
@@ -65,7 +65,7 @@ class RepoData
 
   def refresh_repo(reponame)
     unless enabled? reponame
-      @dev.writeln "    \u{2716} Skiping repo #{reponame}"
+      @dev.writeln "    \u{2716} Skiping repo #{reponame}", color: :yellow
       return false
     end
     dirpath = File.join(@cache_dirpath)

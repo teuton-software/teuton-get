@@ -4,6 +4,7 @@ require_relative "../reader/inifile_reader"
 require_relative "../utils/format"
 require_relative "../writer/terminal_writer"
 
+# Create Teuton Repo config file
 class RepoConfig
   attr_reader :data
 
@@ -27,7 +28,7 @@ class RepoConfig
   end
 
   def create
-    @dev.writeln "\n==> Creating configuration files", color: :light_yellow
+    @dev.writeln "\n==> Creating configuration files"
     create_dir
     create_ini_file
   end
@@ -56,12 +57,12 @@ class RepoConfig
   def create_dir
     dirpath = @config_dirpath
     if Dir.exist? dirpath
-      @dev.write "    \u{2716} Exists dir!      : "
-      @dev.writeln dirpath, color: :yellow
+      @dev.write "    \u{2716} Exists dir!      : ", color: :white
+      @dev.writeln dirpath, color: :white
     else
       begin
         FileUtils.mkdir_p(dirpath)
-        @dev.write "    \u{2714} Create dir       : "
+        @dev.write "    \u{2714} Create dir       : ", color: :white
         @dev.writeln dirpath, color: :green
       rescue => e
         @dev.write "    \u{2716} Create dir  ERROR: "
@@ -78,13 +79,13 @@ class RepoConfig
 
   def copyfile(target, dest)
     if File.exist? dest
-      @dev.write "    \u{2716} Exists file!     : "
-      @dev.writeln dest, color: :yellow
+      @dev.write "    \u{2716} Exists file!     : ", color: :white
+      @dev.writeln dest, color: :white
       return true
     end
     begin
       FileUtils.cp(target, dest)
-      @dev.write "    \u{2714} Create file      : "
+      @dev.write "    \u{2714} Create file      : ", color: :white
       @dev.writeln dest, color: :green
     rescue => e
       @dev.write "    \u{2716} Create file ERROR: "
