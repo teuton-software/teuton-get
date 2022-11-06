@@ -4,9 +4,9 @@
 
 Find and download local or remote test files.
 
-1. [Search](|search)
-2. [Info]
-3. [Download]
+1. [Search](#1-search)
+2. [Info](#2-info)
+3. [Download](#3-download)
 
 ## 1. Search
 
@@ -15,6 +15,15 @@ At first we need to locate the test according to some criterios.
 ```
 teutonget search FILTER
 ```
+
+| Command               | Description |
+| --------------------- | ----------- |
+| teutonget search TEXT | Find test that contains TEXT |
+| teutonget search :TEXT | |
+| teutonget search ALL:TEXT | |
+| teutonget search TEXT1,TEXT2 | Find test that contains TEXT1 or TEXT2 |
+| teutonget search REPONAME:TEXT | Find test from REPONAME, that contains TEXT f|
+| teutonget search REPONAME:ALL | Find all test from REPONAME |
 
 Example:
 
