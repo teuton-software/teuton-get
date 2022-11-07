@@ -6,6 +6,6 @@ namespace :devel do
       return
     end
     puts "[INFO] Creating launcher into /usr/local/bin"
-    system("cp files/teutonget '/usr/local/bin/teutonget'")
+    system("sudo cp tasks/files/teutonget '/usr/local/bin/teutonget'")
   end
 end
