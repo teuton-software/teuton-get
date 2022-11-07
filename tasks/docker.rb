@@ -1,4 +1,3 @@
-# NO USED
 namespace :docker do
   desc "Build docker image"
   task :build do

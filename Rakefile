@@ -3,6 +3,7 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 require_relative "tasks/devel"
+require_relative "tasks/docker"
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
@@ -13,4 +14,3 @@ end
 require "standard/rake"
 
 task default: %i[test standard]
-
