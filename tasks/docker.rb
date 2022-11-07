@@ -2,9 +2,9 @@ namespace :docker do
   desc "Build docker image"
   task :build do
     puts "[INFO] Building docker image..."
-    DOCKER_IMAGE = "dvarrui/teuton-get"
-    system "docker rmi #{DOCKER_IMAGE}"
-    system "docker build -t #{DOCKER_IMAGE} install/docker/"
+    image = "dvarrui/teuton-get"
+    system "docker rmi #{image}"
+    system "docker build -t #{image} install/docker/"
   end
 
   desc "Push docker"
