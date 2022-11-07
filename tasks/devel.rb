@@ -1,4 +1,3 @@
-# NO USED
 namespace :devel do
   desc "Create launcher"
   task :launcher do
