@@ -1,3 +1,4 @@
+# Workflow disabled
 name: Ruby
 
 on: [push]
