@@ -1,3 +1,5 @@
+require "test/unit"
+
 class CommandTest < Test::Unit::TestCase
   def test_teuton_get_help
     output = `teutonget help`
