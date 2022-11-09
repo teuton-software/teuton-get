@@ -20,13 +20,14 @@
 
 ## Example
 
-* Search and download test:
+* Search test and show details:
+
+![](docs/images/teutonget-info.png)
+
+* Download test:
 
 ![](docs/images/teutonget-download.png)
 
-* Refresh repos and show test details:
-
-![](docs/images/teutonget-info.png)
 
 # Contact
 
