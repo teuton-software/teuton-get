@@ -1,5 +1,8 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env bash
 
-require_relative "lib/teuton-get/cli"
+HOME=/home/$(whoami)
+RUBY=$HOME/.rbenv/versions/$(cat .ruby-version)/bin/ruby
+FOLDER=proy/repos/teuton.d/teuton-get
+APP=$HOME/$FOLDER/bin/teutonget
 
-CLI.start(ARGV)
+$RUBY $APP $1 $2
