@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-HOME=/home/$(whoami)
-RUBY=$HOME/.rbenv/versions/$(cat .ruby-version)/bin/ruby
-FOLDER=proy/repos/teuton.d/teuton-get
-APP=$HOME/$FOLDER/bin/teutonget
-
-$RUBY $APP $1 $2
