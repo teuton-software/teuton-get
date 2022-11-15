@@ -1,10 +1,9 @@
 PATH
   remote: .
   specs:
-    teuton-get (0.1.0)
+    teuton-get (0.2.1)
       colorize (~> 0.8.1)
       inifile (~> 3.0)
-      pastel (~> 0.8)
       thor (~> 1.1)
       tty-prompt (~> 0.23)
       tty-table (~> 0.12)
