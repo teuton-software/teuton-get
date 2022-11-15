@@ -15,11 +15,14 @@
 # Use
 
 1. `teutonget init`, at first, create config file.
-1. `teutonget search FILTER`. then, search tests. Example: `teutonget search linux`, will show a list with "linux" related tests.
+1. `teutonget search FILTER`. then, search tests.
 1. `teutonget download REPONAME:TESTPATH`, download test files.
+
+> Example: `teutonget search linux`, will show a list of tests related to "linux".
 
 ## Example
 
+* Create config files with `teutonget. init`
 * Search test and show details:
 
 ![](docs/images/teutonget-info.png)
