@@ -58,6 +58,12 @@ class RepoData
 
   def database_filename
     # REVISE: Used by teutonget search... replace by #get()
+    unless Dir.exist? @cache_dirpath
+      puts "    [WARN] Create Teuton config files!"
+      puts "    Usage: teutonget init"
+      exit 1
+    end
+
     File.join(@cache_dirpath, "database.yaml")
   end
 
