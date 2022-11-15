@@ -1,3 +1,7 @@
+## [0.2.2] - 2022-11-15
+
+- FIX BUG: Advise user when try to read information before create config files.
+
 ## [0.2.1] - 2022-11-05
 
 - FIX BUG: Create directories when download test with "folder/subfolder/files".
