@@ -65,12 +65,15 @@ Example:
 
 ```
 [REPONAME]
+type = teutontest
 description = WRITE REPO DESCRIPTION
 URL = https://write.here/your/repo/url
 enable = true
 ```
 
 * Run `teutonget repos` to check configuration.
+
+> Every repo is showed with different color automatically.
 
 ## 4. Configure local repository
 
@@ -85,6 +88,7 @@ Example:
 
 ```
 [LOCALREPONAME]
+type = teutontest
 description = WRITE LOCAL REPO DESCRIPTION
 URL = /path/to/your/local/repo/folder
 enable=true

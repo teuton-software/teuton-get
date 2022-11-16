@@ -1,6 +1,8 @@
+
 ## [0.2.2] - 2022-11-15
 
 - FIX BUG: Advise user when try to read information before create config files.
+- Main command: teutonget and teuton-get.
 
 ## [0.2.1] - 2022-11-05
 
@@ -16,5 +18,5 @@
 
 ## TODO
 
-- Main command: teutonget and teuton-get.
+- Simplified TESTID. When search, info an download, we need TESTID to uniquely identify one TEST among all. FILTER is not enough. Propose: when FILTER only returns one TEST (REPONAME:PATH) we will use this without requiring TESTID.
 - Sanityze text input for YAML content file.
