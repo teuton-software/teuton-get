@@ -18,11 +18,11 @@
 1. `teutonget search FILTER`. then, search tests.
 1. `teutonget download REPONAME:TESTPATH`, download test files.
 
-> Example: `teutonget search linux`, will show a list of tests related to "linux".
+## Examples
 
-## Example
+**Example 1: search and download**
 
-* Create config files with `teutonget. init`
+* Create config files with `teutonget init`
 * Search test and show details:
 
 ![](docs/images/teutonget-info.png)
@@ -31,6 +31,11 @@
 
 ![](docs/images/teutonget-download.png)
 
+**Example 2: Locate TEST ID**
+
+Teuton test ID (TESTID) is `REPONAME:TESTPATH`.
+
+![](docs/images/teutonget-search-debian.png)
 
 # Contact
 
