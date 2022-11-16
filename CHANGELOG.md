@@ -19,4 +19,5 @@
 ## TODO
 
 - Simplified TESTID. When search, info an download, we need TESTID to uniquely identify one TEST among all. FILTER is not enough. Propose: when FILTER only returns one TEST (REPONAME:PATH) we will use this without requiring TESTID.
+- teuton repos must first check if config files exits. If not then show warning or auto create.
 - Sanityze text input for YAML content file.
