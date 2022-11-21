@@ -6,56 +6,59 @@ require_relative "version"
 require_relative "../teuton-get"
 
 class CLI < Thor
-  map ["h", "-h", "--help"] => "help"
+  map ["-help", "--help"] => "help"
 
-  map ["v", "-v", "--version"] => "version"
+  map ["-version", "--version"] => "version"
   desc "version", "Show the program version"
 
   def version
     puts "#{Version::EXECUTABLE} (version #{Version::VERSION})"
   end
 
-  map ["ci", "-ci", "--create-info"] => "create_info"
+  map ["ci", "-ci", "--create-info", "create-info"] => "create_info"
   desc "create-info [DIRPATH]", "Create info data for Teuton test"
   long_desc <<-LONGDESC
-  Create info data for Teuton test.
+    Create info data for Teuton test. Example: "teutonget create-info systems.1/02-opensuse-conf"
   LONGDESC
+
   def create_info(testpath)
     TeutonGet.create_info(testpath)
   end
 
-  map ["i", "-i", "--info"] => "info"
-  desc "info TESTID", "Show info data for Teuton test"
-  long_desc <<-LONGDESC
-  Show info data for Teuton test.
-  LONGDESC
-  def info(test_id)
-    TeutonGet.show_info(test_id)
-  end
-
-  map ["cr", "-cr", "--create-repo"] => "create_repo"
+  map ["cr", "-cr", "--create-repo", "create-repo"] => "create_repo"
   desc "create-repo", "Create repo into current directory"
   long_desc <<-LONGDESC
-  Create index from SOURCE directory.
+    Create index from SOURCE directory. Example: "teutonget create-repo"
   LONGDESC
   def create_repo
     TeutonGet.create_repo(".")
   end
 
-  map ["i", "-i", "--init"] => "init"
+  map ["--init"] => "init"
   desc "init", "Create ini config file"
   long_desc <<-LONGDESC
-    Create ini config file
+    Create ini config file. Example: "teutonget init"
   LONGDESC
   def init
     TeutonGet.init
   end
 
+  map ["i", "-i", "--info"] => "info"
+  desc "info TESTID", "Show info data for Teuton test"
+  long_desc <<-LONGDESC
+    Show info data for Teuton test. Example: "teutonget info teuton.en:systems.1/02-opensuse-conf"
+  LONGDESC
+
+  def info(test_id)
+    TeutonGet.show_info(test_id)
+  end
+
   map ["--repos"] => "repos"
   desc "repos", "Show repo list"
   long_desc <<-LONGDESC
-    Show repo list.
+    Show repo list. Example: "teutonget repos"
   LONGDESC
+
   def repos
     TeutonGet.show_repo_list
   end
@@ -63,7 +66,7 @@ class CLI < Thor
   map ["r", "-r", "--refresh"] => "refresh"
   desc "refresh", "Synchronize list of available tests."
   long_desc <<-LONGDESC
-    Synchronize list of tests available.
+    Synchronize list of tests available. Example: "teutonget refresh"
   LONGDESC
   def refresh
     TeutonGet.refresh
@@ -72,16 +75,16 @@ class CLI < Thor
   map ["s", "-s", "--search"] => "search"
   desc "search [REPONAME:]FILTER", "Search Teuton test with FILTER"
   long_desc <<-LONGDESC
-  Search Teuton test with FILTER.
+    Search Teuton test using FILTER. Example: "teutonget search opensuse"
   LONGDESC
   def search(filter)
     TeutonGet.search(filter)
   end
 
-  map ["d", "-d", "--download"] => "download"
+  map ["d", "-d", "--download", "clone", "--clone"] => "download"
   desc "download TESTID", "Download Teuton test"
   long_desc <<-LONGDESC
-    Download Teuton test. Example: "teutonget main@system/opensuse"
+    Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
   def download(testname)
     TeutonGet.download(testname)

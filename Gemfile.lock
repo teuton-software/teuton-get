@@ -1,10 +1,11 @@
 PATH
   remote: .
   specs:
-    teuton-get (0.2.1)
-      colorize (~> 0.8.1)
+    teuton-get (0.2.2)
+      colorize (~> 0.8)
       inifile (~> 3.0)
-      thor (~> 1.1)
+      thor (~> 1.2)
+      tty-progressbar (~> 0.18)
       tty-prompt (~> 0.23)
       tty-table (~> 0.12)
 
@@ -20,40 +21,45 @@ GEM
       ast (~> 2.4.1)
     pastel (0.8.0)
       tty-color (~> 0.5)
-    power_assert (2.0.1)
+    power_assert (2.0.2)
     rainbow (3.1.1)
     rake (13.0.6)
-    regexp_parser (2.5.0)
+    regexp_parser (2.6.1)
     rexml (3.2.5)
-    rubocop (1.35.0)
+    rubocop (1.39.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.20.1, < 2.0)
+      rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.21.0)
+    rubocop-ast (1.23.0)
       parser (>= 3.1.1.0)
-    rubocop-performance (1.14.3)
+    rubocop-performance (1.15.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
-    standard (1.16.0)
-      rubocop (= 1.35.0)
-      rubocop-performance (= 1.14.3)
+    standard (1.18.0)
+      rubocop (= 1.39.0)
+      rubocop-performance (= 1.15.0)
     strings (0.2.1)
       strings-ansi (~> 0.2)
       unicode-display_width (>= 1.5, < 3.0)
       unicode_utils (~> 1.4)
     strings-ansi (0.2.0)
-    test-unit (3.5.3)
+    test-unit (3.5.5)
       power_assert
     thor (1.2.1)
     tty-color (0.6.0)
     tty-cursor (0.7.1)
+    tty-progressbar (0.18.2)
+      strings-ansi (~> 0.2)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      unicode-display_width (>= 1.6, < 3.0)
     tty-prompt (0.23.1)
       pastel (~> 0.8)
       tty-reader (~> 0.8)
@@ -66,12 +72,12 @@ GEM
       pastel (~> 0.8)
       strings (~> 0.2.0)
       tty-screen (~> 0.8)
-    unicode-display_width (2.2.0)
+    unicode-display_width (2.3.0)
     unicode_utils (1.4.0)
     wisper (2.0.1)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   rake (~> 13.0)
@@ -80,4 +86,4 @@ DEPENDENCIES
   teuton-get!
 
 BUNDLED WITH
-   2.1.4
+   2.3.18

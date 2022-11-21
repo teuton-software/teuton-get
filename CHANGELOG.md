@@ -1,4 +1,7 @@
 
+- Add gem tty-progress
+- Update gems version 
+
 ## [0.2.2] - 2022-11-15
 
 - FIX BUG: Advise user when try to read information before create config files.
@@ -23,4 +26,3 @@
 - show last refresh timestamp: Perhaps... teuton [search|info] FILTER could show this last refresh timestamp just to advise user... hey!, it's time to refresh!
 - Sanityze text input for YAML content file.
 - download como git clone: crear carpeta con el nombre del repo. Si existe advierte del error. O parámetro con un nombre diferente.
-
