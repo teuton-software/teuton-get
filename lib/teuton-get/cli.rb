@@ -86,6 +86,7 @@ class CLI < Thor
   long_desc <<-LONGDESC
     Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
+
   def download(testname)
     TeutonGet.download(testname)
   end
