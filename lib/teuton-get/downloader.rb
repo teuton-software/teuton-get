@@ -57,9 +57,7 @@ class Downloader
   end
 
   def download(reponame, url, path, files)
-    # @dev.writeln "==> Downloading '#{path}' from repo '#{reponame}'...", color: :white
-    info = "#{reponame}:#{path}"
-    bar = TTY::ProgressBar.new("==> Download: #{info} [:bar] :percent", total: files.size, bar_format: :block)
+    bar = TTY::ProgressBar.new("==> Progress [:bar] :percent", total: files.size, bar_format: :block)
 
     localpath = path.tr("/", "_")
     FileUtils.mkdir(localpath) unless File.exist? localpath
@@ -72,6 +70,6 @@ class Downloader
       out.write(URLReader.new(uri).read)
       out.close
     end
-    @dev.writeln "==> Download: OK", color: :white
+    @dev.writeln "==> Download OK", color: :white
   end
 end
