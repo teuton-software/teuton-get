@@ -83,7 +83,7 @@ class CLI < Thor
 
   map ["d", "-d", "--download", "clone", "--clone"] => "download"
   desc "download TESTID", "Download Teuton test"
-  option :dir
+  option :dirname, type: :string
   long_desc <<-LONGDESC
     Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
