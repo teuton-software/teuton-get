@@ -22,3 +22,5 @@
 - Auto create config files: teuton repos must first check if config files exits. If not then show warning or auto create.
 - show last refresh timestamp: Perhaps... teuton [search|info] FILTER could show this last refresh timestamp just to advise user... hey!, it's time to refresh!
 - Sanityze text input for YAML content file.
+- download como git clone: crear carpeta con el nombre del repo. Si existe advierte del error. O parámetro con un nombre diferente.
+
