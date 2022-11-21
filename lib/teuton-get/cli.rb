@@ -82,13 +82,13 @@ class CLI < Thor
   end
 
   map ["d", "-d", "--download", "clone", "--clone"] => "download"
+  # option :dirname # FIXME
   desc "download TESTID", "Download Teuton test"
-  option :dirname, type: :string
   long_desc <<-LONGDESC
     Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
-
   def download(testname)
-    TeutonGet.download(testname)
+    puts options unless options.empty?
+    TeutonGet.download(testname, options)
   end
 end

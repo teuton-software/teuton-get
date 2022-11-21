@@ -23,13 +23,37 @@
 **Example 1: search and download**
 
 * Create config files with `teutonget init`
+
+```
+sh-5.2$ teutonget init
+
+==> Creating configuration files
+    ✔ Create dir       : /home/quigon/.config/teuton
+    ✔ Create file      : /home/quigon/.config/teuton/repos.ini
+
+==> Refreshing active repos
+    ✔ Repo teuton.en (10 tests)
+    ✔ Repo teuton.es (4 tests)
+sh-5.2$
+```
+
 * Search test and show details:
 
-![](docs/images/teutonget-info.png)
+```
+sh-5.2$ teutonget search usermin
+(x3) teuton.es:sistemas.3/scripting/usermin
+
+```
 
 * Download test:
 
-![](docs/images/teutonget-download.png)
+```
+sh-5.2$ teutonget download teuton.es:sistemas.3/scripting/usermin
+
+==> Progress [█████████████████████] 100%
+==> Download OK
+sh-5.2$
+```
 
 **Example 2: Locate TEST ID**
 
