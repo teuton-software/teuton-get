@@ -17,7 +17,7 @@ module TeutonGet
   end
 
   # Download remote teuton test
-  def self.download(test_id)
+  def self.download(test_id, options)
     Downloader.new.run(test_id)
   end
 

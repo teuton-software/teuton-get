@@ -26,9 +26,10 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 2.5.9"
 
   s.add_runtime_dependency "inifile", "~> 3.0"
-  s.add_runtime_dependency "colorize", "~> 0.8.1"
+  s.add_runtime_dependency "colorize", "~> 0.8"
   # s.add_runtime_dependency "pastel", "~> 0.8"
+  s.add_runtime_dependency "tty-progressbar", "~> 0.18"
   s.add_runtime_dependency "tty-prompt", "~> 0.23"
   s.add_runtime_dependency "tty-table", "~> 0.12"
-  s.add_runtime_dependency "thor", "~> 1.1"
+  s.add_runtime_dependency "thor", "~> 1.2"
 end

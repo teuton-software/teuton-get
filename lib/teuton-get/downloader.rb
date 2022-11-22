@@ -1,4 +1,5 @@
 require "fileutils"
+require "tty-progressbar"
 require_relative "writer/file_writer"
 require_relative "writer/terminal_writer"
 require_relative "reader/inifile_reader"
@@ -56,16 +57,19 @@ class Downloader
   end
 
   def download(reponame, url, path, files)
-    @dev.writeln "==> Downloading '#{path}' from repo '#{reponame}'...", color: :light_yellow
+    bar = TTY::ProgressBar.new("==> Progress [:bar] :percent", total: files.size, bar_format: :block)
+
     localpath = path.tr("/", "_")
     FileUtils.mkdir(localpath) unless File.exist? localpath
     files.each do |filename|
-      @dev.writeln "==> File: #{filename} ", color: :white
+      bar.advance
+
       uri = "#{url}/#{path}/#{filename}"
       out = FileWriter.new
       out.open(File.join(localpath, filename))
       out.write(URLReader.new(uri).read)
       out.close
     end
+    @dev.writeln "==> Download OK", color: :white
   end
 end
