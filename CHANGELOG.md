@@ -1,4 +1,9 @@
 
+## [0.2.4] - 2022-11-25
+
+- Require ruby version >= 3.0.4
+- Upgrade thor gem. Older version showed deprecated warning.
+
 ## [0.2.3] - 2022-11-22
 
 - teuton search output format.
