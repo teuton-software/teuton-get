@@ -5,6 +5,6 @@ namespace :devel do
       puts "[WARN] Exist file /usr/local/bin/teutonget!"
     end
     puts "[INFO] Creating launcher into /usr/local/bin"
-    system("sudo cp tasks/files/teutonget '/usr/local/bin/teutonget'")
+    system("sudo cp tasks/files/teutonget /usr/local/bin/teutonget")
   end
 end
