@@ -33,7 +33,7 @@ class Searcher
 
   def show_result
     @results.each do |i|
-      @dev.write "(x#{i[:score]}) ", color: :white
+      @dev.write ("(x%02d) " % i[:score]), color: :white
       reponame = TeutonGet::Format.colorize(i[:reponame], i[:repoindex])
       @dev.writeln "#{reponame}#{Application::SEPARATOR}#{i[:testname]}"
     end
