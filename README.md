@@ -1,4 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/teuton-get.svg)](https://badge.fury.io/rb/teuton-get)
+![GitHub](https://img.shields.io/github/license/dvarrui/teuton-get)
+![Gem](https://img.shields.io/gem/dv/teuton-get/0.2.4)
 
 # Teuton-Get
 
