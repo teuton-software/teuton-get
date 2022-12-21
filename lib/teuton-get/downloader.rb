@@ -70,6 +70,6 @@ class Downloader
       out.write(URLReader.new(uri).read)
       out.close
     end
-    @dev.writeln "==> Download OK", color: :white
+    @dev.writeln "==> Download finished", color: :white
   end
 end

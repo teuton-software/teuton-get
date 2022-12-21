@@ -1,8 +1,8 @@
+# Teuton-Get
+
 [![Gem Version](https://badge.fury.io/rb/teuton-get.svg)](https://badge.fury.io/rb/teuton-get)
 ![GitHub](https://img.shields.io/github/license/dvarrui/teuton-get)
 ![Gem](https://img.shields.io/gem/dv/teuton-get/0.2.4)
-
-# Teuton-Get
 
 * Find and download _Teuton Tests_ from remote or local repositories.
 * Create _Teuton Test_ repository.
@@ -11,21 +11,15 @@
 
 # Installation
 
-1. Install Ruby on your system.
-1. `gem install teuton-get`, to install **teuton-get** gem.
+First install Ruby, then:
 
-# Use
+```
+gem install teuton-get
+```
 
-1. `teutonget init`, at first, create config file.
-1. `teutonget refresh`, to refresh repo catalog.
-1. `teutonget search FILTER`. then, search tests.
-1. `teutonget download REPONAME:TESTPATH`, download test files.
+# Usage
 
-## Examples
-
-**Example 1: search and download**
-
-* Create config files:
+* At first, **create config file**.
 
 ```
 > teutonget init
@@ -35,7 +29,7 @@
     ✔ Create file      : /home/quigon/.config/teuton/repos.ini
 ```
 
-* Refresh repo catalog:
+* **Refresh** repo catalog, from time to time:
 
 ```
 > teutonget refresh
@@ -45,14 +39,14 @@
     ✔ Repo teuton.es (4 tests)
 ```
 
-* Search test:
+* **Search** test related with "usermin":
 
 ```
 > teutonget search usermin
 (x3) teuton.es:sistemas.3/scripting/usermin
 ```
 
-* Show details:
+* Take a look at **test info**:
 
 ```
 > teutonget info teuton.es:sistemas.3/scripting/usermin
@@ -65,24 +59,18 @@ tags    : script, usuario, crear, consultar, listar, eliminar
 files   : INSTALL.md, README.md, bin/docker.run, bin/up_environ.sh, config.yaml, lib/docker/consultar.rb, lib/docker/eliminar.rb, lib/docker/help.rb, lib/docker/listar.rb, lib/docker/nuevo.rb, lib/vm/consultar.rb, lib/vm/eliminar.rb, lib/vm/help.rb, lib/vm/listar.rb, lib/vm/nuevo.rb, start.rb, tt-info.yaml, vagrant/install-software.sh, vagrant/profesor.rb, vm.rb, vm.yaml
 ```
 
-* Download test:
+* **Download test** "teuton.es:sistemas.3/scripting/usermin":
 
 ```
 > teutonget download teuton.es:sistemas.3/scripting/usermin
 
 ==> Progress [█████████████████████] 100%
-==> Download OK
+==> Download finished
 ```
 
-**Example 2: Locate TEST ID**
-
-Teuton test ID (TESTID) is `REPONAME:TESTPATH`.
+**Example:** Locate TEST_ID for "debian" related tests.
 
 ![](docs/images/teutonget-search-debian.png)
-
-# Contact
-
-* **Email**: `teuton.software@protonmail.com`
 
 # Documentation
 
@@ -90,3 +78,7 @@ Teuton test ID (TESTID) is `REPONAME:TESTPATH`.
 * [Get](docs/get.md)
 * [Repository](docs/repo.md)
 * [Commands](docs/commands.md)
+
+# Contact
+
+* **Email**: `teuton.software@protonmail.com`
