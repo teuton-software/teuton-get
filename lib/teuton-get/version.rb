@@ -1,6 +1,6 @@
 module Version
   NAME = "teuton-get"
   EXECUTABLE = "teutonget"
-  VERSION = "0.2.5"
+  VERSION = "0.2.6"
   HOMEPAGE = "https://github.com/teuton-software/#{NAME}"
 end

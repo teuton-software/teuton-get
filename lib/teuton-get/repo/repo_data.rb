@@ -114,7 +114,11 @@ class RepoData
 
   def get_local_database(dirpath)
     filepath = File.join(dirpath, Application::INDEXFILENAME)
-    @reader.read(filepath)
+    # @reader.read(filepath) # FIXME
+    YAML.safe_load(
+      File.read(filepath),
+      permitted_classes: [Array, Date, Hash, Symbol]
+    )
   end
 
   def get_remote_database(url_repo)
