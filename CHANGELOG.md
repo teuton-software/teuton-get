@@ -1,3 +1,15 @@
+
+-- activar salida --format=json (search, info, repos)
+-- activar opción --no-color en todo
+-- repos.ini en la raiz
+-- init descarga fichero de la central
+-- init -> refresh -> search
+-- refresh alias? update
+-- download alias pull
+-- create_info añade datos si ya existe el yaml
+-- create-info sin argumentos asume el .
+-- teutonget info nombre-incompleto pero único lo acepta
+
 ## [0.2.6] - 2023-02-25
 
 - FIX: refresh local repo
