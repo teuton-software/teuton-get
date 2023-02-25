@@ -6,6 +6,6 @@ class RepoConfigTest < Test::Unit::TestCase
     r = RepoConfig.new_by_default
 
     assert_equal Hash, r.data.class
-    assert_equal 2, r.data.size
+    assert_equal 3, r.data.size
   end
 end
