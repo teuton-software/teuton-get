@@ -9,6 +9,7 @@
 -- create_info añade datos si ya existe el yaml
 -- create-info sin argumentos asume el .
 -- teutonget info nombre-incompleto pero único lo acepta
+- teutonget version
 
 ## [0.2.6] - 2023-02-25
 
