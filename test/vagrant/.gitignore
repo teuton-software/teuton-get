@@ -1,0 +1,4 @@
+.vagrant
+.ruby-version
+*.gem
+*.sh
