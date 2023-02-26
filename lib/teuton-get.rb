@@ -4,7 +4,6 @@ require_relative "teuton-get/repo/repo_config"
 require_relative "teuton-get/repo/repo_data"
 require_relative "teuton-get/searcher"
 require_relative "teuton-get/downloader"
-require "debug"
 
 module TeutonGet
   # Create metadata for local user teuton test
