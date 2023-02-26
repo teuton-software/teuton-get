@@ -35,11 +35,13 @@ class CLI < Thor
   end
 
   map ["--init"] => "init"
+  option :color, type: :boolean
   desc "init", "Create ini config file"
   long_desc <<-LONGDESC
     Create ini config file. Example: "teutonget init"
   LONGDESC
   def init
+    TeutonGet::Format.disable if options["color"]  == false
     TeutonGet.init
   end
 
@@ -48,8 +50,8 @@ class CLI < Thor
   long_desc <<-LONGDESC
     Show info data for Teuton test. Example: "teutonget info teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
-
   def info(test_id)
+    TeutonGet::Format.disable if options["--no-color"]
     TeutonGet.show_info(test_id)
   end
 
@@ -63,7 +65,7 @@ class CLI < Thor
     TeutonGet.show_repo_list
   end
 
-  map ["r", "-r", "--refresh"] => "refresh"
+  map ["r", "-r", "--refresh", "--update", "update"] => "refresh"
   desc "refresh", "Synchronize list of available tests."
   long_desc <<-LONGDESC
     Synchronize list of tests available. Example: "teutonget refresh"
@@ -81,14 +83,14 @@ class CLI < Thor
     TeutonGet.search(filter)
   end
 
-  map ["d", "-d", "--download", "clone", "--clone"] => "download"
+  map ["d", "-d", "--download", "pull", "--pull"] => "download"
+  # option :color, type: :boolean
   # option :dirname # FIXME
   desc "download TESTID", "Download Teuton test"
   long_desc <<-LONGDESC
     Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
   def download(testname)
-    puts options unless options.empty?
     TeutonGet.download(testname, options)
   end
 end
