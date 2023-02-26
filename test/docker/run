@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+APPNAME=teutonget
+export $APPNAME
+SCRIPT="/bin/bash"
+DOCKER_NAME=$APPNAME
+DOCKER_IMAGE=dvarrui/scrapping-ruby
+
+build_docker() {
+  echo "==> Building docker image: $DOCKER_IMAGE"
+  docker build -t $DOCKER_IMAGE .
+}
+
+run_docker() {
+  docker run -it --rm --name $DOCKER_NAME -v "$PWD":/opt -w /opt $DOCKER_IMAGE $SCRIPT $1 $2
+}
+
+run_local() {
+  ruby $SCRIPT $1 $2
+}
+
+start_service() {
+  echo "==> Starting docker service..."
+  sudo systemctl start docker
+  systemctl is-active docker
+}
+
+show_help() {
+  echo "Usage: $0 [FUNCTION]"
+  echo ""
+  echo "local    Run script on local machine"
+  echo "start    Start docker service"
+  echo "docker   Run script into docker container"
+  echo "build    Build docker image"
+  echo "zip      Zip output data (csv and images)"
+  echo ""
+  echo "Output: Data saved into data/*.csv file"
+}
+
+zip_data() {
+  zip -r data/images.zip data/images
+}
+
+case $1 in
+  "build" )
+     build_docker;;
+  "docker" )
+     run_docker $2 $3;;
+  "local" )
+     run_local $2 $3;;
+  "start" )
+     start_service;;
+  "zip" )
+     zip_data;;
+  *)
+     show_help;;
+esac
