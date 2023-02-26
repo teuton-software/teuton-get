@@ -1,0 +1,21 @@
+#####################################################
+# DONT CHANGE THESE ATTRIBUTES (Created by teutonget)
+#
+version: 1
+type: teutontest
+
+#########################################################
+# UPDATE THESE VALUES (Keep names and update their values
+#
+name: foo
+author: david
+date: 2023-02-25
+desc: Write your description
+tags:
+- Write your
+- comma separated
+- tags
+
+###################################
+# Custom attributes after this line
+#

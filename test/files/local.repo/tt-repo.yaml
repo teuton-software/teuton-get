@@ -1,0 +1,15 @@
+foo:
+  version: 1
+  type: teutontest
+  name: foo
+  author: david
+  date: 2023-02-25
+  desc: Write your description
+  tags:
+  - Write your
+  - comma separated
+  - tags
+  files:
+  - config.yaml
+  - start.rb
+  - tt-info.yaml
