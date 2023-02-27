@@ -41,7 +41,7 @@ class CLI < Thor
     Create ini config file. Example: "teutonget init"
   LONGDESC
   def init
-    TeutonGet::Format.disable if options["color"]  == false
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.init
   end
 

@@ -5,7 +5,7 @@ module TeutonGet
     COLORS = [:light_blue, :light_magenta, :light_cyan, :red, :green, :yellow]
 
     def self.disable
-      String.disable_colorization = true 
+      String.disable_colorization = true
     end
 
     def self.colorize(text = "", option = nil)
