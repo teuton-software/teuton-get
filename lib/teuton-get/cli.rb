@@ -23,7 +23,6 @@ class CLI < Thor
   LONGDESC
 
   def create_info(testpath)
-    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_info(testpath)
   end
 
@@ -34,7 +33,6 @@ class CLI < Thor
     Create index from SOURCE directory. Example: "teutonget create-repo"
   LONGDESC
   def create_repo
-    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_repo(".")
   end
 
@@ -45,7 +43,6 @@ class CLI < Thor
     Create inital configuration files. Example: "teutonget init"
   LONGDESC
   def init
-    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.init
   end
 
