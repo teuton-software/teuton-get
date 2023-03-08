@@ -1,15 +1,17 @@
 
 -- activar salida --format=json (search, info, repos)
--- activar opción --no-color en todo
 -- repos.ini en la raiz
 -- init descarga fichero de la central
 -- init -> refresh -> search
--- refresh alias? update
--- download alias pull
 -- create_info añade datos si ya existe el yaml
 -- create-info sin argumentos asume el .
--- teutonget info nombre-incompleto pero único lo acepta
-- teutonget version
+-- teutonget show nombre-incompleto pero único lo acepta
+-- teutonget version
+
+## [0.2.7] - 2023-02-26
+
+-- new alias: update -> refresh, pull -> download, info -> show
+-- enable/disable color output
 
 ## [0.2.6] - 2023-02-25
 

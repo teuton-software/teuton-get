@@ -46,10 +46,10 @@ gem install teuton-get
 (x3) teuton.es:sistemas.3/scripting/usermin
 ```
 
-* Take a look at **test info**:
+* **Show** test info:
 
 ```
-> teutonget info teuton.es:sistemas.3/scripting/usermin
+> teutonget show teuton.es:sistemas.3/scripting/usermin
 
 name    : usermin
 author  : fvarrui, dvarrui

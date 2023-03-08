@@ -16,21 +16,25 @@ class CLI < Thor
   end
 
   map ["ci", "-ci", "--create-info", "create-info"] => "create_info"
+  option :color, type: :boolean
   desc "create-info [DIRPATH]", "Create info data for Teuton test"
   long_desc <<-LONGDESC
     Create info data for Teuton test. Example: "teutonget create-info systems.1/02-opensuse-conf"
   LONGDESC
 
   def create_info(testpath)
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_info(testpath)
   end
 
   map ["cr", "-cr", "--create-repo", "create-repo"] => "create_repo"
+  option :color, type: :boolean
   desc "create-repo", "Create repo into current directory"
   long_desc <<-LONGDESC
     Create index from SOURCE directory. Example: "teutonget create-repo"
   LONGDESC
   def create_repo
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_repo(".")
   end
 
@@ -38,59 +42,67 @@ class CLI < Thor
   option :color, type: :boolean
   desc "init", "Create ini config file"
   long_desc <<-LONGDESC
-    Create ini config file. Example: "teutonget init"
+    Create inital configuration files. Example: "teutonget init"
   LONGDESC
   def init
     TeutonGet::Format.disable if options["color"] == false
     TeutonGet.init
   end
 
-  map ["i", "-i", "--info"] => "info"
-  desc "info TESTID", "Show info data for Teuton test"
+  map ["i", "-i", "--info", "info", "--show"] => "show"
+  option :color, type: :boolean
+  desc "show TESTID", "Show info data for Teuton test"
   long_desc <<-LONGDESC
     Show info data for Teuton test. Example: "teutonget info teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
-  def info(test_id)
+  def show(test_id)
     TeutonGet::Format.disable if options["--no-color"]
     TeutonGet.show_info(test_id)
   end
 
   map ["--repos"] => "repos"
+  option :color, type: :boolean
   desc "repos", "Show repo list"
   long_desc <<-LONGDESC
     Show repo list. Example: "teutonget repos"
   LONGDESC
 
   def repos
+    TeutonGet::Format.disable if options["--no-color"]
     TeutonGet.show_repo_list
   end
 
   map ["r", "-r", "--refresh", "--update", "update"] => "refresh"
+  option :color, type: :boolean
   desc "refresh", "Synchronize list of available tests."
   long_desc <<-LONGDESC
     Synchronize list of tests available. Example: "teutonget refresh"
   LONGDESC
   def refresh
+    TeutonGet::Format.disable if options["--no-color"]
     TeutonGet.refresh
   end
 
   map ["s", "-s", "--search"] => "search"
+  option :color, type: :boolean
   desc "search [REPONAME:]FILTER", "Search Teuton test with FILTER"
   long_desc <<-LONGDESC
     Search Teuton test using FILTER. Example: "teutonget search opensuse"
   LONGDESC
   def search(filter)
+    TeutonGet::Format.disable if options["--no-color"]
     TeutonGet.search(filter)
   end
 
   map ["d", "-d", "--download", "pull", "--pull"] => "download"
-  # option :color, type: :boolean
+  option :color, type: :boolean
   # option :dirname # FIXME
   desc "download TESTID", "Download Teuton test"
   long_desc <<-LONGDESC
     Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
   def download(testname)
+    TeutonGet::Format.disable if options["--no-color"]
     TeutonGet.download(testname, options)
   end
 end
