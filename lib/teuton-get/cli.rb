@@ -96,13 +96,13 @@ class CLI < Thor
 
   map ["d", "-d", "--download", "pull", "--pull"] => "download"
   option :color, type: :boolean
-  # option :dirname # FIXME
+  # option :dirname, type: :string
   desc "download TESTID", "Download Teuton test"
   long_desc <<-LONGDESC
     Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
-  def download(testname)
+  def download(testid)
     TeutonGet::Format.disable if options["--no-color"]
-    TeutonGet.download(testname, options)
+    TeutonGet.download(testid, options)
   end
 end
