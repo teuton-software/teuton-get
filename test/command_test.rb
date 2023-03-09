@@ -5,7 +5,7 @@ class CommandTest < Test::Unit::TestCase
     output = `teutonget help`
     lines = output.split("\n")
 
-    assert(lines.size > 11)
+    assert(lines.size > 10)
   end
 
   def test_teuton_get_version

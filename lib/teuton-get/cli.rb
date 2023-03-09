@@ -17,7 +17,7 @@ class CLI < Thor
 
   map ["ci", "-ci", "--create-info", "create-info"] => "create_info"
   option :color, type: :boolean
-  desc "create-info [DIRPATH]", "Create info data for Teuton test"
+  desc "create-info DIRPATH", "Create info data for Teuton test"
   long_desc <<-LONGDESC
     Create info data for Teuton test. Example: "teutonget create-info systems.1/02-opensuse-conf"
   LONGDESC
@@ -34,13 +34,6 @@ class CLI < Thor
   LONGDESC
   def create_repo
     TeutonGet.create_repo(".")
-  end
-
-  desc "hello NAME", "say hello to NAME"
-  option :from
-  def hello(name)
-    puts "from: #{options[:from]}" if options[:from]
-    puts "Hello #{name}"
   end
 
   map ["d", "-d", "--download", "pull", "--pull"] => "download"
