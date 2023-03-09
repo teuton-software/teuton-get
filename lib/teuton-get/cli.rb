@@ -97,4 +97,9 @@ class CLI < Thor
   def search(filter)
     TeutonGet.search(filter)
   end
+
+  def respond_to_missing?(method_name, include_private = false)
+    # Respond to missing methods name
+    super
+  end
 end
