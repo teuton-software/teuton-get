@@ -7,29 +7,29 @@ require_relative "teuton-get/searcher"
 require_relative "teuton-get/utils/format"
 
 module TeutonGet
-  # Create metadata for local user teuton test
   def self.create_info(testpath)
+    # Create metadata for local user teuton test
     LocalInfo.new.user_create(testpath)
   end
 
-  # Create metadata for local user teuton repository
   def self.create_repo(dirpath)
+    # Create metadata for local user teuton repository
     LocalRepo.new_by_default.create(dirpath)
   end
 
-  # Download remote teuton test
-  def self.download(test_id, options)
-    Downloader.new.run(test_id)
+  def self.download(...)
+    # Download remote teuton test
+    Downloader.new.run(...)
   end
 
-  # Create Teuton Repo config file
   def self.init
+    # Create Teuton Repo config file
     RepoConfig.new_by_default.create
     refresh # Auto repo refresh
   end
 
-  # Refresh Teuton Repo Data
   def self.refresh
+    # Refresh Teuton Repo Data
     RepoData.new_by_default.refresh
   end
 

@@ -5,7 +5,7 @@ require "#{name}/version"
 
 Gem::Specification.new do |s|
   s.name = name
-  s.version = Version::VERSION
+  s.version = TeutonGet::VERSION
   s.summary = "TeutonGet (Teuton Software)"
   s.description = <<-EOF
     Find and download Teuton Test.
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.license = "GPL-3.0"
   s.authors = ["David Vargas Ruiz"]
   s.email = "teuton.software@protonmail.com"
-  s.homepage = Version::HOMEPAGE
+  s.homepage = TeutonGet::HOMEPAGE
 
   s.executables << "teutonget"
   s.executables << "teuton-get"

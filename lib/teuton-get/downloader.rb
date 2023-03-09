@@ -19,10 +19,10 @@ class Downloader
     )
   end
 
-  def run(id)
+  def run(id, localfolder = ".")
     reponame, testpath = id.split(Application::SEPARATOR)
 
-    repo_url, status = get_url_for reponame
+    repourl, status = get_url_for reponame
     unless status == :ok
       @dev.writeln "    #{status}"
       return false
@@ -34,7 +34,7 @@ class Downloader
       return false
     end
 
-    download(reponame, repo_url, testpath, files)
+    download(reponame, repourl, localfolder, testpath, files)
   end
 
   private
@@ -56,10 +56,10 @@ class Downloader
     [files, :ok]
   end
 
-  def download(reponame, url, path, files)
+  def download(reponame, url, basefolder, path, files)
     bar = TTY::ProgressBar.new("==> Progress [:bar] :percent", total: files.size, bar_format: :block)
 
-    localpath = path.tr("/", "_")
+    localpath = File.join(basefolder, path.tr("/", "_"))
     FileUtils.mkdir(localpath) unless File.exist? localpath
     files.each do |filename|
       bar.advance

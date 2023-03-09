@@ -12,7 +12,7 @@ class CLI < Thor
   desc "version", "Show the program version"
 
   def version
-    puts "#{Version::EXECUTABLE} version #{Version::VERSION}"
+    puts "#{TeutonGet::EXECUTABLE} version #{TeutonGet::VERSION}"
   end
 
   map ["ci", "-ci", "--create-info", "create-info"] => "create_info"
@@ -34,6 +34,24 @@ class CLI < Thor
   LONGDESC
   def create_repo
     TeutonGet.create_repo(".")
+  end
+
+  desc "hello NAME", "say hello to NAME"
+  option :from
+  def hello(name)
+    puts "from: #{options[:from]}" if options[:from]
+    puts "Hello #{name}"
+  end
+
+  map ["d", "-d", "--download", "pull", "--pull"] => "download"
+  option :color, type: :boolean
+  option :into
+  desc "download TESTID", "Download Teuton test"
+  long_desc <<-LONGDESC
+    Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
+  LONGDESC
+  def download(testid)
+    TeutonGet.download(testid, options[:into] || ".")
   end
 
   map ["--init"] => "init"
@@ -85,16 +103,5 @@ class CLI < Thor
   LONGDESC
   def search(filter)
     TeutonGet.search(filter)
-  end
-
-  map ["d", "-d", "--download", "pull", "--pull"] => "download"
-  option :color, type: :boolean
-  # option :dirname, type: :string
-  desc "download TESTID", "Download Teuton test"
-  long_desc <<-LONGDESC
-    Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
-  LONGDESC
-  def download(testid)
-    TeutonGet.download(testid, options)
   end
 end

@@ -1,4 +1,4 @@
-module Version
+module TeutonGet
   NAME = "teuton-get"
   EXECUTABLE = "teutonget"
   VERSION = "0.2.7"
