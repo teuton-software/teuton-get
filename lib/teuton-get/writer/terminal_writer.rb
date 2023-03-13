@@ -1,8 +1,14 @@
 require "tty-table"
 require_relative "writer"
-require_relative "../utils/format"
+require_relative "format"
 
 class TerminalWriter < Writer
+  attr_accessor :quiet
+
+  def initialize
+    @quiet = false
+  end
+
   def write(text = "", args = {})
     print TeutonGet::Format.colorize(text, args[:color])
   end
@@ -13,7 +19,6 @@ class TerminalWriter < Writer
 
   def write_table(rows)
     table = TTY::Table.new(rows)
-    # puts table.render(:basic)
     puts table.render(:ascii)
   end
 end

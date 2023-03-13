@@ -3,10 +3,10 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "teuton-get/cli"
 
-argv = ARGV.clone
+args = ARGV.clone
 if ARGV.include? "--no-color"
-  argv.delete("--no-color")
+  args.delete("--no-color")
   TeutonGet::Format.disable
 end
 
-CLI.start(argv)
+CLI.start(args)

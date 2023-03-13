@@ -11,7 +11,7 @@ require_relative "settings"
 class Downloader
   def initialize
     @dev = TerminalWriter.new
-    @repo_config = RepoConfig.new_by_default.data
+    @repo_config = RepoConfig.default.data
     cache_dirpath = Settings.get(:cache_dirpath)
     @repo_data = RepoData.new(
       config_reader: IniFileReader.new,

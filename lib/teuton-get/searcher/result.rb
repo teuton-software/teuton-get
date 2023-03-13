@@ -1,4 +1,4 @@
-require_relative "../application"
+require_relative "../settings"
 
 class Result
   @@repoindex = Set.new
@@ -15,7 +15,7 @@ class Result
   end
 
   def id
-    "#{reponame}#{Application::SEPARATOR}#{testname}"
+    "#{reponame}#{Settings::SEPARATOR}#{testname}"
   end
 
   def to_h

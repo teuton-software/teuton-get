@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require "yaml"
-require_relative "../application"
+require_relative "../settings"
 require_relative "../reader/url_reader"
 require_relative "../reader/inifile_reader"
 require_relative "../reader/yaml_reader"
@@ -14,12 +16,12 @@ class RepoData
     @cache_dirpath = args[:cache_dirpath]
   end
 
-  def self.new_by_default
-    config_filepath = Application.instance.get(:config_filepath)
+  def self.default
+    config_filepath = Settings.get(:config_filepath)
     RepoData.new(
       config_reader: IniFileReader.new(config_filepath),
       progress_writer: TerminalWriter.new,
-      cache_dirpath: Application.instance.get(:cache_dirpath)
+      cache_dirpath: Settings.get(:cache_dirpath)
     )
   end
 
@@ -36,7 +38,7 @@ class RepoData
   end
 
   def get(test_id)
-    reponame, id = test_id.split(Application::SEPARATOR)
+    reponame, id = test_id.split(Settings::SEPARATOR)
     database = YamlReader.new.read(database_filename)
     return {} if database[reponame].nil?
     database[reponame][id]
@@ -113,7 +115,7 @@ class RepoData
   end
 
   def get_local_database(dirpath)
-    filepath = File.join(dirpath, Application::INDEXFILENAME)
+    filepath = File.join(dirpath, Settings::INDEXFILENAME)
     # @reader.read(filepath) # FIXME
     YAML.safe_load(
       File.read(filepath),
@@ -122,7 +124,7 @@ class RepoData
   end
 
   def get_remote_database(url_repo)
-    url_file = "#{url_repo}/#{Application::INDEXFILENAME}"
+    url_file = "#{url_repo}/#{Settings::INDEXFILENAME}"
     content_page = URLReader.new(url_file).read
     YAML.safe_load(
       content_page,

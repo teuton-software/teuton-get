@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "thor"
-require_relative "application"
 require_relative "version"
 require_relative "../teuton-get"
 

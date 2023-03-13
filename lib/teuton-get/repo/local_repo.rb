@@ -9,7 +9,7 @@ class LocalRepo
     @dev = args[:progress_writer]
   end
 
-  def self.new_by_default
+  def self.default
     LocalRepo.new(
       repoindex_writer: FileWriter.new,
       progress_writer: TerminalWriter.new

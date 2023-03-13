@@ -1,7 +1,7 @@
 require "fileutils"
-require_relative "../application"
+require_relative "../settings"
 require_relative "../reader/inifile_reader"
-require_relative "../utils/format"
+require_relative "../writer/format"
 require_relative "../writer/terminal_writer"
 
 # Create Teuton Repo config file
@@ -14,16 +14,16 @@ class RepoConfig
     @dev = args[:progress_writer]
 
     @config_dirpath = args[:config_dirpath] || ""
-    @config_filepath = File.join(@config_dirpath, Application::CONFIGFILE)
+    @config_filepath = File.join(@config_dirpath, Settings::CONFIGFILE)
   end
 
-  def self.new_by_default
-    config_filepath = Application.instance.get(:config_filepath)
+  def self.default
+    config_filepath = Settings.get(:config_filepath)
 
     RepoConfig.new(
       config_reader: IniFileReader.new(config_filepath),
       progress_writer: TerminalWriter.new,
-      config_dirpath: Application.instance.get(:config_dirpath)
+      config_dirpath: Settings.get(:config_dirpath)
     )
   end
 
@@ -73,7 +73,7 @@ class RepoConfig
   end
 
   def create_ini_file
-    src = File.join(File.dirname(__FILE__), "..", "files", Application::CONFIGFILE)
+    src = File.join(File.dirname(__FILE__), "..", "files", Settings::CONFIGFILE)
     copyfile(src, @config_filepath)
   end
 

@@ -1,8 +1,8 @@
-require_relative "application"
+require_relative "settings"
 require_relative "reader/yaml_reader"
 require_relative "repo/repo_data"
 require_relative "searcher/result"
-require_relative "utils/format"
+require_relative "writer/format"
 require_relative "writer/terminal_writer"
 
 class Searcher
@@ -18,10 +18,10 @@ class Searcher
     @results = {}
   end
 
-  def self.new_by_default
+  def self.default
     Searcher.new(
       writer: TerminalWriter.new,
-      repodata: RepoData.new_by_default,
+      repodata: RepoData.default,
       reader: YamlReader.new
     )
   end
@@ -35,7 +35,7 @@ class Searcher
     @results.each do |i|
       @dev.write ("(x%02d) " % i[:score]), color: :white
       reponame = TeutonGet::Format.colorize(i[:reponame], i[:repoindex])
-      @dev.writeln "#{reponame}#{Application::SEPARATOR}#{i[:testname]}"
+      @dev.writeln "#{reponame}#{Settings::SEPARATOR}#{i[:testname]}"
     end
   end
 
@@ -44,7 +44,7 @@ class Searcher
   def parse_input(input)
     reponame_filter = :all
     filter = :all
-    options = input.split(Application::SEPARATOR)
+    options = input.split(Settings::SEPARATOR)
     if options.size == 1
       reponame_filter = :all
       filter = options[0]
@@ -137,7 +137,7 @@ class Searcher
     @results.each_pair { |key, value| results += [value.to_h] }
 
     results.sort_by! do |i|
-      [(Application::MAGICNUMBER - i[:score]), i[:id]]
+      [(Settings::MAGICNUMBER - i[:score]), i[:id]]
     end
     @results = results
   end
