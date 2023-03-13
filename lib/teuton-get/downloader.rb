@@ -6,12 +6,13 @@ require_relative "reader/inifile_reader"
 require_relative "reader/url_reader"
 require_relative "repo/repo_config"
 require_relative "repo/repo_data"
+require_relative "settings"
 
 class Downloader
   def initialize
     @dev = TerminalWriter.new
     @repo_config = RepoConfig.new_by_default.data
-    cache_dirpath = Application.instance.get(:cache_dirpath)
+    cache_dirpath = Settings.get(:cache_dirpath)
     @repo_data = RepoData.new(
       config_reader: IniFileReader.new,
       progress_writer: TerminalWriter.new,
@@ -20,7 +21,7 @@ class Downloader
   end
 
   def run(id, localfolder = ".")
-    reponame, testpath = id.split(Application::SEPARATOR)
+    reponame, testpath = id.split(Settings::SEPARATOR)
 
     repourl, status = get_url_for reponame
     unless status == :ok
@@ -57,8 +58,11 @@ class Downloader
   end
 
   def download(reponame, url, basefolder, path, files)
-    bar = TTY::ProgressBar.new("==> Progress [:bar] :percent", total: files.size, bar_format: :block)
-
+    bar = TTY::ProgressBar.new(
+      "==> Progress [:bar] :percent",
+      total: files.size,
+      bar_format: :block
+    )
     localpath = File.join(basefolder, path.tr("/", "_"))
     FileUtils.mkdir(localpath) unless File.exist? localpath
     files.each do |filename|
