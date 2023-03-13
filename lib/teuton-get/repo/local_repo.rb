@@ -1,4 +1,4 @@
-require_relative "../application"
+require_relative "../settings"
 require_relative "../writer/file_writer"
 require_relative "../writer/terminal_writer"
 
@@ -17,14 +17,14 @@ class LocalRepo
   end
 
   def create(dirpath)
-    infofilename = Application::INFOFILENAME
+    infofilename = Settings::INFOFILENAME
     infofiles = Dir.glob(File.join(dirpath, "**", infofilename))
     return if infofiles.size.zero?
 
     @dev.writeln "\n==> Creating repository", color: :light_yellow
     data = read_files(infofiles)
 
-    filepath = File.join(dirpath, Application::INDEXFILENAME)
+    filepath = File.join(dirpath, Settings::INDEXFILENAME)
     @repoindex_writer.open(filepath)
     @repoindex_writer.write data.to_yaml
     @repoindex_writer.close

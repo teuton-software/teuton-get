@@ -1,4 +1,4 @@
-require_relative "../application"
+require_relative "../settings"
 require_relative "../writer/terminal_writer"
 require_relative "../reader/yaml_reader"
 require "erb"
@@ -36,7 +36,7 @@ class LocalInfo
 
   def set_default_data(testpath)
     @data[:name] = File.basename(testpath)
-    @data[:author] = ENV["USER"]
+    @data[:author] = Settings.get("USER")
     @data[:date] = Time.now.strftime("%Y-%m-%d")
     @data[:desc] = "Write your description"
     @data[:tags] = ["Write your", "comma separated", "tags"]
@@ -60,7 +60,7 @@ class LocalInfo
       return false
     end
 
-    infofilename = Application::INFOFILENAME
+    infofilename = Settings::INFOFILENAME
     sourcepath = File.join(File.dirname(__FILE__), "..", "files", infofilename)
     template = File.read(sourcepath)
     content = ERB.new(template, trim_mode: "%>")
