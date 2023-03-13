@@ -31,7 +31,7 @@ class Searcher
     search_inside(reponame_filter, filters)
   end
 
-  def show_result
+  def show_results
     @results.each do |i|
       @dev.write ("(x%02d) " % i[:score]), color: :white
       reponame = TeutonGet::Format.colorize(i[:reponame], i[:repoindex])

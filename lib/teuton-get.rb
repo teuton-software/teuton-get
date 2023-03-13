@@ -48,6 +48,6 @@ module TeutonGet
   def self.search(filter)
     searcher = Searcher.default
     searcher.get(filter)
-    searcher.show_result
+    searcher.show_results
   end
 end
