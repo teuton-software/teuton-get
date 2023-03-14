@@ -7,6 +7,8 @@ require_relative "writer/format"
 require_relative "writer/terminal_writer"
 
 class Searcher
+  attr_reader :results
+
   def initialize(args)
     repodata = args[:repodata]
     filename = repodata.database_filename
@@ -28,14 +30,7 @@ class Searcher
   def get(input)
     reponame_filter, filters = parse_input(input)
     @results.call(reponame_filter, filters)
-  end
-
-  def show_results(options)
-    if options["output"] == "json"
-      @results.show_json
-    else
-      @results.show_screen
-    end
+    @results
   end
 
   private
