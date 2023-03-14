@@ -26,23 +26,23 @@ module TeutonGet
   end
 end
 
-class MyColor
-  COLORS = {
-    black: 30, red: 31, green: 32, yellow: 33,
-    blue: 34, violet: 35, cyan: 36, white: 37
-  }
-
-  def color(code)
-    color = COLORS[code]
-    if color.nil?
-      color = COLORS[:violet]
-      puts "[WARN] MyColor: unkown value color #{code}"
-    end
-
-    if code == :white
-      "\e[%dm#{@text}\e[0m" % color
-    else
-      "\e[%d;1m#{@text}\e[0m" % color
-    end
-  end
-end
+# class MyColor
+#  COLORS = {
+#    black: 30, red: 31, green: 32, yellow: 33,
+#    blue: 34, violet: 35, cyan: 36, white: 37
+#  }
+#
+#  def color(code)
+#    color = COLORS[code]
+#    if color.nil?
+#      color = COLORS[:violet]
+#      puts "[WARN] MyColor: unkown value color #{code}"
+#    end
+#
+#    if code == :white
+#      "\e[%dm#{@text}\e[0m" % color
+#    else
+#      "\e[%d;1m#{@text}\e[0m" % color
+#    end
+#  end
+# end

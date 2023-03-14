@@ -22,6 +22,7 @@ class CLI < Thor
   LONGDESC
 
   def create_info(testpath)
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_info(testpath)
   end
 
@@ -32,6 +33,7 @@ class CLI < Thor
     Create index from SOURCE directory. Example: "teutonget create-repo"
   LONGDESC
   def create_repo
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_repo(".")
   end
 
@@ -43,6 +45,7 @@ class CLI < Thor
     Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
   def download(testid)
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.download(testid, options[:into] || ".")
   end
 
@@ -53,6 +56,7 @@ class CLI < Thor
     Create inital configuration files. Example: "teutonget init"
   LONGDESC
   def init
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.init
   end
 
@@ -63,6 +67,7 @@ class CLI < Thor
     Show info data for Teuton test. Example: "teutonget info teuton.en:systems.1/02-opensuse-conf"
   LONGDESC
   def show(test_id)
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.show_info(test_id)
   end
 
@@ -74,6 +79,7 @@ class CLI < Thor
   LONGDESC
 
   def repos
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.show_repo_list
   end
 
@@ -84,6 +90,7 @@ class CLI < Thor
     Synchronize list of tests available. Example: "teutonget refresh"
   LONGDESC
   def refresh
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.refresh
   end
 
@@ -94,6 +101,7 @@ class CLI < Thor
     Search Teuton test using FILTER. Example: "teutonget search opensuse"
   LONGDESC
   def search(filter)
+    TeutonGet::Format.disable if options["color"] == false
     TeutonGet.search(filter)
   end
 
