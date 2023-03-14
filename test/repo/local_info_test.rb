@@ -18,7 +18,7 @@ class LocalInfoTest < Test::Unit::TestCase
 
   def test_create_info_wrong
     dirpath = @dirpaths[0]
-    filepath = File.join(dirpath, Application::INFOFILENAME)
+    filepath = File.join(dirpath, Settings::INFOFILENAME)
 
     assert_equal true, File.exist?(dirpath)
     assert_equal false, File.exist?(filepath)
@@ -28,7 +28,7 @@ class LocalInfoTest < Test::Unit::TestCase
 
   def test_create_info_ok
     dirpath = @dirpaths[1]
-    filepath = File.join(dirpath, Application::INFOFILENAME)
+    filepath = File.join(dirpath, Settings::INFOFILENAME)
 
     assert_equal true, File.exist?(dirpath)
     assert_equal false, File.exist?(filepath)
@@ -39,14 +39,14 @@ class LocalInfoTest < Test::Unit::TestCase
 
   def test_read_no_exist_info
     dirpath = @dirpaths[1]
-    filepath = File.join(dirpath, Application::INFOFILENAME)
+    filepath = File.join(dirpath, Settings::INFOFILENAME)
     data = @localinfo.read(filepath)
     assert_equal({"files" => ["README.md", "start.rb"]}, data)
   end
 
   def test_read_info_file
     dirpath = @dirpaths[2]
-    filepath = File.join(dirpath, Application::INFOFILENAME)
+    filepath = File.join(dirpath, Settings::INFOFILENAME)
     data = @localinfo.read(filepath)
     assert_equal(8, data.size)
   end
