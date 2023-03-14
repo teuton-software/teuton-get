@@ -11,12 +11,12 @@ class LocalInfo
     @data = {}
   end
 
-  def default_create(testpath)
+  def default_created(testpath)
     set_default_data(testpath)
     create(testpath)
   end
 
-  def user_create(testpath)
+  def user_created(testpath)
     ask_data(testpath)
     create(testpath)
   end

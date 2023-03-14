@@ -11,7 +11,7 @@ require_relative "teuton-get/writer/format"
 module TeutonGet
   def self.create_info(testpath)
     # Create metadata for local user teuton test
-    LocalInfo.new.user_create(testpath)
+    LocalInfo.new.user_created(testpath)
   end
 
   def self.create_repo(dirpath)

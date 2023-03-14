@@ -22,7 +22,7 @@ class LocalInfoTest < Test::Unit::TestCase
 
     assert_equal true, File.exist?(dirpath)
     assert_equal false, File.exist?(filepath)
-    assert_equal false, @localinfo.default_create(dirpath)
+    assert_equal false, @localinfo.default_created(dirpath)
     assert_equal false, File.exist?(filepath)
   end
 
@@ -32,7 +32,7 @@ class LocalInfoTest < Test::Unit::TestCase
 
     assert_equal true, File.exist?(dirpath)
     assert_equal false, File.exist?(filepath)
-    assert_equal true, @localinfo.default_create(dirpath)
+    assert_equal true, @localinfo.default_created(dirpath)
     assert_equal true, File.exist?(filepath)
     FileUtils.rm(filepath)
   end
