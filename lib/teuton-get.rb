@@ -45,9 +45,9 @@ module TeutonGet
     repo_data.show_testinfo(info) unless info == {}
   end
 
-  def self.search(filter)
+  def self.search(filter, options)
     searcher = Searcher.default
     searcher.get(filter)
-    searcher.show_results
+    searcher.show_results(options)
   end
 end

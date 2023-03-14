@@ -1,3 +1,4 @@
+require "json"
 require_relative "settings"
 require_relative "reader/yaml_reader"
 require_relative "repo/repo_data"
@@ -31,11 +32,23 @@ class Searcher
     search_inside(reponame_filter, filters)
   end
 
-  def show_results
-    @results.each do |i|
-      @dev.write ("(x%02d) " % i[:score]), color: :white
-      reponame = TeutonGet::Format.colorize(i[:reponame], i[:repoindex])
-      @dev.writeln "#{reponame}#{Settings::SEPARATOR}#{i[:testname]}"
+  def show_results(options)
+    if options["output"] == "json"
+      list = []
+      @results.each do |i|
+        list << {
+          "score": i[:score],
+          "reponame": i[:reponame],
+          "testname": i[:testname]
+        }
+      end
+      puts list.to_json
+    else
+      @results.each do |i|
+        @dev.write ("(x%02d) " % i[:score]), color: :white
+        reponame = TeutonGet::Format.colorize(i[:reponame], i[:repoindex])
+        @dev.writeln "#{reponame}#{Settings::SEPARATOR}#{i[:testname]}"
+      end
     end
   end
 

@@ -21,7 +21,8 @@ class Result
   def to_h
     {
       score: @score,
-      id: id, reponame: @reponame,
+      id: id,
+      reponame: @reponame,
       testname: @testname,
       repoindex: repoindex
     }
