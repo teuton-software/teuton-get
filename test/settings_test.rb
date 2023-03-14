@@ -7,7 +7,7 @@ class SettingsTest < Test::Unit::TestCase
     @config_path = File.join("/", "home", @username, ".config", "teuton")
   end
 
-  def test_application_env
+  def test_env
     dirpath = File.join("/", "home", @username)
     assert_equal dirpath, Settings.get("HOME")
   end
