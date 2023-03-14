@@ -23,9 +23,9 @@ class Search
     list = []
     @results.each do |i|
       list << {
-        "score": i[:score],
-        "reponame": i[:reponame],
-        "testname": i[:testname]
+        score: i[:score],
+        reponame: i[:reponame],
+        testname: i[:testname]
       }
     end
     puts list.to_json
