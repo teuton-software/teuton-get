@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
+require "debug"; binding.break
+args = ARGV.clone
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "teuton-get/cli"
 
-args = ARGV.clone
 if ARGV.include? "--no-color"
   args.delete("--no-color")
   TeutonGet::Format.disable

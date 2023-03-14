@@ -6,4 +6,4 @@ RUBY_VERSION=$(cat $HOME/$FOLDER/.ruby-version)
 RUBY=$HOME/.rbenv/versions/$RUBY_VERSION/bin/ruby
 APP=$HOME/$FOLDER/bin/teutonget
 
-$RUBY $APP $1 $2
+$RUBY $APP $1 $2 $3 $4 $5
