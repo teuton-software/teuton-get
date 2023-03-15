@@ -1,12 +1,15 @@
 
--- activar salida --format=json (search, info, repos)
--- repos.ini en la raiz
--- init descarga fichero de la central
+-- repos.ini en la raiz. init descarga fichero de la central
 -- init -> refresh -> search
 -- create_info añade datos si ya existe el yaml
 -- create-info sin argumentos asume el .
--- teutonget show nombre-incompleto pero único lo acepta
--- teutonget version
+
+## [0.3.0] - 2023-03-15
+
+-- New output option --format=json (teutonget search, teutonget show, teutonget repos)
+-- New output option --no-color
+-- teutonget show accept TESTID or FILTER
+-- teutonget version without color
 
 ## [0.2.7] - 2023-02-26
 
