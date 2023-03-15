@@ -39,14 +39,13 @@ class CLI < Thor
 
   map ["d", "-d", "--download", "download", "--pull"] => "pull"
   option :color, type: :boolean
-  option :into
-  desc "pull TESTID", "Download Teuton test"
+  desc "pull TESTID [DIRECTORY]", "Download Teuton test"
   long_desc <<-LONGDESC
   Example: "teutonget pull teuton.en:systems.1/02-opensuse-conf". Download test.
   LONGDESC
-  def pull(testid)
+  def pull(testid, dirpath=".")
     TeutonGet::Format.disable if options["color"] == false
-    TeutonGet.download(testid, options[:into] || ".")
+    TeutonGet.download(testid, dirpath)
   end
 
   map ["--init"] => "init"
@@ -81,7 +80,7 @@ class CLI < Thor
   long_desc <<-LONGDESC
     Example: "teutonget repos". Show repo list.
 
-    Example: "teutonget repos --format=json". Show JSON repos list. 
+    Example: "teutonget repos --format=json". Show JSON repos list.
   LONGDESC
 
   def repos
