@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "json/pure"
 require_relative "teuton-get/downloader"
 require_relative "teuton-get/repo/local_info"
 require_relative "teuton-get/repo/local_repo"
@@ -39,7 +40,7 @@ module TeutonGet
     RepoConfig.default.show_list
   end
 
-  def self.show_info(test_id)
+  def self.show_info(test_id, options)
     results = Searcher.default.get(test_id).results
     if results.size == 1
       test_id = results[0][:id]
@@ -51,7 +52,12 @@ module TeutonGet
 
     repo_data = RepoData.default
     testinfo = repo_data.get_info(test_id)
-    repo_data.show_testinfo(testinfo) unless testinfo == {}
+
+    if options["format"] == "json"
+      puts testinfo.to_json
+    else
+      repo_data.show_testinfo(testinfo) unless testinfo == {}
+    end
   end
 
   def self.search(filter, options)

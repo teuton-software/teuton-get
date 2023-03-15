@@ -62,13 +62,16 @@ class CLI < Thor
 
   map ["i", "-i", "--info", "info", "--show"] => "show"
   option :color, type: :boolean
-  desc "show TESTID", "Show info data for Teuton test"
+  option :format, type: :string
+  desc "show TESTID|FILTER", "Show info data for Teuton test"
   long_desc <<-LONGDESC
-    Show info data for Teuton test. Example: "teutonget info teuton.en:systems.1/02-opensuse-conf"
+    Example: "teutonget show teuton.en:systems.1/02-opensuse-conf". Show test info.
+
+    Example: "teutonget show foo --format=json". Show test info using JSON format.
   LONGDESC
   def show(test_id)
     TeutonGet::Format.disable if options["color"] == false
-    TeutonGet.show_info(test_id)
+    TeutonGet.show_info(test_id, options)
   end
 
   map ["--repos"] => "repos"
