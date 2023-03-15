@@ -44,7 +44,9 @@ module TeutonGet
     if results.size == 1
       test_id = results[0][:id]
     else
-      puts "#{results.size} results!"
+      puts "(#{results.size} results!)"
+      results.each { |i| puts "* #{i[:id]}" }
+      exit 1
     end
 
     repo_data = RepoData.default
