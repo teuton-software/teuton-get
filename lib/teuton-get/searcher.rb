@@ -16,7 +16,7 @@ class Searcher
     database = reader.read(filename)
 
     dev = args[:writer]
-    @results = Search.new(database, dev)
+    @search = Search.new(database, dev)
   end
 
   def self.default
@@ -29,8 +29,8 @@ class Searcher
 
   def get(input)
     reponame_filter, filters = parse_input(input)
-    @results.call(reponame_filter, filters)
-    @results
+    @search.call(reponame_filter, filters)
+    @search
   end
 
   private

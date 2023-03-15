@@ -37,7 +37,7 @@ class RepoData
     save_database
   end
 
-  def get(test_id)
+  def get_info(test_id)
     reponame, id = test_id.split(Settings::SEPARATOR)
     database = YamlReader.new.read(database_filename)
     return {} if database[reponame].nil?

@@ -40,9 +40,16 @@ module TeutonGet
   end
 
   def self.show_info(test_id)
+    results = Searcher.default.get(test_id).results
+    if results.size == 1
+      test_id = results[0][:id]
+    else
+      puts "#{results.size} results!"
+    end
+
     repo_data = RepoData.default
-    info = repo_data.get(test_id)
-    repo_data.show_testinfo(info) unless info == {}
+    testinfo = repo_data.get_info(test_id)
+    repo_data.show_testinfo(testinfo) unless testinfo == {}
   end
 
   def self.search(filter, options)

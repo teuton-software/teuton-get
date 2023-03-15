@@ -101,7 +101,7 @@ class CLI < Thor
   long_desc <<-LONGDESC
     Example: "teutonget search opensuse". Search tests filtering by 'opensuse'.
 
-    Example: "teutonget search debian --format=json". Search tests filtering by 'debian' with JSON format output.
+    Example: "teutonget search debian --format=json". Search tests filtering by 'debian' and show JSON format output.
   LONGDESC
   def search(filter)
     TeutonGet::Format.disable if options["color"] == false

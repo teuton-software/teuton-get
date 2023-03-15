@@ -4,6 +4,8 @@ require_relative "../settings"
 require_relative "../writer/format"
 
 class Search
+  attr_reader :results
+
   def initialize(database, dev)
     @dev = dev
     @database = database
