@@ -1,4 +1,5 @@
 require "fileutils"
+require "json/pure"
 require_relative "../settings"
 require_relative "../reader/inifile_reader"
 require_relative "../writer/format"
@@ -33,7 +34,17 @@ class RepoConfig
     create_ini_file
   end
 
-  def show_list
+  def show_list(options)
+    if options["format"] == "json"
+      show_json_list
+    else
+      show_default_list
+    end
+  end
+
+  private
+
+  def show_default_list
     rows = []
     rows << ["E", "NAME", "DESCRIPTION"]
     rows << :separator
@@ -52,7 +63,18 @@ class RepoConfig
     @dev.writeln "#{@reader.source}\n", color: :white
   end
 
-  private
+  def show_json_list
+    alist = []
+
+    @data.each_pair do |key, value|
+      alist << {
+        enable: value["enable"],
+        reponame: key,
+        description: value["description"] || "?"
+        }
+    end
+    puts JSON.dump(alist)
+  end
 
   def create_dir
     dirpath = @config_dirpath

@@ -76,14 +76,17 @@ class CLI < Thor
 
   map ["--repos"] => "repos"
   option :color, type: :boolean
+  option :format, type: :string
   desc "repos", "Show repo list"
   long_desc <<-LONGDESC
-    Show repo list. Example: "teutonget repos"
+    Example: "teutonget repos". Show repo list.
+
+    Example: "teutonget repos --format=json". Show JSON repos list. 
   LONGDESC
 
   def repos
     TeutonGet::Format.disable if options["color"] == false
-    TeutonGet.show_repo_list
+    TeutonGet.show_repo_list(options)
   end
 
   map ["r", "-r", "--refresh", "--update", "update"] => "refresh"

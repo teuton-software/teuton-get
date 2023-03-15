@@ -36,8 +36,8 @@ module TeutonGet
     RepoData.default.refresh
   end
 
-  def self.show_repo_list
-    RepoConfig.default.show_list
+  def self.show_repo_list(...)
+    RepoConfig.default.show_list(...)
   end
 
   def self.show_info(test_id, options)
