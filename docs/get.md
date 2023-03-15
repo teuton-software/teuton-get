@@ -5,7 +5,7 @@
 Find and download local or remote test files.
 
 1. [Search](#1-search)
-2. [Info](#2-info)
+2. [Show](#2-show)
 3. [Download](#3-download)
 
 ## 1. Search
@@ -28,7 +28,7 @@ teutonget search FILTER
 Example:
 
 ```
-❯ teutonget se window
+❯ teutonget search window
 (x3) teuton.en:systems.1/01-windows-conf
 (x1) teuton.en:systems.1/04-winserver-conf
 (x1) teuton.en:systems.2/01-install-w10-vbox
@@ -39,18 +39,19 @@ As a result we have a list of tests ordered from highest to lowest value accordi
 
 Ejample:
 ```
-❯ teutonget se script,fvarrui
+❯ teutonget search script,fvarrui
 (x6) teuton.es:sistemas.3/scripting/usermin
 (x1) teuton.en:systems.2/01-install-w10-vbox
 ```
 
 In this example, the filter is form by multiple words separated by commas. As result, will be shown tests that contain word 1 or word 2, or both. And appear in order from highest to lowest according to the number of times these words appear in the test metadata.
 
-## 2. Info
+## 2. Show
 
 Show info about test. Example:
+
 ```
-❯ teutonget info teuton.en:systems.1/03-debian-conf
+❯ teutonget show teuton.en:systems.1/03-debian-conf
 
 name    : Debian configuration
 author  : dvarrui
@@ -65,7 +66,7 @@ files   : README.md, config.yaml, debian.rb, network.rb, start.rb
 Download teuton test files identified by TESTID. Example:
 
 ```
-❯ teutonget download teuton.en:systems.1/03-debian-conf
+❯ teutonget pull teuton.en:systems.1/03-debian-conf
 
 ==> Downloading...
 ==> File: README.md

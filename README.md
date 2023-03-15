@@ -62,9 +62,8 @@ files   : INSTALL.md, README.md, bin/docker.run, bin/up_environ.sh, config.yaml,
 * **Download test** "teuton.es:sistemas.3/scripting/usermin":
 
 ```
-> teutonget download teuton.es:sistemas.3/scripting/usermin
-
-==> Progress [█████████████████████] 100%
+teutonget pull teuton.es:sistemas.3/scripting/usermin
+==> Progress [██████████████] 100%
 ==> Download finished
 ```
 
