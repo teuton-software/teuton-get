@@ -71,7 +71,7 @@ class RepoConfig
         enable: value["enable"],
         reponame: key,
         description: value["description"] || "?"
-        }
+      }
     end
     puts JSON.dump(alist)
   end
