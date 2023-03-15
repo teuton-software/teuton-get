@@ -1,4 +1,5 @@
 require "test/unit"
+require "json/pure"
 
 class CommandTest < Test::Unit::TestCase
   def test_teutonget_help
@@ -28,6 +29,13 @@ class CommandTest < Test::Unit::TestCase
     output = `teutonget search local:foo --no-color`
     assert_equal 0, $?.exitstatus
     assert_equal true, output.include?("(x02) local:foo")
+  end
+
+  def test_teutonget_search_ok_format_json
+    output = `teutonget search local:foo --no-color --format=json`
+    assert_equal 0, $?.exitstatus
+    expect = '[{"score":2,"reponame":"local","testname":"foo"}]'
+    assert_equal JSON.parse(expect), JSON.parse(output)
   end
 
   def test_teutonget_search_fail
