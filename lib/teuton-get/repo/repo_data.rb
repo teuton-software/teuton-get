@@ -41,7 +41,7 @@ class RepoData
     reponame, id = test_id.split(Settings::SEPARATOR)
     database = YamlReader.new.read(database_filename)
     return {} if database[reponame].nil?
-    database[reponame][id]
+    database[reponame][id] || {}
   end
 
   def show_testinfo(item)
