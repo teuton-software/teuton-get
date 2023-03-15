@@ -1,20 +1,36 @@
+# frozen_string_literal: true
+
 require_relative "repo/repo_data"
 require_relative "searcher"
 require "json/pure"
 
 class ShowInfo
-  def self.call(test_id, options)
-    repo_data = RepoData.default
-    testinfo = repo_data.get_info(test_id)
+  def initialize
+    @repo_data = RepoData.default
+  end
+
+  def call(testid, options)
+    testinfo = get_testinfo(testid)
+    if options["format"] == "json"
+      puts testinfo.to_json
+    else
+      @repo_data.show_testinfo(testinfo)
+    end
+  end
+
+  private
+
+  def get_testinfo(testid)
+    testinfo = @repo_data.get_info(testid)
 
     if testinfo == {}
-      results = Searcher.default.get(test_id).results
+      results = Searcher.default.get(testid).results
       if results.size.zero?
         puts "No results!"
         exit 1
       elsif results.size == 1
-        test_id = results[0][:id]
-        testinfo = repo_data.get_info(test_id)
+        testid = results[0][:id]
+        testinfo = @repo_data.get_info(testid)
         exit 1 if testinfo == {}
       else
         results.each { |i| puts "* #{i[:id]}" }
@@ -23,10 +39,6 @@ class ShowInfo
       end
     end
 
-    if options["format"] == "json"
-      puts testinfo.to_json
-    else
-      repo_data.show_testinfo(testinfo)
-    end
+    testinfo
   end
 end

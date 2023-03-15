@@ -40,7 +40,7 @@ module TeutonGet
   end
 
   def self.show_info(...)
-    ShowInfo.call(...)
+    ShowInfo.new.call(...)
   end
 
   def self.search(filter, options)
