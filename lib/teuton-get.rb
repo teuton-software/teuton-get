@@ -48,7 +48,7 @@ module TeutonGet
   def self.search(filter, options)
     searcher = Searcher.default
     results = searcher.get(filter)
-    if options["output"] == "json"
+    if options["format"] == "json"
       results.show_json
     else
       results.show_screen

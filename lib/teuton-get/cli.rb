@@ -96,12 +96,12 @@ class CLI < Thor
 
   map ["s", "-s", "--search"] => "search"
   option :color, type: :boolean
-  option :output, type: :string
+  option :format, type: :string
   desc "search [REPONAME:]FILTER", "Search Teuton test with FILTER"
   long_desc <<-LONGDESC
     Example: "teutonget search opensuse". Search tests filtering by 'opensuse'.
 
-    Example: "teutonget search debian --output=json". Search tests filtering by 'debian' with JSON format output.
+    Example: "teutonget search debian --format=json". Search tests filtering by 'debian' with JSON format output.
   LONGDESC
   def search(filter)
     TeutonGet::Format.disable if options["color"] == false
