@@ -21,7 +21,7 @@ class CLI < Thor
     Create info data for Teuton test. Example: "teutonget create-info systems.1/02-opensuse-conf"
   LONGDESC
 
-  def create_info(testpath)
+  def create_info(testpath = ".")
     TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_info(testpath)
   end
@@ -43,7 +43,7 @@ class CLI < Thor
   long_desc <<-LONGDESC
   Example: "teutonget pull teuton.en:systems.1/02-opensuse-conf". Download test.
   LONGDESC
-  def pull(testid, dirpath=".")
+  def pull(testid, dirpath = ".")
     TeutonGet::Format.disable if options["color"] == false
     TeutonGet.download(testid, dirpath)
   end

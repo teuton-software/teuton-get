@@ -63,10 +63,10 @@ class Downloader
       total: files.size,
       bar_format: :block
     )
-    if dirpath == "."
-      localpath = File.join(path.tr("/", "_"))
+    localpath = if dirpath == "."
+      File.join(path.tr("/", "_"))
     else
-      localpath = dirpath
+      dirpath
     end
     FileUtils.mkdir_p(localpath) unless File.exist? localpath
 
