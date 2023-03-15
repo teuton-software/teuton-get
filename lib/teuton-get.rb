@@ -41,22 +41,27 @@ module TeutonGet
   end
 
   def self.show_info(test_id, options)
-    results = Searcher.default.get(test_id).results
-    if results.size == 1
-      test_id = results[0][:id]
-    else
-      puts "(#{results.size} results!)"
-      results.each { |i| puts "* #{i[:id]}" }
-      exit 1
-    end
-
     repo_data = RepoData.default
     testinfo = repo_data.get_info(test_id)
+
+    if testinfo == {}
+      results = Searcher.default.get(test_id).results
+      if results.size == 1
+        test_id = results[0][:id]
+      else
+        puts "(#{results.size} results!)"
+        results.each { |i| puts "* #{i[:id]}" }
+        exit 1
+      end
+    end
+
+    testinfo = repo_data.get_info(test_id)
+    exit 1 if testinfo == {}
 
     if options["format"] == "json"
       puts testinfo.to_json
     else
-      repo_data.show_testinfo(testinfo) unless testinfo == {}
+      repo_data.show_testinfo(testinfo)
     end
   end
 

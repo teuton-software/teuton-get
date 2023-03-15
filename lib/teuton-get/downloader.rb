@@ -49,9 +49,9 @@ class Downloader
   end
 
   def get_files_for_test(id)
-    testdata = @repo_data.get(id)
-    return [], "ERROR: not found!" if testdata.nil?
-    files = testdata["files"]
+    testinfo = @repo_data.get_info(id)
+    return [], "ERROR: not found!" if testinfo.nil?
+    files = testinfo["files"]
     return [], "WARN: files no defined!" if files.nil?
     return [], "WARN: 0 files defined!" if files.size.zero?
     [files, :ok]

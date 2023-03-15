@@ -37,14 +37,14 @@ class CLI < Thor
     TeutonGet.create_repo(".")
   end
 
-  map ["d", "-d", "--download", "pull", "--pull"] => "download"
+  map ["d", "-d", "--download", "download", "--pull"] => "pull"
   option :color, type: :boolean
   option :into
-  desc "download TESTID", "Download Teuton test"
+  desc "pull TESTID", "Download Teuton test"
   long_desc <<-LONGDESC
-    Download Teuton test. Example: "teutonget download teuton.en:systems.1/02-opensuse-conf"
+  Example: "teutonget pull teuton.en:systems.1/02-opensuse-conf". Download test.
   LONGDESC
-  def download(testid)
+  def pull(testid)
     TeutonGet::Format.disable if options["color"] == false
     TeutonGet.download(testid, options[:into] || ".")
   end
