@@ -66,17 +66,11 @@ class RepoConfig
 
   def show_json_list
     alist = []
-
     @data.each_pair do |key, values|
       next unless values["type"] == "teutontest"
-      line = {
-        enable: (values["enable"] || false),
-        reponame: (key || "unkown"),
-        description: (values["description"] || "?"),
-        url: values["URL"]
-      }
-      values.each_pair { |k, v| line[k] == v }
-      alist << line
+
+      values["reponame"] = key
+      alist << values
     end
     puts JSON.dump(alist)
   end
