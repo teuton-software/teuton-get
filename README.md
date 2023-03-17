@@ -97,7 +97,7 @@ rake build
 sudo gem install pkg/teuton-get-*.gem
 ```
 
-- As `Administrator` on Windows:
+- On Windows as `Administrator`:
 
 ```bash
 gem install pkg\teuton-get-*.gem
