@@ -51,6 +51,7 @@ class RepoConfig
 
     index = 0
     @data.each_pair do |key, value|
+      next unless value["type"] == "teutontest"
       enable = "\u{2714}"
       enable = " " unless value["enable"]
       description = value["description"] || "?"
@@ -66,14 +67,16 @@ class RepoConfig
   def show_json_list
     alist = []
 
-    @data.each_pair do |key, value|
-      alist << {
-        type: value["type"],
-        enable: value["enable"],
-        reponame: key,
-        description: (value["description"] || "?"),
-        url: value["URL"]
+    @data.each_pair do |key, values|
+      next unless values["type"] == "teutontest"
+      line = {
+        enable: (values["enable"] || false),
+        reponame: (key || "unkown"),
+        description: (values["description"] || "?"),
+        url: values["URL"]
       }
+      values.each_pair { |k, v| line[k] == v }
+      alist << line
     end
     puts JSON.dump(alist)
   end
