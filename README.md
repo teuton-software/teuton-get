@@ -73,6 +73,36 @@ $ teutonget se debian
 (x04) teuton.en:systems.2/11-debian-custom-installation
 ```
 
+## Build and install the gem from sources
+
+You can build `teuton-get` Ruby gem from sources following the next steps:
+
+1. Clone the repo and change to its directory:
+
+```bash
+git clone https://github.com/teuton-software/teuton-get
+cd teuton-get
+```
+
+2. Build the gem:
+
+```bash
+rake build
+```
+
+3. Install newly built gem:
+- As `root` GNU/Linux or Mac OS:
+
+```bash
+sudo gem install pkg/teuton-get-*.gem
+```
+
+- As `Administrator` on Windows:
+
+```bash
+gem install pkg\teuton-get-*.gem
+```
+
 ## Documentation
 
 * [Settings](docs/settings.md)
