@@ -91,7 +91,7 @@ rake build
 ```
 
 3. Install newly built gem:
-- As `root` GNU/Linux or Mac OS:
+- On GNU/Linux or Mac OS:
 
 ```bash
 sudo gem install pkg/teuton-get-*.gem
