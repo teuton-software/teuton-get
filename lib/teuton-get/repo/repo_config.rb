@@ -68,9 +68,11 @@ class RepoConfig
 
     @data.each_pair do |key, value|
       alist << {
+        type: value["type"],
         enable: value["enable"],
         reponame: key,
-        description: value["description"] || "?"
+        description: (value["description"] || "?"),
+        url: value["URL"]
       }
     end
     puts JSON.dump(alist)
