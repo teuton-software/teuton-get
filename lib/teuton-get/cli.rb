@@ -21,7 +21,7 @@ class CLI < Thor
     Create info data for Teuton test. Example: "teutonget create-info systems.1/02-opensuse-conf"
   LONGDESC
 
-  def create_info(testpath)
+  def create_info(testpath = ".")
     TeutonGet::Format.disable if options["color"] == false
     TeutonGet.create_info(testpath)
   end
@@ -39,14 +39,13 @@ class CLI < Thor
 
   map ["d", "-d", "--download", "download", "--pull"] => "pull"
   option :color, type: :boolean
-  option :into
-  desc "pull TESTID", "Download Teuton test"
+  desc "pull TESTID [DIRECTORY]", "Download Teuton test"
   long_desc <<-LONGDESC
   Example: "teutonget pull teuton.en:systems.1/02-opensuse-conf". Download test.
   LONGDESC
-  def pull(testid)
+  def pull(testid, dirpath = ".")
     TeutonGet::Format.disable if options["color"] == false
-    TeutonGet.download(testid, options[:into] || ".")
+    TeutonGet.download(testid, dirpath)
   end
 
   map ["--init"] => "init"
@@ -76,14 +75,17 @@ class CLI < Thor
 
   map ["--repos"] => "repos"
   option :color, type: :boolean
+  option :format, type: :string
   desc "repos", "Show repo list"
   long_desc <<-LONGDESC
-    Show repo list. Example: "teutonget repos"
+    Example: "teutonget repos". Show repo list.
+
+    Example: "teutonget repos --format=json". Show JSON repos list.
   LONGDESC
 
   def repos
     TeutonGet::Format.disable if options["color"] == false
-    TeutonGet.show_repo_list
+    TeutonGet.show_repo_list(options)
   end
 
   map ["r", "-r", "--refresh", "--update", "update"] => "refresh"
