@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+# File: teuton-get
 
 system("teutonget #{ARGV.join(" ")}")
