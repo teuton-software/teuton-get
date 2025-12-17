@@ -1,11 +1,21 @@
 namespace :devel do
-  desc "Create launcher"
+  desc "Create /usr/local/bin/teutonget"
   task :launcher do
-    if File.exist? "/usr/local/bin/teutonget"
-      puts "[WARN] Exist file /usr/local/bin/teutonget!"
+    launcherpath = "/usr/local/bin/teutonget"
+    if File.exist?(launcherpath)
+      warn "File exist! (#{launcherpath})"
+      exit 1
     end
-    puts "[INFO] Creating launcher 'teutonget' into /usr/local/bin"
-    system("sudo cp tasks/files/teutonget /usr/local/bin/teutonget")
-    system("sudo ln -s /usr/local/bin/teutonget /usr/local/bin/teuton-get")
+
+    rubypath = `rbenv which ruby`.strip
+    commandpath = File.join(Dir.pwd, "teutonget")
+
+    puts "# Created with: 'rake devel:launcher'"
+    puts "# - Copy this content into: #{launcherpath}"
+    puts "# - Then: chmod +x #{launcherpath}"
+    puts "RUBYPATH=#{rubypath}"
+    puts "COMMANDPATH=#{commandpath}"
+    puts "$RUBYPATH $COMMANDPATH $@"
   end
+
 end
