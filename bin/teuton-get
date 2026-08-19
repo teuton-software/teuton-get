@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
 # File: teuton-get
 
-system("teutonget #{ARGV.join(" ")}")
+# system("teutonget #{ARGV.join(" ")}")
+
+$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+require "teuton-get/cli"
+
+CLI.start(ARGV)
